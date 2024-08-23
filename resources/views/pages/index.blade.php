@@ -1,73 +1,78 @@
 @extends('layouts.main-layout')
 @section('content')
 @include('includes.header')
- 
 
-  <!-- ***** Main Banner Area Start ***** -->
+<style>
+    
+  .box-container {
+      display: flex;
+     
+  }
+
+  .box-container li {
+      border: 1px solid #51B3E4;
+      width: 200px;
+      height: 150px;
+      padding: 50px;
+      margin: 20px;
+      text-align: center;
+      background-color: #51B3E4;
+      border-radius: 20px;
+      
+  }
+
+  li a {
+      text-decoration: none;
+      color: #000;
+  }
+
+  .box-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+
+
+</style>
+
+<div class="box-wrapper" style="z-index: 50;">
+  <h4 style="position: absolute;top: 150px;left:200px">We produce well refined <em>salts</em> to serve your needs</h4>
+  
+      <div style="position: absolute;top: 450px;left:200px">
+          <div>
+              <ul class="box-container">
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/about-us">About</a></li>
+                  <li><a href="/jobs">Job</a></li>
+                  <li><a href="/contact">Contact</a></li>
+                  <li><a href="/marketing">Marketing</a></li>
+                  <li><a href="/sales">Sales</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
   <div class="swiper-container" id="top">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="slide-inner" style="background-image:url(assets/images/Dernan-logo.jpg)">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="header-text">
-                  <h2 style="font-size: 5rem">We produce well refined  <em>salts</em><br> to serve your needs</h2>
-                  {{-- <p>Lorem ipsum dolor sit amet consectetur. Id dui augue aliquam non sed. Eu erat curabitur.</p> --}}
-                  <div class="buttons">
-                    <div class="green-button">
-                      <a href="/about-us">Read More</a>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
+      <h2 style="position: absolute; top: 100px">We produce well refined <em>salts</em><br> to serve your needs</h2>
+        <div class="swiper-slide">
+          
+            <div class="slide-inner" style="background-image:url('assets/images/Dernan-logo.jpg')">
             </div>
-          </div>
         </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="slide-inner" style="background-image:url(assets/images/BackGround2.jpg)">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="header-text">
-                  {{-- <h2>Lorem ipsum dolor<br>sit amet consectetur <em>slide2</em></h2> --}}
-                  {{-- <p>Lorem ipsum dolor sit amet consectetur. Id dui augue aliquam non sed. Eu erat curabitur.</p> --}}
-                  <div class="buttons">
-                    <div class="green-button">
-                      {{-- <a href="#">Read More</a> --}}
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="swiper-slide">
+            <div class="slide-inner" style="background-image:url('assets/images/BackGround2.jpg')">
             </div>
-          </div>
         </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="slide-inner" style="background-image:url(assets/images/BackGround3.jpg)">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="header-text">
-                  {{-- <h2>Lorem ipsum dolor<br>sit amet consectetur <em>AliquamSlide3</em></h2> --}}
-                  {{-- <p>Lorem ipsum dolor sit amet consectetur. Id dui augue aliquam non sed. Eu erat curabitur.</p> --}}
-                  <div class="buttons">
-                    <div class="green-button">
-                      {{-- <a href="#">Read More</a> --}}
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="swiper-slide">
+            <div class="slide-inner" style="background-image:url('assets/images/BackGround3.jpg')">
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <div class="swiper-button-next swiper-button-white"></div>
-    <div class="swiper-button-prev swiper-button-white"></div>
-  </div>
+</div>
+
 
   <!-- ***** Main Banner Area End ***** -->
 
@@ -113,106 +118,36 @@
 
 
 <br>
-  
-  <section class="simple-cta">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5">
-          <h4 style="text-shadow: 2px 2px 25px rgba(0 0 0 / 0.34);">Salt <em>Harvesting, Processing,</em> and <strong>Distribution</strong> Services</h4>
-        </div>
-        <div class="col-lg-7">
-          <div class="buttons">
-            <div class="green-button">
-              {{-- <a href="our-services.html">Discover More</a> --}}
-            </div>
-            <div class="orange-button">
-              <a href="/contact">Contact Us</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   
-  <section class="calculator">
-    <div class="container">
-      <div class="row">
-        {{-- <div class="col-lg-7">
-          <div class="left-image">
-            <img src="assets/images/calculator-image.png" alt="">
-          </div>
-        </div> --}}
-        <div class="col-lg-7">
-          <div class="section-heading">
-            <h4>Sign Up For News Letter</h4>
-          </div>
-          <form id="calculate" action="" method="get">
-            <div class="row">
-              <div class="col-lg-6">
-                <fieldset>
-                  <label for="name">Your Name</label>
-                  <input type="name" name="name" id="name" placeholder="" autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <label for="email">Your Email</label>
-                  <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="" required="">
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="subject">Subject</label>
-                  <input type="subject" name="subject" id="subject" placeholder="" autocomplete="on" >
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="chooseOption" class="form-label">Your Reason</label>
-                  <textarea name="Category" class="form-control" id="chooseOption" cols="30" rows="10" style="background-color:#626D80;border:1px solid #626D80;margin-bottom: 30px; "></textarea>
-                  {{-- <select name="Category" class="form-select" aria-label="Default select example" id="chooseOption" onchange="this.form.click()">
-                      <option selected>Choose an Option</option>
-                      <option type="checkbox" name="option1" value="Online Banking">Online Banking</option>
-                      <option value="Financial Control">Financial Control</option>
-                      <option value="Yearly Profit">Yearly Profit</option>
-                      <option value="Crypto Investment">Crypto Investment</option>
-                  </select> --}}
-              </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <button type="submit" id="form-submit" class="orange-button">Submit Now</button>
-                </fieldset>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
 
   <script src="assets/js/owl-carousel.js"></script>
   <script src="assets/js/swiper.js"></script>
 
+  <script src="../assets1/js/vendor-all.min.js"></script>
+  <script src="../assets1/js/plugins/bootstrap.min.js"></script>
+
     <script>
-        var interleaveOffset = 0.5;
 
-      var swiperOptions = {
-        loop: true,
-        speed: 1000,
-        grabCursor: true,
-        watchSlidesProgress: true,
-        mousewheelControl: true,
-        keyboardControl: true,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        },
-      };
-
-      var swiper = new Swiper(".swiper-container", swiperOptions);
+      var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    autoplay: {
+        delay: 5000, // Change slide every 5 seconds
+        disableOnInteraction: false, // Continue autoplay after user interaction
+    },
+    loop: true, // Infinite loop
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+});
     </script>
 
 @endsection

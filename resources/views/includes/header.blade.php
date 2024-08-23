@@ -12,13 +12,13 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="/">Home</a></li>
-                        <li class="scroll-to-section"><a href="/about-us">About</a></li>
-                        <li class="scroll-to-section"><a href="/jobs">job</a></li>
-                        <li><a href="/contact">Contact</a></li> 
-                        <li class="scroll-to-section"><a href="/jobs">Marketing</a></li>
-                        <li class="scroll-to-section"><a href="/jobs">Sales</a></li>
-                        <li class="scroll-to-section"><a href="/login">Login</a></li>
+                        <li class="scroll-to-section"><a wire:navigate href="/">Home</a></li>
+                        <li class="scroll-to-section"><a wire:navigate href="/about-us">About</a></li>
+                        <li class="scroll-to-section"><a wire:navigate href="/jobs">job</a></li>
+                        <li><a wire:navigate href="/contact">Contact</a></li> 
+                        <li class="scroll-to-section"><a wire:navigate href="/marketing">Marketing</a></li>
+                        <li class="scroll-to-section"><a wire:navigate href="/sales">Sales</a></li>
+                        <li class="scroll-to-section"><a wire:navigate href="/login">Login</a></li>
                     </ul>        
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -29,6 +29,10 @@
             </div>
         </div>
     </div>
+    
 </header>
+
+
+
 
 <!-- ***** Header Area End ***** -->

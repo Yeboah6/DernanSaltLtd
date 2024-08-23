@@ -52,3 +52,7 @@ Route::get('/send/mail/{id}', [SendMailController::class, 'send_mail']) -> name(
 // Route::get('/send/mail/', [SendMailController::class, 'send_mail']) -> name('send_mail');
 
 Route::get('/download/{id}', [MainController::class, 'download']) -> name('download');
+
+Route::get('/sales', [MainController::class, 'sales']) -> name('sales');
+
+Route::get('/marketing', [MainController::class, 'marketing']) -> name('marketing');

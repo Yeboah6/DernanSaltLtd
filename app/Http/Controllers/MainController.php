@@ -219,4 +219,14 @@ class MainController extends Controller
         // }
         dd('Ok');
     }
+
+    // Display Sales Page Function
+    public function sales() {
+        return view('pages.sales');
+    }
+
+    // Display Marketing Page Function
+    public function marketing() {
+        return view('pages.marketing');
+    }
 }
