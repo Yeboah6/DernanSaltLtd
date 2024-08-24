@@ -229,4 +229,8 @@ class MainController extends Controller
     public function marketing() {
         return view('pages.marketing');
     }
+
+    public function signup() {
+        return view('auth.applicant-sign-up');
+    }
 }

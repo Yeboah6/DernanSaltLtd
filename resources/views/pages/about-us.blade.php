@@ -41,7 +41,7 @@
 
   <!-- ***** Main Banner Area End ***** -->
 
-  <section class="top-section">
+  <section class="top-section" style="margin-bottom: 50px">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">

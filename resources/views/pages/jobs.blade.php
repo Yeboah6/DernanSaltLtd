@@ -55,7 +55,7 @@
                 <h1>Hello</h1>
               </div>
             </a>
-            <a href="/about-us">
+            <a href="/applicant-sign-up">
               <div class="job-card-body">
                 <h1>Hello</h1>
               </div>

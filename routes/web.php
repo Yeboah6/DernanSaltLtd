@@ -56,3 +56,5 @@ Route::get('/download/{id}', [MainController::class, 'download']) -> name('downl
 Route::get('/sales', [MainController::class, 'sales']) -> name('sales');
 
 Route::get('/marketing', [MainController::class, 'marketing']) -> name('marketing');
+
+Route::get('/applicant-sign-up', [MainController::class, 'signup']) -> name('applicant-sign-up');
