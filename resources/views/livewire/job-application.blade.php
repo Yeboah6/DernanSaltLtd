@@ -76,6 +76,23 @@
 
     <form class="application-form" wire:submit.prevent="jobapply">
 
+        <div class="action-button d-flex justify-content-between bg-white pt-2 pb-2">
+            @if ($currentStep == 1)
+                <div></div>
+            @endif
+            @if ($currentStep == 2 || $currentStep == 3 || $currentStep == 4 || $currentStep == 5 || $currentStep == 6 || $currentStep == 7 )
+                <button type="button" class="btn btn-sm btn-secondary" wire:click="decreaseStep()">Back</button>
+            @endif
+            
+            @if ($currentStep == 1|| $currentStep == 2 || $currentStep == 3 || $currentStep == 4 || $currentStep == 5 || $currentStep == 6)
+                <button type="button" class="btn btn-sm btn-primary" wire:click="increaseStep()">Next</button>
+            @endif
+            @if ($currentStep == 7)
+                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+            @endif
+            
+        </div>
+
         @if ($currentStep == 1)
             {{-- Personal Info SECTION 1 --}}
         <fieldset id="personal">

@@ -11,8 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('post_jobs', function (Blueprint $table) {
+            $table->id();
+            $table -> string('job_id');
+            $table -> string('job_title');
+            $table -> string('job_type');
+            $table -> text('job_description');
+            $table -> text('education');
+            $table -> string('position');
+            $table -> text('experience');
+            $table -> text('personal_attributes');
+            $table -> text('skills_competencies');
+            $table -> string('deadline');
+            $table -> string('status');
+            $table->timestamps();
+        });
+
         Schema::create('job_details', function (Blueprint $table) {
             $table->id();
+
+            $table -> string('applicant_id');
             // Personnal Info
             $table -> string('first_name');
             $table -> string('middle_name') -> nullable();
@@ -28,14 +46,15 @@ return new class extends Migration
             $table -> string('current_employer');
             $table -> string('position_held');
             $table -> string('duration_of_employment');
-            $table -> string('responsilibities');
+            $table -> text('responsilibities');
 
             $table -> string('current_employer2');
             $table -> string('position_held2');
             $table -> string('duration_of_employment2');
-            $table -> string('responsilibities2');
+            $table -> text('responsilibities2');
 
-            $table -> string('position_id');
+            $table -> unsignedBigInteger('position_id');
+            $table -> foreign('position_id') -> references('id') -> on('post_job') -> onDelete('cascade');
 
             // Education Background
             $table -> string('highest_qualification');
@@ -43,7 +62,6 @@ return new class extends Migration
             $table -> string('certificate');
             $table -> string('year_of_graduation');
 
-            // $table -> string('highest-qualification');
             $table -> string('school_name');
             $table -> string('secondary_certificate');
             $table -> string('year_of_completion');
@@ -63,7 +81,7 @@ return new class extends Migration
 
             // Other Relevant Information
             $table -> string('skills_certificate');
-            $table -> string('reason'); // Why do you want to work at Dernan Salt Limited?
+            $table -> text('reason'); // Why do you want to work at Dernan Salt Limited?
             $table -> string('availability');
 
             // Document Uploads
@@ -82,6 +100,15 @@ return new class extends Migration
             
             $table->timestamps();
         });
+
+        Schema::create('referee_testimonies', function (Blueprint $table) {
+            $table->id();
+            $table -> unsignedBigInteger('applicant_id');
+            $table -> foreign('applicant_id') -> references('id') -> on('job_details') -> onDelete('cascade');
+            $table -> text('testimony');
+            $table -> string('document');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -89,6 +116,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('post_jobs');
         Schema::dropIfExists('job_details');
+        Schema::dropIfExists('referee_testimonies');
     }
 };

@@ -84,7 +84,7 @@
                 <hr>
                 <p>{{$jobDesc -> job_title}}</p>
                 
-                <h6>Job Type</h6>
+                <h6>Permanent</h6>
                 <hr>
                 <p>{{$jobDesc -> job_type}}</p>
                 

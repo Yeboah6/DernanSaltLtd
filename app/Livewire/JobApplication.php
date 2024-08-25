@@ -12,6 +12,7 @@ class JobApplication extends Component
 {
 
     use WithFileUploads;
+    public $applicant_id;
     public $first_name;
     public $middle_name;
     public $last_name;
@@ -71,6 +72,8 @@ class JobApplication extends Component
 
     public $status;
 
+    
+
     // public $jobDesc;
 
 
@@ -126,12 +129,12 @@ class JobApplication extends Component
                 'current_employer' => 'required|string',
                 'position_held' => 'required|string',
                 'duration_of_employment' => 'required|string',
-                'responsilibities' => 'required|string',
+                'responsilibities' => 'required|string|min:20|max:500',
 
                 'current_employer2' => 'required|string',
                 'position_held2' => 'required|string',
                 'duration_of_employment2' => 'required|string',
-                'responsilibities2' => 'required|string',
+                'responsilibities2' => 'required|string|min:20|max:500',
 
                 // 'position' => 'required|array|min:1|max:1'
             ]);
@@ -163,7 +166,7 @@ class JobApplication extends Component
         } elseif ($this -> currentStep == 5) {
             $this -> validate([
                 'skills_certificate' => 'required',
-                'reason' => 'required',
+                'reason' => 'required|min:20|max:500',
                 'availability' => 'required',
             ]);
         } elseif ($this -> currentStep == 6) {
@@ -179,6 +182,11 @@ class JobApplication extends Component
 
     public function jobapply() {
         $this -> resetErrorBag();
+
+        $character = 'ID';
+        $pin = mt_rand(10, 99) . mt_rand(10, 99);
+        $applicant_id = $character. '' .$pin;
+
         if ($this -> currentStep == 7) {
             $this -> validate([
                 'agreement' => 'required|array|min:1|max:1',
@@ -200,6 +208,7 @@ class JobApplication extends Component
 
         if ($upload_cv && $upload_cerificates_acquired && $upload_cover_letter && $upload_other_relevant_doc && $upload_image) {
             $values = array(
+            $this -> applicant_id = $applicant_id,
             "first_name" => $this -> first_name,
             "middle_name" => $this -> middle_name,
             "last_name" => $this -> last_name,

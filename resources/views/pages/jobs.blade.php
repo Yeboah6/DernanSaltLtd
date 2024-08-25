@@ -48,26 +48,16 @@
           </div>
         </div>
 
+        @foreach ($jobPosting as $position)
         <div class="jobs-container">
           <div class="job-card">
-            <a href="/">
+            <a href="{{ url('/applicant-sign-up/'.$position -> id)}}"> 
               <div class="job-card-body">
                 <h1>Hello</h1>
               </div>
             </a>
-            <a href="/applicant-sign-up">
-              <div class="job-card-body">
-                <h1>Hello</h1>
-              </div>
-            </a>
-            <a href="/contact">
-              <div class="job-card-body">
-                <h1>Hello</h1>
-              </div>
-            </a>
-          </div>
-
-          <div class="job-card">
+          @endforeach
+          {{-- <div class="job-card">
             <a href="">
               <div class="job-card-body">
                 <h1>Hello</h1>
@@ -83,7 +73,7 @@
                 <h1>Hello</h1>
               </div>
             </a>
-          </div>
+          </div> --}}
         </div>
 
         {{-- <div>

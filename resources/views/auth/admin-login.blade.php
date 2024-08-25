@@ -36,7 +36,7 @@
 				{{-- <img src="assets/images/auth/auth-logo-dark.png" alt="" > --}}
                 <img src="assets/images/Dernan-logo.jpg" style="width:4.5em" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
 				<h3 class="mb-4 f-w-400">Login</h3>
-				<form action="{{url('/login')}}" method="POST">
+				<form action="{{url('/admin-login')}}" method="POST">
 					@csrf
 				<div class="form-group mb-3">
 					<label class="floating-label" for="Email">Email address</label>

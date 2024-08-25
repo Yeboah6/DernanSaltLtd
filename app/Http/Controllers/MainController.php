@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactUs;
+use App\Mail\RejectMail;
 use App\Models\Admin;
 use App\Models\JobDetails;
 use App\Models\Position;
@@ -9,6 +11,7 @@ use App\Models\PostJobs;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
@@ -34,12 +37,36 @@ class MainController extends Controller
         return view('pages.contact-us');
     }
 
-    // Display Login Page Function
-    public function login() {
-        return view('auth.login');
+    // Email Message Function
+    public function send() {
+        $data = request() -> validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'subject' => 'required|min:5|max:25',
+            'message' => 'required|min:5'
+        ]);
+        Mail::to('yeboahs324@gmail.com') -> send(new ContactUs($data));
+
+        return redirect() -> back() -> with('success', 'Message sent successfully');
     }
 
-    // Login Function
+    public function reject_send_mail($id) {
+        $rejected = JobDetails::find($id);
+
+        Mail::to($rejected -> email) -> send(new RejectMail($rejected));
+
+        $rejected -> status = "Rejected";
+        $rejected -> update();
+
+        return redirect('/admin-dashboard');
+    }
+
+    // Display Login Page Function
+    public function adminlogin() {
+        return view('auth.admin-login');
+    }
+
+    // Admin Login Function 
     public function log(Request $request) {
         $request -> validate([
             'email' => 'required|email',
@@ -50,7 +77,7 @@ class MainController extends Controller
         if($user) {
             if(Hash::check($request -> password, $user -> password)) {
                 $request -> session() -> put('loginId', $user -> id);
-                return redirect('/dashboard');
+                return redirect('/admin-dashboard');
             } else {
                 return back() -> with('fail', 'Incorrect Credentials!!');
             } 
@@ -74,13 +101,13 @@ class MainController extends Controller
     }
 
     // Display Dashboard Function
-    public function dashboard() {
+    public function admindashboard() {
         $applicants = JobDetails::all() -> count();
         $positions = Position::all() -> count();
         $jobPosted = PostJobs::all() -> count();
         $applicantsRejected = JobDetails::where('status', 'Rejected') -> count();
         $applicantsAccepted = JobDetails::where('status', 'Accepted') -> count();
-        return view('dashboard.dashboard', compact('applicants', 'positions', 'jobPosted', 'applicantsRejected', 'applicantsAccepted'));
+        return view('dashboard.admin-dashboard', compact('applicants', 'positions', 'jobPosted', 'applicantsRejected', 'applicantsAccepted'));
     }
 
     // Display Applicants Page Function
@@ -200,14 +227,14 @@ class MainController extends Controller
     }
 
     // Reject Applicant Function
-    public function rejectApplicant($id) {
-        $reject = JobDetails::find($id);
+    // public function rejectApplicant($id) {
+    //     $reject = JobDetails::find($id);
 
-        $reject -> status = "Rejected";
+    //     $reject -> status = "Rejected";
 
-        $reject -> update();
-        return redirect('/applicants');
-    }
+    //     $reject -> update();
+    //     return redirect('/applicants');
+    // }
 
     public function download(Request $request, $id) {
         // if(Storage::disk('local') -> exists("applicants_docs/$request -> file")) {
@@ -230,7 +257,12 @@ class MainController extends Controller
         return view('pages.marketing');
     }
 
+    // Display Applicant Sign Up Page Function
     public function signup() {
         return view('auth.applicant-sign-up');
     }
+
+    // public function storeSignUp(Request $request) {
+
+    // }
 }

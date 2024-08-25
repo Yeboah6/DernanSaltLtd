@@ -52,7 +52,7 @@
                                     @foreach ($applicants as $applicant)
                                         <tr>
                                         <td>{{ $applicant -> id}}</td>
-                                        <td><img src="{{ asset('storage/app/applicants_images/'.$applicant -> image) }}" alt="" title=""></td>
+                                        <td><img src="{{ asset('storage/app/applicants_images/'.$applicant -> image) }}" alt=""></td>
                                         <td>{{ $applicant -> first_name}} {{ $applicant -> middle_name}} {{ $applicant -> last_name}}</td>
                                         <td>{{ $applicant -> email}}</td>
                                         <td>{{ $applicant -> number}}</td>

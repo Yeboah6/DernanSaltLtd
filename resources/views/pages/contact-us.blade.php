@@ -91,36 +91,36 @@
           </div>
         </div>
         <div class="col-lg-10 offset-lg-1">
-          <form id="contact" action="" method="post">
+          <form id="contact" action="{{ url('/contact') }}" method="POST">
+            @csrf
             <div class="row">
               <div class="col-lg-6">
                 <fieldset>
                   <input type="name" name="name" id="name" placeholder="Your Name..." autocomplete="on" required>
                 </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <input type="phone" name="phone" id="phone" placeholder="Your Phone..." autocomplete="on" required>
-                </fieldset>
+                <span class="text-danger">@error('name'){{ $message }} @enderror</span>
               </div>
               <div class="col-lg-6">
                 <fieldset>
                   <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your E-mail..." required="">
                 </fieldset>
+                <span class="text-danger">@error('email'){{ $message }} @enderror</span>
               </div>
-              <div class="col-lg-6">
+              <div class="col">
                 <fieldset>
                   <input type="subject" name="subject" id="subject" placeholder="Subject..." autocomplete="on" >
                 </fieldset>
+                <span class="text-danger">@error('subject'){{ $message }} @enderror</span>
               </div>
               <div class="col-lg-12">
                 <fieldset>
                   <textarea name="message" id="message" placeholder="Your Message"></textarea>
                 </fieldset>
+                <span class="text-danger">@error('message'){{ $message }} @enderror</span>
               </div>
               <div class="col-lg-12" style="margin-bottom: 50px">
                 <fieldset>
-                  <button type="submit" id="form-submit" class="orange-button">Send Message</button>
+                  <button type="submit" class="orange-button">Send Message</button>
                 </fieldset>
               </div>
             </div>

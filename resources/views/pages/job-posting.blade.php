@@ -182,6 +182,7 @@
     </div>
 </div>
 
+<!-- Job Posting -->
 <div class="modal fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -203,9 +204,10 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="floating-label">Job Type</label>
+                                <label class="floating-label">Permanent</label>
                                 <select class="form-control" name="job_type">
                                     <option value=""></option>
+                                    <option value="Contract">Contract</option>
                                     <option value="Full Time">Full Time</option>
                                     <option value="Part Time">Part Time</option>
                                 </select>
@@ -217,12 +219,12 @@
                                 <textarea class="form-control" name="job_description" rows="3"></textarea>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        {{-- <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label">Key Responsibilities</label>
                                 <textarea class="form-control" name="key_responsibilities" rows="3"></textarea>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col">
                             <div class="form-group">
                                 <label class="floating-label">Education</label>

@@ -206,7 +206,7 @@
                             <button type="button" class="btn waves-effect waves-light btn-primary btn-print-invoice m-b-10">Print</button>
                             <a href="{{url('/send/mail/'.$applicants -> id)}}" class="btn waves-effect waves-light btn-success m-b-10">Accepted</a>
                             {{-- <button type="button" class="btn waves-effect waves-light btn-success m-b-10 ">Accepted</button> --}}
-                            <a href="{{url('/applicants-reject/'.$applicants -> id)}}" type="button" class="btn waves-effect waves-light btn-danger m-b-10 ">Rejected</a>
+                            <a href="{{url('/reject-send/mail/'.$applicants -> id)}}" type="button" class="btn waves-effect waves-light btn-danger m-b-10 ">Rejected</a>
                         </div>
                     </div>
                 </div>

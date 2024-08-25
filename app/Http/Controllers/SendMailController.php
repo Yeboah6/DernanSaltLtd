@@ -17,7 +17,7 @@ class SendMailController extends Controller
         $positionName = PostJobs::find($id);
 
         $data["email"] = $emailSubmit -> email;
-        $data["title"] = " Interview Invitation for {$positionName -> position} at Dernan Salt Limited";
+        $data["title"] = "Interview Invitation for {$positionName -> position} at Dernan Salt Limited";
 
         $data2["email"] = $emailSubmit -> referee_email;
         $data2["title"] = "Request for Reference Letter for {$emailSubmit -> first_name}";

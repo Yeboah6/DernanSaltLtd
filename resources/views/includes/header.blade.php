@@ -18,7 +18,7 @@
                         <li><a wire:navigate href="/contact">Contact</a></li> 
                         <li class="scroll-to-section"><a wire:navigate href="/marketing">Marketing</a></li>
                         <li class="scroll-to-section"><a wire:navigate href="/sales">Sales</a></li>
-                        <li class="scroll-to-section"><a wire:navigate href="/login">Login</a></li>
+                        <li class="scroll-to-section"><a wire:navigate href="/admin-login">Login</a></li>
                     </ul>        
                     <a class='menu-trigger'>
                         <span>Menu</span>
