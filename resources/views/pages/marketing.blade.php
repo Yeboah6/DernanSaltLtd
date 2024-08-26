@@ -110,7 +110,8 @@
           </div>
         </div>
         <div class="col-lg-10 offset-lg-1">
-          <form id="contact" action="" method="post">
+          <form id="contact" action="{{url('/marketing')}}" method="POST">
+            @csrf
             <div class="row">
               <div class="col-lg-6">
                 <fieldset>
@@ -119,15 +120,10 @@
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="phone" name="phone" id="phone" placeholder="Your Phone..." autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
                   <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your E-mail..." required="">
                 </fieldset>
               </div>
-              <div class="col-lg-6">
+              <div class="col">
                 <fieldset>
                   <input type="subject" name="subject" id="subject" placeholder="Subject..." autocomplete="on" >
                 </fieldset>

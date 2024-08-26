@@ -22,17 +22,6 @@
     <link rel="stylesheet" href="../assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
 
-    {{-- <link rel="stylesheet" href="../assets/css/style1.css"> --}}
-
-
-
-
-
-<!--TemplateMo 574 Mexant
-
-https://templatemo.com/tm-574-mexant
-
--->
 <style>
         .footer-text{
           font-size: 20px;

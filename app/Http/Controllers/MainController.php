@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApplicantMail;
 use App\Mail\ContactUs;
+use App\Mail\MarketingMail;
 use App\Mail\RejectMail;
+use App\Mail\SalesMail;
 use App\Models\Admin;
 use App\Models\JobDetails;
 use App\Models\Position;
@@ -37,7 +40,7 @@ class MainController extends Controller
         return view('pages.contact-us');
     }
 
-    // Email Message Function
+    // Send Contact Us Email Message Function
     public function send() {
         $data = request() -> validate([
             'name' => 'required|min:3',
@@ -50,6 +53,7 @@ class MainController extends Controller
         return redirect() -> back() -> with('success', 'Message sent successfully');
     }
 
+    // Sending Rejected Email Function
     public function reject_send_mail($id) {
         $rejected = JobDetails::find($id);
 
@@ -57,6 +61,18 @@ class MainController extends Controller
 
         $rejected -> status = "Rejected";
         $rejected -> update();
+
+        return redirect('/admin-dashboard');
+    }
+
+    // Sending Rejected Email Function
+    public function accept_send_mail($id) {
+        $accepted = JobDetails::find($id);
+
+        Mail::to($accepted -> email) -> send(new ApplicantMail($accepted));
+
+        $accepted -> status = "Accepted";
+        $accepted -> update();
 
         return redirect('/admin-dashboard');
     }
@@ -226,25 +242,18 @@ class MainController extends Controller
         return view('pages.job-description', compact('jobDesc'));
     }
 
-    // Reject Applicant Function
-    // public function rejectApplicant($id) {
-    //     $reject = JobDetails::find($id);
-
-    //     $reject -> status = "Rejected";
-
-    //     $reject -> update();
-    //     return redirect('/applicants');
-    // }
-
-    public function download(Request $request, $id) {
-        // if(Storage::disk('local') -> exists("applicants_docs/$request -> file")) {
-        //     $path = Storage::disk('local') -> path("applicants_docs/$request -> file");
+    // Download Document Function
+    public function download($file) {
+        return response()->download(storage_path('app/applicants_docs/'.$file));
+ 
+        // if(Storage::disk('local') -> exists("applicants_docs/".$request -> file)) {
+        //     $path = Storage::disk('local') -> path("applicants_docs/".$request -> file);
         //     $content = file_get_contents($path);
         //     return response($content) -> withHeaders([
         //         'content-Type' => mime_content_type($path)
         //     ]);
         // }
-        dd('Ok');
+        // dd('Ok');
     }
 
     // Display Sales Page Function
@@ -257,12 +266,39 @@ class MainController extends Controller
         return view('pages.marketing');
     }
 
+    // Send Sales Email Message Function
+    public function sendSales() {
+        $data = request() -> validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'subject' => 'required|min:5|max:25',
+            'message' => 'required|min:5'
+        ]);
+        Mail::to('yeboahs324@gmail.com') -> send(new SalesMail($data));
+
+        return redirect() -> back() -> with('success', 'Message sent successfully');
+    }
+
+
+    // Send Marketing Email Message Function
+    public function sendMarketing() {
+        $data = request() -> validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'subject' => 'required|min:5|max:25',
+            'message' => 'required|min:5'
+        ]);
+        Mail::to('yeboahs324@gmail.com') -> send(new MarketingMail($data));
+
+        return redirect() -> back() -> with('success', 'Message sent successfully');
+    }
+
     // Display Applicant Sign Up Page Function
     public function signup() {
         return view('auth.applicant-sign-up');
     }
 
-    // public function storeSignUp(Request $request) {
-
-    // }
+    public function refereeTestimony() {
+        return view('pages.referee-testimony');
+    }
 }

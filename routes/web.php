@@ -47,11 +47,16 @@ Route::get('/job-posting-show/{id}', [MainController::class, 'jobPostingShow']) 
 
 Route::get('/job-description/{id}', [MainController::class, 'jobDesc']) -> name('job-description');
 
-
+// Sending Emails Routes
 Route::get('/send/mail/{id}', [SendMailController::class, 'send_mail']) -> name('send_mail');
 Route::get('/reject-send/mail/{id}', [MainController::class, 'reject_send_mail']) -> name('reject_send_mail');
+Route::get('/accept-send/mail/{id}', [MainController::class, 'accept_send_mail']) -> name('accept_send_mail');
 
-Route::get('/download/{id}', [MainController::class, 'download']) -> name('download');
+Route::post('/contact', [MainController::class, 'send']) -> name('send');
+Route::post('/marketing', [MainController::class, 'sendMarketing']) -> name('sendMarketing');
+Route::post('/sales', [MainController::class, 'sendSales']) -> name('sendSales');
+
+Route::get('/download/{file}', [MainController::class, 'download']) -> name('download');
 
 Route::get('/sales', [MainController::class, 'sales']) -> name('sales');
 
@@ -60,7 +65,8 @@ Route::get('/marketing', [MainController::class, 'marketing']) -> name('marketin
 Route::get('/applicant-sign-up/{id}', [MainController::class, 'signup']) -> name('applicant-sign-up');
 Route::post('/applicant-sign-up', [MainController::class, 'storeSignUp']) -> name('applicant-sign-up');
 
-Route::post('/contact', [MainController::class, 'send']) -> name('send');
+Route::get('/referee-testimony', [MainController::class, 'refereeTestimony']) -> name('referee-testimony');
+
 
 // Auth::routes([
 //     'verify' => true

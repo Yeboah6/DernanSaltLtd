@@ -138,25 +138,25 @@
                                                     <td>
                                                         <h6>CV</h6>
                                                     </td>
-                                                    <td><a href="{{ '/download/'.$applicants -> cv}}">Download</a></td>
+                                                    <td><a href="{!! route('download', $applicants -> cv) !!}">Download</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Certificates Acquired</h6>
                                                     </td>
-                                                    <td><a href="{{ '/download/'.$applicants -> cerificates_acquired}}">Download</a></td>
+                                                    <td><a href="{{ url('/download/'.$applicants -> cerificates_acquired)}}">Download</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Cover Letter</h6>
                                                     </td>
-                                                    <td><a href="{{ '/download/'.$applicants -> cover_letter}}">Download</a></td>
+                                                    <td><a href="{{ url('/download/'.$applicants -> cover_letter)}}">Download</a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Other Relevant Documents</h6>
                                                     </td>
-                                                    <td><a href="{{ '/download/'.$applicants -> other_relevant_doc}}">Download</a></td>
+                                                    <td><a href="{{ url('/download/'.$applicants -> other_relevant_doc)}}">Download</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -204,8 +204,7 @@
                     <div class="row text-center">
                         <div class="col-sm-12 invoice-btn-group text-center">
                             <button type="button" class="btn waves-effect waves-light btn-primary btn-print-invoice m-b-10">Print</button>
-                            <a href="{{url('/send/mail/'.$applicants -> id)}}" class="btn waves-effect waves-light btn-success m-b-10">Accepted</a>
-                            {{-- <button type="button" class="btn waves-effect waves-light btn-success m-b-10 ">Accepted</button> --}}
+                            <a href="{{url('/accept-send/mail/'.$applicants -> id)}}" class="btn waves-effect waves-light btn-success m-b-10">Accepted</a>
                             <a href="{{url('/reject-send/mail/'.$applicants -> id)}}" type="button" class="btn waves-effect waves-light btn-danger m-b-10 ">Rejected</a>
                         </div>
                     </div>
