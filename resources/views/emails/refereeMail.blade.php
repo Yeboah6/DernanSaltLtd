@@ -1,9 +1,13 @@
 <x-mail::message>
-# Introduction
+# Request for Reference Letter for {{$referee['referee_name']}}
 
-The body of your message.
+<img src="../assets/images/Asset4@4x.png" alt="Dernan Salt">
 
-<x-mail::button :url="''">
+<p>Dear {{$referee['referee_name']}},</p>
+<p>I hope you are doing well. {{$referee['referee_name']}} has applied for a position with our organization and has listed you as a reference. 
+    We would greatly appreciate your providing a brief recommendation letter to support their application. </p>
+
+<x-mail::button :url="'/referee-testimony'">
 Button Text
 </x-mail::button>
 

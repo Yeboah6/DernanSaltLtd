@@ -11,20 +11,29 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('positions', function (Blueprint $table) {
+            $table->id();
+            $table -> string('position');
+            $table -> string('status');
+            $table->timestamps();
+        });
+
         Schema::create('post_jobs', function (Blueprint $table) {
             $table->id();
             $table -> string('job_id');
             $table -> string('job_title');
             $table -> string('job_type');
+            $table -> bigInteger('position_id')->unsigned()->index()->nullable();
             $table -> text('job_description');
             $table -> text('education');
-            $table -> string('position');
             $table -> text('experience');
             $table -> text('personal_attributes');
             $table -> text('skills_competencies');
             $table -> string('deadline');
             $table -> string('status');
             $table->timestamps();
+
+            $table -> foreign('position_id') -> references('id') -> on('positions') ->onDelete('cascade');
         });
 
         Schema::create('job_details', function (Blueprint $table) {
@@ -44,23 +53,39 @@ return new class extends Migration
 
             // Work Experience
             $table -> string('current_employer');
+            $table -> string('company_name');
+            $table -> string('company_address');
             $table -> string('position_held');
-            $table -> string('duration_of_employment');
+            $table -> string('duration_of_employment_from');
+            $table -> string('duration_of_employment_to');
             $table -> text('responsilibities');
 
             $table -> string('current_employer2');
+            $table -> string('company_name2');
+            $table -> string('company_address2');
             $table -> string('position_held2');
-            $table -> string('duration_of_employment2');
+            $table -> string('duration_of_employment_from2');
+            $table -> string('duration_of_employment_to2');
             $table -> text('responsilibities2');
 
-            $table -> unsignedBigInteger('position_id');
-            $table -> foreign('position_id') -> references('id') -> on('post_job') -> onDelete('cascade');
+            $table -> bigInteger('post_jobs_id')->unsigned()->index()->nullable();
+            $table -> foreign('post_jobs_id') -> references('id') -> on('post_jobs') ->onDelete('cascade');
 
             // Education Background
-            $table -> string('highest_qualification');
             $table -> string('institution_name');
             $table -> string('certificate');
             $table -> string('year_of_graduation');
+            $table -> string('year_began');
+
+            $table -> string('institution_name2');
+            $table -> string('certificate2');
+            $table -> string('year_of_graduation2');
+            $table -> string('year_began2');
+
+            $table -> string('institution_name3');
+            $table -> string('certificate3');
+            $table -> string('year_of_graduation3');
+            $table -> string('year_began3');
 
             $table -> string('school_name');
             $table -> string('secondary_certificate');
@@ -103,10 +128,10 @@ return new class extends Migration
 
         Schema::create('referee_testimonies', function (Blueprint $table) {
             $table->id();
-            $table -> unsignedBigInteger('applicant_id');
-            $table -> foreign('applicant_id') -> references('id') -> on('job_details') -> onDelete('cascade');
-            $table -> text('testimony');
             $table -> string('document');
+            $table -> bigInteger('job_details_id')->unsigned()->index()->nullable();
+            $table -> foreign('job_details_id') -> references('id') -> on('job_details') ->onDelete('cascade');
+            $table -> text('testimony');
             $table->timestamps();
         });
     }
@@ -116,6 +141,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('positions');
         Schema::dropIfExists('post_jobs');
         Schema::dropIfExists('job_details');
         Schema::dropIfExists('referee_testimonies');

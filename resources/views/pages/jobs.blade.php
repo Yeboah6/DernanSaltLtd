@@ -9,10 +9,17 @@
         }
 
         a .job-card-body  {
-          border: 1px solid red;
+          border: 1px solid #51B3E4;
           border-radius: 10px;
           margin: 20px;
           padding: 50px;
+          color: #fff;
+          background-color: #51B3E4;
+        }
+
+        a .job-card-body:hover {
+          background-color: #85c6e7;
+          color: #000;
         }
 
         </style>
@@ -51,7 +58,7 @@
         @foreach ($jobPosting as $position)
         <div class="jobs-container">
           <div class="job-card">
-            <a href="{{ url('/applicant-sign-up/'.$position -> id)}}"> 
+            <a href="{{ url('/job-description/'.$position -> id)}}"> 
               <div class="job-card-body">
                 <h1>Hello</h1>
               </div>

@@ -43,7 +43,7 @@
                                         <th>Phone</th>
                                         <th>Position Held</th>
                                         <th>Position</th>
-                                        <th>Highest Qualification</th>
+                                        {{-- <th>Position Held</th> --}}
                                         <th>Status</th>
                                         <th>Options</th>
                                     </tr>
@@ -51,14 +51,14 @@
                                 <tbody>
                                     @foreach ($applicants as $applicant)
                                         <tr>
-                                        <td>{{ $applicant -> id}}</td>
+                                        <td>{{ $applicant -> applicant_id}}</td>
                                         <td><img src="{{ asset('storage/app/applicants_images/'.$applicant -> image) }}" alt=""></td>
                                         <td>{{ $applicant -> first_name}} {{ $applicant -> middle_name}} {{ $applicant -> last_name}}</td>
                                         <td>{{ $applicant -> email}}</td>
                                         <td>{{ $applicant -> number}}</td>
                                         <td>{{ $applicant -> position_held}}</td>
                                         <td>{{ $applicant -> position}}</td>
-                                        <td>{{ $applicant -> highest_qualification}}</td>
+                                        {{-- <td>{{ $applicant -> position_held}}</td> --}}
                                         @if ($applicant -> status == "Submitted")
                                             <td style="text-align: center"><span style="background-color: #008B9C;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $applicant -> status}}</span></td>
                                         

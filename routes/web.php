@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MultiStepForm;
 use App\Http\Controllers\SendMailController;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +26,9 @@ Route::post('/admin-login', [MainController::class, 'log']) -> name('admin-login
 Route::get('/admin-dashboard', [MainController::class, 'admindashboard']) -> name('admin-dashboard');
 
 Route::get('/job-apply/{id}', [MainController::class, 'apply']) -> name('job-apply');
+
+
+Route::get('/job-form', [MainController::class, 'jobApply']) -> name('job-form');
 // });
 
 
@@ -52,6 +56,9 @@ Route::get('/send/mail/{id}', [SendMailController::class, 'send_mail']) -> name(
 Route::get('/reject-send/mail/{id}', [MainController::class, 'reject_send_mail']) -> name('reject_send_mail');
 Route::get('/accept-send/mail/{id}', [MainController::class, 'accept_send_mail']) -> name('accept_send_mail');
 
+Route::get('/referee-send/mail/{id}', [MainController::class, 'referee_send_mail']) -> name('referee_send_mail');
+
+
 Route::post('/contact', [MainController::class, 'send']) -> name('send');
 Route::post('/marketing', [MainController::class, 'sendMarketing']) -> name('sendMarketing');
 Route::post('/sales', [MainController::class, 'sendSales']) -> name('sendSales');
@@ -66,9 +73,24 @@ Route::get('/applicant-sign-up/{id}', [MainController::class, 'signup']) -> name
 Route::post('/applicant-sign-up', [MainController::class, 'storeSignUp']) -> name('applicant-sign-up');
 
 Route::get('/referee-testimony', [MainController::class, 'refereeTestimony']) -> name('referee-testimony');
+Route::post('/referee-testimony', [MainController::class, 'postRefereeTestimony']) -> name('referee-testimony');
 
 
-// Auth::routes([
-//     'verify' => true
-// ]);
+
+Route::get('/verify/email', [SendMailController::class, 'verifyEmail']) -> name('verify.email');
+
+
+
+// Route::get('/apply/create-step-one', [MultiStepForm::class, 'createStepOne']) -> name('apply.create.step.one');
+// Route::post('/apply/create-step-one', [MultiStepForm::class, 'postCreateStepOne']) -> name('apply.create.step.one');
+
+// Route::get('/apply/create-step-two', [MultiStepForm::class, 'createStepTwo']) -> name('apply.create.step.two');
+// Route::post('/apply/create-step-two', [MultiStepForm::class, 'postCreateStepTwo']) -> name('apply.create.step.two');
+
+
+// Route::get('/apply/create-step-three', [MultiStepForm::class, 'createStepThree']) -> name('apply.create.step.three');
+// Route::post('/apply/create-step-three', [MultiStepForm::class, 'postCreateStepThree']) -> name('apply.create.step.three');
+
+
+
 

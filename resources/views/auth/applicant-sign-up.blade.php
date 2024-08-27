@@ -38,8 +38,8 @@
 				<form action="{{url('')}}" method="POST">
 					@csrf
 				<div class="form-group mb-3">
-					<label class="floating-label" for="Email">User Name</label>
-					<input type="text" class="form-control" name="username" placeholder="">
+					<label class="floating-label" for="Email">Username</label>
+					<input type="text" class="form-control" name="user_name" placeholder="">
 				</div>
 				<div class="form-group mb-4">
 					<label class="floating-label" for="Password">Email</label>

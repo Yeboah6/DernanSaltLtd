@@ -29,8 +29,8 @@ class ApplicantMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Applicant Mail',
-            from: new Address('yeboahs324@gmail.com', 'Dernan Salt Ltd Accepted')
+            subject: 'Interview Invitation for {$accpeted -> post_jobs_id} at Dernan Salt Limited',
+            from: new Address('yeboahs324@gmail.com', 'Dernan Salt Ltd')
         );
     }
 

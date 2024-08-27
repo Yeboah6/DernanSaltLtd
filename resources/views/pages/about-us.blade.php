@@ -53,43 +53,52 @@
           <div class="accordions is-first-expanded">
             <article class="accordion">
               <div class="accordion-head">
-                  <span>Mexant Financial Planning</span>
+                  <span>Our Vision</span>
                   <span class="icon">
                       <i class="icon fa fa-chevron-right"></i>
                   </span>
               </div>
               <div class="accordion-body">
                   <div class="content">
-                      <p>You will see a bunch of free CSS templates when you search on Google. TemplateMo website is probably the best one because it is 100% free. 
-                      <br><br>We do not ask you anything in return. You are free to use our templates for any purpose.</p>
+                      <p>To be the leading supplier of premium salt products in the global market, recognized for our commitment to quality, sustainability, and community development. 
+                        We aspire to set the industry standard through innovation, excellence, and ethical practices.
+                      </p>
                   </div>
               </div>
           </article>
           <article class="accordion">
             <div class="accordion-head">
-                <span>Mexant Crypto Investing</span>
+                <span>Our Mission</span>
                 <span class="icon">
                     <i class="icon fa fa-chevron-right"></i>
                 </span>
             </div>
             <div class="accordion-body">
                 <div class="content">
-                    <p>Mexant HTML5 Template is available to download 100% free of charge. This CSS layout is based on Boostrap 5 framework. 
-                    <br><br>Anyone can edit and use this layout for all professional websites. Thank you for visiting TemplateMo website.</p>
+                    <p>At Dernan Salt Limited, our mission is to provide our customers with the highest quality salt products, tailored to meet the diverse needs of various industries. 
+                      We are dedicated to upholding the principles of sustainability in all aspects of our operations, ensuring that our processes are environmentally friendly and socially responsible. We aim to foster long-term relationships with our clients by consistently delivering superior value and exceptional customer service.
+                    </p>
                 </div>
             </div>
           </article>
           <article class="accordion">
             <div class="accordion-head">
-                <span>Cryptocurrency Investments</span>
+                <span>Our Core Values</span>
                 <span class="icon">
                     <i class="icon fa fa-chevron-right"></i>
                 </span>
             </div>
             <div class="accordion-body">
                 <div class="content">
-                    <p>Ut dictum vehicula massa, ac pharetra leo tincidunt eu. Phasellus in tristique magna, ac gravida leo.<br><br>
-                    Integer sed lorem sapien. Ut viverra mauris sed lobortis commodo. Mauris scelerisque venenatis justo, sed interdum sem.</p>
+                    <p>Quality: We are committed to maintaining the highest standards in every product we deliver. Our rigorous quality control processes ensure that our customers receive pure, reliable, and consistent salt products.
+<br><br>
+                      Sustainability: We prioritize environmentally friendly practices and are dedicated to reducing our ecological footprint. Our sustainable approach encompasses everything from production to packaging, ensuring that we contribute positively to the environment.
+                      <br><br>
+                      Integrity: We operate with honesty, transparency, and ethical principles. Building trust with our customers, employees, and stakeholders is at the heart of our business.
+                      <br><br>
+                      Community: We believe in giving back to the communities where we operate. Through job creation, local development projects, and support for education, we strive to make a positive impact on society.
+                      <br><br>
+                      Innovation: We embrace continuous improvement and innovation in all aspects of our business. By staying ahead of industry trends and investing in advanced technologies, we ensure that we remain at the forefront of the salt industry.</p>
                 </div>
             </div>
           </article>
@@ -97,77 +106,4 @@
       </div>
     </div>
   </section>  
-
-  {{-- <section class="simple-cta">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5">
-          <h4>Business <em>Solutions</em> and <strong>Crypto</strong> Investments</h4>
-        </div>
-        <div class="col-lg-7">
-          <div class="buttons">
-            <div class="green-button">
-              <a href="#">Discover More</a>
-            </div>
-            <div class="orange-button">
-              <a href="#">Contact Us</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-
-  {{-- <section class="what-we-do">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5">
-          <div class="left-content">
-            <h4>Please tell us about your idea and how you want it to be</h4>
-            <p>If you need more HTML templates, you can try visiting TooCSS blog and Tooplate websites. You can get many good templates on those websites.<br><br>Nulla non placerat neque, a gravida elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi sed dolor condimentum tellus commodo volutpat non malesuada turpis.</p>
-            <div class="green-button">
-              <a href="contact-us.html">Discover More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="right-items">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="item">
-                  <em>01</em>
-                  <h4>First Step</h4>
-                  <p>Pellentesque ipsum elit, congue a sapien laoreet, pellentesque ultricies risus.</p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="item">
-                  <em>02</em>
-                  <h4>Second Step</h4>
-                  <p>Pellentesque ipsum elit, congue a sapien laoreet, pellentesque ultricies risus.</p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="item">
-                  <em>03</em>
-                  <h4>Third Step</h4>
-                  <p>Pellentesque ipsum elit, congue a sapien laoreet, pellentesque ultricies risus.</p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="item">
-                  <em>04</em>
-                  <h4>Fourth Step</h4>
-                  <p>Pellentesque ipsum elit, congue a sapien laoreet, pellentesque ultricies risus.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-
-
-    
-    @endsection
+@endsection

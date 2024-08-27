@@ -24,21 +24,37 @@ class JobApplication extends Component
     public $email;
 
     public $current_employer;
+    public $company_name;
+    public $company_address;
     public $position_held;
-    public $duration_of_employment;
+    public $duration_of_employment_from;
+    public $duration_of_employment_to;
     public $responsilibities;
 
     public $current_employer2;
+    public $company_name2;
+    public $company_address2;
     public $position_held2;
-    public $duration_of_employment2;
+    public $duration_of_employment_from2;
+    public $duration_of_employment_to2;
     public $responsilibities2;
 
-    public $position;
+    public $position_id;
 
-    public $highest_qualification;
+    public $year_began;
     public $institution_name;
     public $certificate;
     public $year_of_graduation;
+
+    public $year_began2;
+    public $institution_name2;
+    public $certificate2;
+    public $year_of_graduation2;
+
+    public $year_began3;
+    public $institution_name3;
+    public $certificate3;
+    public $year_of_graduation3;
 
     public $school_name;
     public $secondary_certificate;
@@ -90,7 +106,7 @@ class JobApplication extends Component
     public function render()
     {
         return view('livewire.job-application', [
-            "position" => PostJobs::all()
+            "position_id" => PostJobs::where('id', 'id') -> get()
         ]);
     }
 
@@ -127,23 +143,39 @@ class JobApplication extends Component
         } elseif ($this -> currentStep == 2) {
             $this -> validate([
                 'current_employer' => 'required|string',
+                'company_name' => 'required',
+                'company_address' => 'required',
                 'position_held' => 'required|string',
-                'duration_of_employment' => 'required|string',
-                'responsilibities' => 'required|string|min:20|max:500',
+                'duration_of_employment_from' => 'required',
+                'duration_of_employment_to' => 'required', 
+                'responsilibities' => 'required|string|min:10|max:500',
 
                 'current_employer2' => 'required|string',
+                'company_name2' => 'required',
+                'company_address2' => 'required',
                 'position_held2' => 'required|string',
-                'duration_of_employment2' => 'required|string',
-                'responsilibities2' => 'required|string|min:20|max:500',
+                'duration_of_employment_from2' => 'required',
+                'duration_of_employment_to2' => 'required',
+                'responsilibities2' => 'required|string|min:10|max:500',
 
-                // 'position' => 'required|array|min:1|max:1'
+                // 'position' => 'string'
             ]);
         } elseif ($this -> currentStep == 3) {
             $this -> validate([
-                'highest_qualification' => 'required',
+                'year_began' => 'required',
                 'institution_name' => 'required',
                 'certificate' => 'required',
                 'year_of_graduation' => 'required',
+
+                'year_began2' => 'required',
+                'institution_name2' => 'required',
+                'certificate2' => 'required',
+                'year_of_graduation2' => 'required',
+
+                'year_began3' => 'string',
+                'institution_name3' => 'string',
+                'certificate3' => 'string',
+                'year_of_graduation3' => 'string',
 
                 'school_name' => 'required',
                 'secondary_certificate' => 'required',
@@ -208,7 +240,7 @@ class JobApplication extends Component
 
         if ($upload_cv && $upload_cerificates_acquired && $upload_cover_letter && $upload_other_relevant_doc && $upload_image) {
             $values = array(
-            $this -> applicant_id = $applicant_id,
+            "applicant_id" => $this -> applicant_id = $applicant_id,
             "first_name" => $this -> first_name,
             "middle_name" => $this -> middle_name,
             "last_name" => $this -> last_name,
@@ -220,22 +252,38 @@ class JobApplication extends Component
             "email" => $this -> email,
 
             "current_employer" => $this -> current_employer,
+            "company_name" => $this -> company_name,
+            "company_address" => $this -> company_address,
             "position_held" => $this -> position_held,
-            "duration_of_employment" => $this -> duration_of_employment,
+            "duration_of_employment_from" => $this -> duration_of_employment_from,
+            "duration_of_employment_to" => $this -> duration_of_employment_to,
             "responsilibities" => $this -> responsilibities,
 
             "current_employer2" => $this -> current_employer2,
+            "company_name2" => $this -> company_name2,
+            "company_address2" => $this -> company_address2,
             "position_held2" => $this -> position_held2,
-            "duration_of_employment2" => $this -> duration_of_employment2,
+            "duration_of_employment_from2" => $this -> duration_of_employment_from2,
+            "duration_of_employment_to2" => $this -> duration_of_employment_to2,
             "responsilibities2" => $this -> responsilibities2,
 
             // "position" => $jobDesc = App\Model\JobDetails::find($this -> position),
-            "position" => $this -> position_id,
+            // "position" => $this -> position_id,
 
-            "highest_qualification" => $this -> highest_qualification,
+            "year_began" => $this -> year_began,
             "institution_name" => $this -> institution_name,
             "certificate" => $this -> certificate,
             "year_of_graduation" => $this -> year_of_graduation,
+
+            "year_began2" => $this -> year_began2,
+            "institution_name2" => $this -> institution_name2,
+            "certificate2" => $this -> certificate2,
+            "year_of_graduation2" => $this -> year_of_graduation2,
+
+            "year_began3" => $this -> year_began3,
+            "institution_name3" => $this -> institution_name3,
+            "certificate3" => $this -> certificate3,
+            "year_of_graduation3" => $this -> year_of_graduation3,
 
             "school_name" => $this -> school_name,
             "secondary_certificate" => $this -> secondary_certificate,
@@ -270,7 +318,7 @@ class JobApplication extends Component
             "status" => $this -> status = "Submitted" 
 
             );
-            JobDetails::insert($values);
+            JobDetails::updateOrCreate($values);
             $this -> reset();
             $this -> currentStep = 1;
         }

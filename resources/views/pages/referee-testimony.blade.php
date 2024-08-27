@@ -211,8 +211,8 @@
 </header>
 
 <body>
- <form action="">
-  
+ <form action="{{url('/referee-testimony')}}" method="POST">
+  @csrf
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-6 offset-md-3">
 
@@ -226,7 +226,7 @@
                 </div>
                 <div class="form-group">
                     <label for="middle-name">Document <span>*</span></label>
-                    <input type="file" name="document">
+                    <input type="file" name="document" required>
                     <span class="text-danger">@error('document'){{ $message }} @enderror</span>
                 </div>
             </fieldset>

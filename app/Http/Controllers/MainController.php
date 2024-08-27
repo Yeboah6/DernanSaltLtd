@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Mail\ApplicantMail;
 use App\Mail\ContactUs;
 use App\Mail\MarketingMail;
+use App\Mail\RefereeMail;
 use App\Mail\RejectMail;
 use App\Mail\SalesMail;
 use App\Models\Admin;
+use App\Models\ApplicantLogins;
 use App\Models\JobDetails;
 use App\Models\Position;
 use App\Models\PostJobs;
+use App\Models\RefereeTestimony;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -65,15 +68,24 @@ class MainController extends Controller
         return redirect('/admin-dashboard');
     }
 
-    // Sending Rejected Email Function
+    // Sending Accept Email Function
     public function accept_send_mail($id) {
         $accepted = JobDetails::find($id);
 
         Mail::to($accepted -> email) -> send(new ApplicantMail($accepted));
+        Mail::to($accepted -> referee_email) -> send(new RefereeMail($accepted));
 
         $accepted -> status = "Accepted";
         $accepted -> update();
 
+        return redirect('/admin-dashboard');
+    }
+
+    // Sending Referee Email Function
+    public function referee_send_mail($id) {
+        $referral = JobDetails::find($id);
+
+        Mail::to($referral -> referee_email);
         return redirect('/admin-dashboard');
     }
 
@@ -111,9 +123,13 @@ class MainController extends Controller
         }
 
     // Display Apply page Function
-    public function apply($id) {
-        $jobDesc = PostJobs::find($id);
-        return view('pages.apply', compact('jobDesc'));
+    public function apply() {
+        return view('pages.apply');
+    }
+
+      // Display Apply page Function
+      public function jobApply() {
+        return view('pages.job-form');
     }
 
     // Display Dashboard Function
@@ -143,8 +159,9 @@ class MainController extends Controller
     public function jobPosting() {
         $position = Position::where('status', 'Available') -> get();
         $jobPosting = PostJobs::all();
+        $positionNames = Position::all();
         
-        return view('pages.job-posting', compact('position', 'jobPosting'));
+        return view('pages.job-posting', compact('position', 'jobPosting', 'positionNames'));
     }
 
     // Hide Jobs Function
@@ -170,12 +187,16 @@ class MainController extends Controller
 
         $jobPosting = new PostJobs();
 
+        $character = 'JID';
+        $pin = mt_rand(10, 99) . mt_rand(10, 99);
+        $job_id = $character. '' .$pin;
+
+        $jobPosting -> job_id = $job_id;
         $jobPosting -> job_title = $request -> input('job_title');
         $jobPosting -> job_type = $request -> input('job_type');
         $jobPosting -> job_description = $request -> input('job_description');
-        $jobPosting -> key_responsibilities = $request -> input('key_responsibilities');
         $jobPosting -> education = $request -> input('education');
-        $jobPosting -> position = $request -> input('position');
+        $jobPosting -> position_id = $request -> input('position');
         $jobPosting -> experience = $request -> input('experience');
         $jobPosting -> personal_attributes = $request -> input('personal_attributes');
         $jobPosting -> skills_competencies = $request -> input('skills_competencies');
@@ -244,7 +265,7 @@ class MainController extends Controller
 
     // Download Document Function
     public function download($file) {
-        return response()->download(storage_path('app/applicants_docs/'.$file));
+        return response()->download(storage_path('/storage/app/applicants_docs/'. $file));
  
         // if(Storage::disk('local') -> exists("applicants_docs/".$request -> file)) {
         //     $path = Storage::disk('local') -> path("applicants_docs/".$request -> file);
@@ -298,7 +319,39 @@ class MainController extends Controller
         return view('auth.applicant-sign-up');
     }
 
+    // public function storeSignUp(Request $request) {
+    //     $applicant = new ApplicantLogins();
+
+    //     $applicant -> user_name = $request -> input('user_name');
+    //     $applicant -> email = $request -> input('email');
+
+    //     Mail::to($request -> input('email')) -> send(new MarketingMail($data));
+    // }
+
+
+    // public function 
+
+    // Display Referee Testimony Page Function
     public function refereeTestimony() {
         return view('pages.referee-testimony');
+    }
+
+    // Post Referee Testimony Function
+    public function postRefereeTestimony(Request $request) {
+        $referee = new RefereeTestimony();
+
+        $referee -> job_details_id = 1234;
+        $referee -> testimony = $request -> input('testimony');
+
+        if($request -> hasFile('doc')) {
+            $file = $request -> file('doc');
+            $extension = $file -> getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file -> move('uploads/refereeDocuments', $filename);
+            $referee -> document = $filename;
+        }
+        // = time().'.'.$request -> file('doc') -> getClientOriginalExtension();
+        $referee -> save();
+        return redirect() -> back();
     }
 }

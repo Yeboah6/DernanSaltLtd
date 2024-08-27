@@ -21,9 +21,15 @@
       
   }
 
-  li a {
+  a li{
       text-decoration: none;
       color: #000;
+  }
+
+  a li:hover {
+    color: #fff;
+    border: 1px solid #8bc9e7;
+    background-color: #8bc9e7;
   }
 
   .box-wrapper {
@@ -33,22 +39,72 @@
     right: 0;
   }
 
+  .main-box-container {
+    position: absolute;
+    top: 450px;
+    left:200px;
+  }
+
+  .h4 {
+    position: absolute;
+    top: 350px;
+    left:600px;
+    font-size:2rem;
+    color:#fff;
+  }
+
+  @media screen and (max-width: 460px) {
+    .box-container li {
+      width: 50px;
+      height: 50px;
+    }
+
+    .main-box-container {
+      top: 250px;
+      left:90px;
+    }
+
+    .h4 {
+      top: 50px;
+      left:300px;
+    }
+  }
+
+  @media screen and (min-width: 850px) {
+    .box-container li {
+      border: 1px solid #51B3E4;
+      width: 200px;
+
+      
+  }
+
+    .main-box-container {
+      top: 250px;
+      left:90px;
+    }
+
+    .h4 {
+      top: 150px;
+      left:300px;
+    }
+  }
+
 
 
 </style>
 
 <div class="box-wrapper" style="z-index: 50;">
-  <h4 style="position: absolute;top: 150px;left:200px">We produce well refined <em>salts</em> to serve your needs</h4>
+  <h4 class="h4">We produce well refined salts to serve your needs</h4>
   
-      <div style="position: absolute;top: 450px;left:200px">
+      <div class="main-box-container">
           <div>
               <ul class="box-container">
-                  <li><a href="/">Home</a></li>
-                  <li><a href="/about-us">About</a></li>
-                  <li><a href="/jobs">Job</a></li>
-                  <li><a href="/contact">Contact</a></li>
-                  <li><a href="/marketing">Marketing</a></li>
-                  <li><a href="/sales">Sales</a></li>
+                  <a href="/"><li>Home</li></a>
+                  <a href="/about-us"><li>About</li></a>
+                  <a href="/jobs"><li>Job</li></a>
+                  <a href="/contact"><li>Contact</li></a>
+                  <a href="/marketing"><li>Marketing</li></a>
+                  <a href="/sales"><li>Sales</li></a>
               </ul>
           </div>
       </div>

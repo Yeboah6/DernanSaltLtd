@@ -108,7 +108,10 @@
     input[type="text"],
     input[type="date"], 
     input[type="email"],
-    input[type="file"] {
+    input[type="file"],
+    input[type='month'],
+    textarea,
+    select {
         width: calc(100% - 20px);
         padding: 10px;
         border: 1px solid #ccc;

@@ -24,7 +24,6 @@ class SendMailController extends Controller
 
         $data3["email"] = $emailSubmit -> referee_email2;
         $data3["title"] = "Request for Reference Letter for {$emailSubmit -> first_name}";
-        // $data["body"] = '';
 
         Mail::send('emails.applicantMail', $data, function($message) use($data) {
             $message -> to($data["email"])
@@ -45,6 +44,11 @@ class SendMailController extends Controller
         $emailSubmit -> update();
 
         return redirect() -> back();
+    }
+
+
+    public function verifyEmail() {
+        return view('emails.verify-email');
     }
     
     // public function send_mail(Request $request) {

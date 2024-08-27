@@ -239,8 +239,6 @@ header
   -moz-transition: all .5s ease 0s;
   -o-transition: all .5s ease 0s;
   transition: all .5s ease 0s;
-  /* background-color: #181D303A;
-  backdrop-filter: blur(8px); */
 }
 
 .background-header {
@@ -1629,12 +1627,12 @@ body {
   /* .header-area .main-nav .nav li:last-child {
     display: none;
   } */
-  .header-area .main-nav .nav li ul li:last-child {
+  /* .header-area .main-nav .nav li ul li:last-child {
     display: inline-block;
-  }
-  .header-area {
+  } */
+  /* .header-area {
     background-color: #0170A6;
-  }
+  } */
   .slide-inner .header-text {
     width: 80%;
   }

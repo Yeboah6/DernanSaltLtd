@@ -10,4 +10,8 @@ class RefereeTestimony extends Model
     use HasFactory;
 
     protected $table = 'referee_testimonies'; 
+    protected $guarded = [
+        'testimony',
+        'document'
+    ];
 }

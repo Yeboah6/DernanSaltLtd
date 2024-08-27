@@ -57,7 +57,14 @@
                                         </td>
                                         <td>{{$posting -> job_title}}</td>
                                         <td>{{ Str::limit($posting -> job_description, 105) }}</td>
-                                        <td>{{$posting -> position}}</td>
+                                        <td>
+                                            @foreach ($positionNames as $positionName)
+                                                @if ($positionName -> id == $posting -> position_id)
+                                                    {{ $positionName -> position }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        {{-- {{$posting -> position_id}} --}}
                                         <td>{{$posting -> deadline}}</td>
                                         @if ($posting -> status == "Available")
                                             <td style="text-align: center"><span style="background-color: #008B9C;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{$posting -> status}}</span></td>
@@ -90,7 +97,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-report2" tabindex="-2" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
+{{-- <div class="modal fade" id="modal-report2" tabindex="-2" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -154,9 +161,9 @@
                                 <label class="floating-label">Position</label>
                                 <select class="form-control" name="position">
                                     <option value=""></option>
-                                    {{-- @foreach ($position as $position)
+                                    @foreach ($position as $position)
                                          <option value="{{$position -> position}}">{{$position -> position}}</option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -180,7 +187,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- Job Posting -->
 <div class="modal fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -219,12 +226,6 @@
                                 <textarea class="form-control" name="job_description" rows="3"></textarea>
                             </div>
                         </div>
-                        {{-- <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="floating-label">Key Responsibilities</label>
-                                <textarea class="form-control" name="key_responsibilities" rows="3"></textarea>
-                            </div>
-                        </div> --}}
                         <div class="col">
                             <div class="form-group">
                                 <label class="floating-label">Education</label>
@@ -249,7 +250,7 @@
                                 <select class="form-control" name="position">
                                     <option value=""></option>
                                     @foreach ($position as $position)
-                                         <option value="{{$position -> position}}">{{$position -> position}}</option>
+                                         <option value="{{$position -> id}}">{{$position -> position}}</option>
                                     @endforeach
                                 </select>
                             </div>

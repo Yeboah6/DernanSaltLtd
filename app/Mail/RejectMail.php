@@ -29,8 +29,8 @@ class RejectMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Reject Mail',
-            from: new Address('yeboahs324@gmail.com', 'Dernan Salt Ltd Rejected')
+            subject: 'Update on Your Application with Dernan Salt Limited.',
+            from: new Address('yeboahs324@gmail.com', 'Dernan Salt Ltd')
         );
     }
 
