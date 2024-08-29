@@ -45,11 +45,6 @@ class SendMailController extends Controller
 
         return redirect() -> back();
     }
-
-
-    public function verifyEmail() {
-        return view('emails.verify-email');
-    }
     
     // public function send_mail(Request $request) {
     //     $data["email"] = "ads21b00223y@ait.edu.gh";

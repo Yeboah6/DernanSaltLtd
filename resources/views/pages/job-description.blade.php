@@ -67,7 +67,8 @@
         }
 
         .btn-checkin:hover {
-            background-color: #0b5ed7;
+            background-color: #fff;
+            color: #0b5ed7;
         }
     </style>
     
@@ -77,7 +78,7 @@
         <div class="card-main">
             <div class="card-header">
                 <span>Job Details</span>
-                <a href="{{ url('/job-apply/'.$jobDesc -> id) }}" class="btn-checkin">Apply</a>
+                <a href="{{ url('/applicant-sign-up/'.$jobDesc -> id) }}" class="btn-checkin">Apply</a>
             </div>
             <div class="card-body">
                 <h6>Job Title</h6>
@@ -92,11 +93,6 @@
                 <h6>Job Description</h6>
                 <hr>
                 <p>{{$jobDesc -> job_description}}</p>
-
-                <!-- What we need Section -->
-                <h6>Key Responsibilities</h6>
-                <hr>
-                <p>{{$jobDesc -> key_responsibilities}}</p>
 
                 <!-- Qualifications Section -->
                 <h6>Qualifications</h6>

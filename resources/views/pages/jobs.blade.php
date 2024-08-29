@@ -22,6 +22,10 @@
           color: #000;
         }
 
+        /* .job-card-body h1 {
+          display: block;
+        } */
+
         </style>
 
 
@@ -56,14 +60,43 @@
         </div>
 
         @foreach ($jobPosting as $position)
-        <div class="jobs-container">
-          <div class="job-card">
-            <a href="{{ url('/job-description/'.$position -> id)}}"> 
+          
+        <div class="jobs-container" style="display: flexbox;">
+         
+          <div class="job-card" >
+            
+            <a href="{{ url('/job-description/'.$position -> id)}}">
+               
               <div class="job-card-body">
-                <h1>Hello</h1>
+                <h1 style="font-size: 12px;">
+                  {{-- {{ $position-> position_id ->position}} --}}
+                  @foreach ($positionNames as $positionName)
+                  @if ($positionName -> id == $position -> position_id)
+                    {{ $positionName -> position}}
+                  @endif
+                  @endforeach
+
+                </h1>
               </div>
+             
             </a>
+           
+          </div>
+          
+        </div>
           @endforeach
+
+          {{-- @foreach ($jobPosting as $position)
+          <div class="col-sm-4">
+						<div class="card bg-light">
+              <a href="{{ url('/job-description/'.$position -> id)}}">
+							<div class="card-body" style="width: 250px;padding:50px;height: 150px">
+								<p class="card-text">IT Manager</p>
+							</div>
+            </a>
+						</div>
+					</div>
+          @endforeach --}}
           {{-- <div class="job-card">
             <a href="">
               <div class="job-card-body">

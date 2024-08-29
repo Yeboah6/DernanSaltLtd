@@ -77,7 +77,8 @@ Route::post('/referee-testimony', [MainController::class, 'postRefereeTestimony'
 
 
 
-Route::get('/verify/email', [SendMailController::class, 'verifyEmail']) -> name('verify.email');
+Route::get('/verify-email', [MainController::class, 'verifyEmail']) -> name('verify.email');
+Route::post('/verify-email', [MainController::class, 'postVerifyEmail']) -> name('verify.email');
 
 
 

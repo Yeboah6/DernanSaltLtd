@@ -1,10 +1,10 @@
 <div>
-    <h2 class="form-title" style="margin-top: 50px">Job Application Form</h2>
+    <h2 class="form-title" style="margin-top: 70px">Job Application Form</h2>
 
     {{-- <h6>Personal Information</h6> --}}
     <ul class="fieldset-containter">
         @if ($currentStep == 1)
-            <li class="fieldset" style="background-color: #51B3E4;color:#fff;"><a href="#personal" wire:navigate> Personal Information</a></li>  
+            <li class="fieldset" style="background-color: #51B3E4;color:#fff;"> Personal Information</li>  
             <li class="fieldset">Work Experience</li>
             <li class="fieldset">Educational Background</li>
             <li class="fieldset">Referee</li>
@@ -14,8 +14,8 @@
         @endif
 
         @if ($currentStep == 2)
-        <li class="fieldset"><a href="#personal" wire:navigate> Personal Information</a></li>  
-        <li class="fieldset" style="background-color: #51B3E4;color:#fff;"> <a href="#experience" class="pagination-class">Work Experience </a> </li>
+        <li class="fieldset"> Personal Information</li>  
+        <li class="fieldset" style="background-color: #51B3E4;color:#fff;"> Work Experience</li>
         <li class="fieldset">Educational Background</li>
         <li class="fieldset">Referee</li>
         <li class="fieldset">Other Relevant</li>
@@ -76,7 +76,7 @@
 
     <form class="application-form" wire:submit.prevent="jobapply">
 
-        <div class="action-button d-flex justify-content-between bg-white pt-2 pb-2">
+        <div class="action-button d-flex justify-content-between pt-2 pb-2">
             @if ($currentStep == 1)
                 <div></div>
             @endif
@@ -500,7 +500,7 @@
             
         @endif
 
-        <div class="action-button d-flex justify-content-between bg-white pt-2 pb-2">
+        <div class="action-button d-flex justify-content-between pt-2 pb-2">
             @if ($currentStep == 1)
                 <div></div>
             @endif

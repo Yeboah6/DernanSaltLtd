@@ -8,6 +8,7 @@ use App\Mail\MarketingMail;
 use App\Mail\RefereeMail;
 use App\Mail\RejectMail;
 use App\Mail\SalesMail;
+use App\Mail\VerifyEmail;
 use App\Models\Admin;
 use App\Models\ApplicantLogins;
 use App\Models\JobDetails;
@@ -35,7 +36,12 @@ class MainController extends Controller
     // Display Jobs Page Function
     public function job() {
         $jobPosting = PostJobs::where('status', 'Available') -> get();
-        return view('pages.jobs', compact('jobPosting'));
+        $positionNames = Position::all();
+
+        // if($positionNames -> id == $jobPosting -> position_id) {
+        //     $name = $positionNames -> position;
+        // }
+        return view('pages.jobs', compact('jobPosting', 'positionNames'));
     }
     
     // Display Contact Page Function
@@ -48,7 +54,7 @@ class MainController extends Controller
         $data = request() -> validate([
             'name' => 'required|min:3',
             'email' => 'required|email',
-            'subject' => 'required|min:5|max:25',
+            'subject' => 'required',
             'message' => 'required|min:5'
         ]);
         Mail::to('yeboahs324@gmail.com') -> send(new ContactUs($data));
@@ -74,6 +80,7 @@ class MainController extends Controller
 
         Mail::to($accepted -> email) -> send(new ApplicantMail($accepted));
         Mail::to($accepted -> referee_email) -> send(new RefereeMail($accepted));
+        Mail::to($accepted -> referee_email2) -> send(new RefereeMail($accepted));
 
         $accepted -> status = "Accepted";
         $accepted -> update();
@@ -306,7 +313,7 @@ class MainController extends Controller
         $data = request() -> validate([
             'name' => 'required|min:3',
             'email' => 'required|email',
-            'subject' => 'required|min:5|max:25',
+            'subject' => 'required',
             'message' => 'required|min:5'
         ]);
         Mail::to('yeboahs324@gmail.com') -> send(new MarketingMail($data));
@@ -319,17 +326,42 @@ class MainController extends Controller
         return view('auth.applicant-sign-up');
     }
 
-    // public function storeSignUp(Request $request) {
-    //     $applicant = new ApplicantLogins();
+    // Store Applicant SignUp Function
+    public function storeSignUp(Request $request) {
+        $applicant = new ApplicantLogins();
 
-    //     $applicant -> user_name = $request -> input('user_name');
-    //     $applicant -> email = $request -> input('email');
+        $applicant -> user_name = $request -> input('user_name');
+        $applicant -> email = $request -> input('email');
 
-    //     Mail::to($request -> input('email')) -> send(new MarketingMail($data));
-    // }
+        Mail::to($request -> input('email')) -> send(new VerifyEmail($applicant));
+
+        $applicant -> save();
+        return redirect() -> back();
+    }
+
+    // Display Verify Account Page Function
+    public function verifyEmail() {
+        return view('emails.verify-email');
+    }
 
 
-    // public function 
+    // Store Verify Account Function
+    public function postVerifyEmail(Request $request) {
+        $request -> validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8|max:12'
+        ]);
+
+        $applicant = ApplicantLogins::where('email', '=', $request -> email) -> first();
+        if($applicant) {
+          $applicant -> password = Hash::make($request -> input('password'));
+        //   $applicant -> verified_at = update(['verified_at' => now()])
+            $applicant -> update(['verified_at' => now()]);
+            return redirect('/admin-login');
+        } else {
+            return back() -> with('fail', 'Incorrect Credentials!!');
+        }
+    }
 
     // Display Referee Testimony Page Function
     public function refereeTestimony() {

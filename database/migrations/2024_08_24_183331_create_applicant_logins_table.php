@@ -16,7 +16,8 @@ return new class extends Migration
             $table -> string('user_name');
             $table -> string('email');
             $table -> string('password') -> nullable();
-            $table->timestamps();
+            $table -> timestamps('verified_at');
+            $table -> timestamps();
         });
     }
 

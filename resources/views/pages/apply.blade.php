@@ -5,7 +5,6 @@
 @livewireStyles
     
 <div class="container">
-  
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-6 offset-md-3">
             <livewire:job-application>
@@ -21,15 +20,6 @@
         margin: 0;
         padding: 0;
     }
-    
-    /* .container {
-        width: 60%;
-        margin: 20px auto;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-    } */
     
     .header {
         text-align: center;

@@ -27,20 +27,28 @@
 		<div class="card">
 			<div class="row align-items-center text-center">
 				<div class="col-md-12">
-                    <form action="">
+                    <form action="{{url('/verify-email')}}" method="POST">
+						@if (Session::has('success'))
+							<div class="alert alert-success">{{ Session::get('success') }}</div>
+						@endif
+						@if (Session::has('fail'))
+							<div class="alert alert-danger">{{ Session::get('fail') }}</div>
+						@endif
+						@csrf
 					<div class="card-body">
 						<img src="../assets/images/Asset4@4x.png" alt="" class="img-fluid mb-4" style="width:6.5em">
 						<h4 class="mb-3 f-w-400">Verify Account</h4>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Username">Email</label>
-							<input type="email" class="form-control" id="Username">
+							<input type="text" class="form-control" name="email" id="Username">
+							<span class="text-danger">@error('email'){{ $message }} @enderror</span>
 						</div>
                         <div class="form-group mb-4">
 							<label class="floating-label" for="Username">Password</label>
-							<input type="email" class="form-control" id="Username">
+							<input type="password" class="form-control" name="password" id="Username">
+							<span class="text-danger">@error('password'){{ $message }} @enderror</span>
 						</div>
-						<button class="btn btn-block btn-primary mb-4">Reset password</button>
-						{{-- <p class="mb-0 text-muted">Don’t have an account? <a href="auth-signup.html" class="f-w-400">Signup</a></p> --}}
+						<button class="btn btn-block btn-primary mb-4">Login</button>
 					</div>
                 </form>
 				</div>

@@ -35,15 +35,17 @@
 			<div class=" auth-content">
                 <img src="assets/images/Dernan-logo.jpg" style="width:4.5em" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
 				<h3 class="mb-4 f-w-400">Sign Up</h3>
-				<form action="{{url('')}}" method="POST">
+				<form action="{{url('/applicant-sign-up')}}" method="POST">
 					@csrf
 				<div class="form-group mb-3">
 					<label class="floating-label" for="Email">Username</label>
-					<input type="text" class="form-control" name="user_name" placeholder="">
+					<input type="text" class="form-control" name="user_name">
+					<span class="text-danger">@error('user_name'){{ $message }} @enderror</span>
 				</div>
 				<div class="form-group mb-4">
 					<label class="floating-label" for="Password">Email</label>
-					<input type="password" class="form-control" name="email" placeholder="">
+					<input type="email" class="form-control" name="email">
+					<span class="text-danger">@error('email'){{ $message }} @enderror</span>
 				</div>
 				<button type="submit" class="btn btn-block btn-primary mb-4">Signup</button>
 			</form>
