@@ -9,8 +9,8 @@ use App\Mail\RefereeMail;
 use App\Mail\RejectMail;
 use App\Mail\SalesMail;
 use App\Mail\VerifyEmail;
-use App\Models\Admin;
 use App\Models\ApplicantLogins;
+use App\Models\Admin;
 use App\Models\JobDetails;
 use App\Models\Position;
 use App\Models\PostJobs;
@@ -101,7 +101,7 @@ class MainController extends Controller
     // Admin Login Function 
     public function log(Request $request) {
         $request -> validate([
-            'email' => 'required|email|unique:admin',
+            'email' => 'required|email',
             'password' => 'required|min:8|max:12'
         ]);
 
@@ -324,8 +324,28 @@ class MainController extends Controller
         return view('pages.choose-account', compact('jobDesc'));
     }
 
+    // Display Applicant Login Page Function
     public function Applicantlogin() {
         return view('auth.applicant-login');
+    }
+
+    public function postApplicantlogin(Request $request) {
+        $request -> validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8|max:12'
+        ]);
+
+        $applicant = ApplicantLogins::where('email', '=', $request -> email) -> first();
+        if($applicant) {
+            if(Hash::check($request -> password, $applicant -> password)) {
+                $request -> session() -> put('loginId', $applicant -> id);
+                return redirect('/job-apply');
+            } else {
+                return back() -> with('fail', 'Incorrect Credentials!!');
+            } 
+        } else {
+            return back() -> with('fail', 'You do not access to this portal!!');
+        }
     }
 
     // Display Applicant Sign Up Page Function
@@ -359,14 +379,19 @@ class MainController extends Controller
     public function postVerifyEmail(Request $request) {
         $request -> validate([
             'email' => 'required|email',
+            'confirm_password' => 'required|min:8|max:12',
             'password' => 'required|min:8|max:12'
         ]);
 
         $applicant = ApplicantLogins::where('email', '=', $request -> email) -> first();
         if($applicant) {
+            if ($request -> confirm_password == $request -> password) {
           $applicant -> password = Hash::make($request -> input('password'));
-            $applicant -> update(['verified_at' => now()]);
-            return redirect('/admin-login');
+            $applicant -> update();
+            return redirect('/applicant-login');
+            } else {
+                return back() -> with('fail', "Passwords don't match!!");
+            }
         } else {
             return back() -> with('fail', 'Incorrect Credentials!!');
         }

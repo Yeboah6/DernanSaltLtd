@@ -94,7 +94,7 @@
 		<div class="card" style="border: 1px solid #51B3E4; top:70px;">
 			<div class="row align-items-center text-center">
 				<div class="col-md-12">
-                    <form action="{{url('/applicant-sign-up')}}" method="POST">
+                    <form action="{{url('/applicant-login')}}" method="POST">
 						@if (Session::has('success'))
 							<div class="alert alert-success">{{ Session::get('success') }}</div>
 						@endif
@@ -114,7 +114,7 @@
 						</div>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Username">Password</label>
-							<input type="text" class="form-control" name="password" required>
+							<input type="password" class="form-control" name="password" required>
 							<span class="text-danger">@error('password'){{ $message }} @enderror</span>
 						</div>
 						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Log in</button>

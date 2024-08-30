@@ -37,7 +37,7 @@
 						@csrf
 					<div class="card-body">
 						<img src="../assets/images/Asset4@4x.png" alt="" class="img-fluid mb-4" style="width:6.5em">
-						<h4 class="mb-3 f-w-400">Verify Account</h4>
+						<h6 class="mb-3 f-w-400">Set Password | Verify Account</h6>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Username">Email</label>
 							<input type="text" class="form-control" name="email" value="{{old('email')}}">
@@ -50,10 +50,10 @@
 						</div>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Username">Confirm Password</label>
-							<input type="password" class="form-control" name="password">
+							<input type="password" class="form-control" name="confirm_password">
 							<span class="text-danger">@error('password'){{ $message }} @enderror</span>
 						</div>
-						<button class="btn btn-block btn-primary mb-4">Login</button>
+						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Login</button>
 					</div>
                 </form>
 				</div>

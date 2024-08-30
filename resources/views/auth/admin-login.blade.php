@@ -40,13 +40,15 @@
 					@csrf
 				<div class="form-group mb-3">
 					<label class="floating-label" for="Email">Email address</label>
-					<input type="text" class="form-control" name="email" id="Email" placeholder="">
+					<input type="text" class="form-control" name="email">
+					<span class="text-danger">@error('email'){{ $message }} @enderror</span>
 				</div>
 				<div class="form-group mb-4">
 					<label class="floating-label" for="Password">Password</label>
-					<input type="password" class="form-control" name="password" id="Password" placeholder="">
+					<input type="password" class="form-control" name="password">
+					<span class="text-danger">@error('password'){{ $message }} @enderror</span>
 				</div>
-				<button class="btn btn-block btn-primary mb-4">Login</button>
+				<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Login</button>
 			</form>
 			</div>
 		</div>

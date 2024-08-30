@@ -91,7 +91,7 @@
 <div class="auth-wrapper">
 	<!-- [ reset-password ] start -->
 	<div class="auth-content">
-		<div class="card" style="border: 1px solid #51B3E4; top:70px;">
+		<div class="card" style="border: 1px solid #51B3E4; margin-top:150px;margin-bottom:50px;">
 			<div class="row align-items-center text-center">
 				<div class="col-md-12">
                     <form action="{{url('/applicant-sign-up')}}" method="POST">
@@ -123,8 +123,10 @@
 							<span class="text-danger">@error('last_name'){{ $message }} @enderror</span>
 						</div>
 						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Register</button>
-					</div>
-                </form>
+            <p><a href="/applicant-login">Login</a></p>
+          </div>
+         
+        </form>
 				</div>
 			</div>
 		</div>
@@ -157,13 +159,6 @@
             <p>Legal</p>
           </div>
           <div class="col-lg-4 me-3 me-lg-0">
-            {{-- <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Stay up to date</h6> --}}
-            {{-- <div class="position-relative footerInput-container mx-auto mx-md-0"> --}}
-              {{-- <input type="email" name="" id="" placeholder="Your email address" class="footer-input px-2 py-2 pe-4 rounded-3"> --}}
-              {{-- <div class="position-absolute top-0 end-0 h-100 d-flex align-items-center justify-content-center pe-2">
-                <img src="../assets/icons/Vector.png" class="plane-icon text-white" style="width: 20px; height: 20px;" alt="">
-              </div> --}}
-            {{-- </div> --}}
           </div>
         </div>
       </div>

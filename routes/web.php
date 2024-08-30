@@ -25,7 +25,7 @@ Route::post('/admin-login', [MainController::class, 'log']) -> name('admin-login
 // Route::get('/logout', [MainController::class, 'logout']) -> name('logout');
 Route::get('/admin-dashboard', [MainController::class, 'admindashboard']) -> name('admin-dashboard');
 
-Route::get('/job-apply/{id}', [MainController::class, 'apply']) -> name('job-apply');
+Route::get('/job-apply', [MainController::class, 'apply']) -> name('job-apply');
 
 
 Route::get('/job-form', [MainController::class, 'jobApply']) -> name('job-form');
@@ -73,6 +73,7 @@ Route::get('/applicant-sign-up/{id}', [MainController::class, 'signup']) -> name
 Route::post('/applicant-sign-up', [MainController::class, 'storeSignUp']) -> name('applicant-sign-up');
 
 Route::get('/applicant-login', [MainController::class, 'Applicantlogin']) -> name('applicant-login');
+Route::post('/applicant-login', [MainController::class, 'postApplicantlogin']) -> name('applicant-login');
 
 Route::get('/referee-testimony', [MainController::class, 'refereeTestimony']) -> name('referee-testimony');
 Route::post('/referee-testimony', [MainController::class, 'postRefereeTestimony']) -> name('referee-testimony');
