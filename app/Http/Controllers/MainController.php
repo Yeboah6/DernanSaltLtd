@@ -38,10 +38,7 @@ class MainController extends Controller
         $jobPosting = PostJobs::where('status', 'Available') -> get();
         $positionNames = Position::all();
 
-        // if($positionNames -> id == $jobPosting -> position_id) {
-        //     $name = $positionNames -> position;
-        // }
-        return view('pages.jobs', compact('jobPosting', 'positionNames'));
+        return view('pages.jobs', compact('positionNames', 'jobPosting'));
     }
     
     // Display Contact Page Function
@@ -104,7 +101,7 @@ class MainController extends Controller
     // Admin Login Function 
     public function log(Request $request) {
         $request -> validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:admin',
             'password' => 'required|min:8|max:12'
         ]);
 
@@ -121,13 +118,13 @@ class MainController extends Controller
         }
     }
 
-        public function logout() {
-        $data = array();
-        if(Session::has('loginId')){
-            Session::pull('loginId');
-            return redirect('/login');
-            }
-        }
+        // public function logout() {
+        // $data = array();
+        // if(Session::has('loginId')){
+        //     Session::pull('loginId');
+        //     return redirect('/login');
+        //     }
+        // }
 
     // Display Apply page Function
     public function apply() {
@@ -321,6 +318,16 @@ class MainController extends Controller
         return redirect() -> back() -> with('success', 'Message sent successfully');
     }
 
+    // Display Choose Account Page Function
+    public function chooseAccount($id) {
+        $jobDesc = PostJobs::find($id);
+        return view('pages.choose-account', compact('jobDesc'));
+    }
+
+    public function Applicantlogin() {
+        return view('auth.applicant-login');
+    }
+
     // Display Applicant Sign Up Page Function
     public function signup() {
         return view('auth.applicant-sign-up');
@@ -328,15 +335,18 @@ class MainController extends Controller
 
     // Store Applicant SignUp Function
     public function storeSignUp(Request $request) {
-        $applicant = new ApplicantLogins();
 
-        $applicant -> user_name = $request -> input('user_name');
-        $applicant -> email = $request -> input('email');
+        $applicant = request() -> validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:applicant_logins'
+        ]);
+
+        ApplicantLogins::insert($applicant);
 
         Mail::to($request -> input('email')) -> send(new VerifyEmail($applicant));
-
-        $applicant -> save();
-        return redirect() -> back();
+        // $applicant -> save();
+        return redirect() -> back() -> with('success', 'Verification link has been sent your email');
     }
 
     // Display Verify Account Page Function
@@ -355,7 +365,6 @@ class MainController extends Controller
         $applicant = ApplicantLogins::where('email', '=', $request -> email) -> first();
         if($applicant) {
           $applicant -> password = Hash::make($request -> input('password'));
-        //   $applicant -> verified_at = update(['verified_at' => now()])
             $applicant -> update(['verified_at' => now()]);
             return redirect('/admin-login');
         } else {

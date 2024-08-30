@@ -1,5 +1,6 @@
 @extends('layouts.main-layout')
 @section('content')
+@include('includes.header')
     <style>
         body {
             background-color: #f8f9fa;
@@ -72,13 +73,13 @@
         }
     </style>
     
-  @include('includes.header')
+
 
     <div class="container">
         <div class="card-main">
             <div class="card-header">
                 <span>Job Details</span>
-                <a href="{{ url('/applicant-sign-up/'.$jobDesc -> id) }}" class="btn-checkin">Apply</a>
+                <a href="{{ url('/choose-account/'.$jobDesc -> id) }}" class="btn-checkin">Apply</a>
             </div>
             <div class="card-body">
                 <h6>Job Title</h6>

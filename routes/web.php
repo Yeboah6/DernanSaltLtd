@@ -72,6 +72,8 @@ Route::get('/marketing', [MainController::class, 'marketing']) -> name('marketin
 Route::get('/applicant-sign-up/{id}', [MainController::class, 'signup']) -> name('applicant-sign-up');
 Route::post('/applicant-sign-up', [MainController::class, 'storeSignUp']) -> name('applicant-sign-up');
 
+Route::get('/applicant-login', [MainController::class, 'Applicantlogin']) -> name('applicant-login');
+
 Route::get('/referee-testimony', [MainController::class, 'refereeTestimony']) -> name('referee-testimony');
 Route::post('/referee-testimony', [MainController::class, 'postRefereeTestimony']) -> name('referee-testimony');
 
@@ -79,6 +81,9 @@ Route::post('/referee-testimony', [MainController::class, 'postRefereeTestimony'
 
 Route::get('/verify-email', [MainController::class, 'verifyEmail']) -> name('verify.email');
 Route::post('/verify-email', [MainController::class, 'postVerifyEmail']) -> name('verify.email');
+
+Route::get('/choose-account/{id}', [MainController::class, 'chooseAccount']) -> name('choose.account');
+
 
 
 

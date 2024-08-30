@@ -23,7 +23,7 @@
     {{-- <link rel="stylesheet" href="../assets/css/owl.css"> --}}
     {{-- <link rel="stylesheet" href="../assets/css/animate.css"> --}}
 
-    <title>Website Menu #5</title>
+    <title> Dernan Salt Ltd | Home </title>
 
     <style>
         .hero-carousel {
@@ -44,7 +44,7 @@
           z-index: 1;
           color: #fff;
           font-size: 2.5rem;
-          top: 190px;
+          top: 100px;
           left: 290px;
         }
 
@@ -53,8 +53,8 @@
           /* visibility: visible; */
           opacity: 1;
           z-index: 1;
-          top: 300px;
-          left: 100px;
+          top: 220px;
+          left: 330px;
         }
 
         .box-wrapper {
@@ -63,13 +63,13 @@
 
         .box-wrapper li {
           border: 1px solid #fff;
-          border-radius: 10px;
+          border-radius: 5px;
           display: flex;
           margin: 20px;
           font-size: 1.3rem;
-          padding-left: 60px;
+          padding-left: 90px;
           padding-top: 50px;
-          width: 200px;
+          width: 250px;
           height: 150px;
           background-color: #fff;
         }
@@ -98,7 +98,7 @@
           }
 
           .box-wrapper li {
-            width: 220px;
+            width: 250px;
             height: 100px;
             font-size: 1rem;
             padding-left: 80px;
@@ -197,7 +197,7 @@
 
     <!-- Hero Carousel -->
     <div id="heroCarousel" class="carousel slide hero-carousel" data-ride="carousel" data-interval="3000" data-pause="false">
-      <h4 class="topic">We produce well refined salts to serve your needs</h4>
+      <h4 class="topic">We produce well refined salts to serve your needs.</h4>
 
     <div class="box-container">
       <ul class="box-wrapper">

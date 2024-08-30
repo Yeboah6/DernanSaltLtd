@@ -12,7 +12,8 @@ class ApplicantLogins extends Model
     protected $table = 'applicant_logins';
 
     protected $fillable = [
-        'user_name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'verified_at'

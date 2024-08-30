@@ -5,7 +5,7 @@
 
         .job-card {
           display: flex;
-          justify-content: center
+          
         }
 
         a .job-card-body  {
@@ -59,32 +59,80 @@
           </div>
         </div>
 
-        @foreach ($jobPosting as $position)
-          
-        <div class="jobs-container" style="display: flexbox;">
-         
-          <div class="job-card" >
-            
-            <a href="{{ url('/job-description/'.$position -> id)}}">
-               
-              <div class="job-card-body">
-                <h1 style="font-size: 12px;">
-                  {{-- {{ $position-> position_id ->position}} --}}
-                  @foreach ($positionNames as $positionName)
-                  @if ($positionName -> id == $position -> position_id)
-                    {{ $positionName -> position}}
-                  @endif
-                  @endforeach
-
-                </h1>
-              </div>
-             
-            </a>
-           
+        <style>
+          .jobs-container {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 16px; /* Space between job cards */
+              justify-content: space-around; /* Adjust spacing between items */
+              padding: 10px; /* Padding around the container */
+          }
+      
+          .job-card {
+              flex: 1 1 calc(25% - 16px); /* Adjust card size for 4 per row with spacing */
+              box-sizing: border-box; /* Include padding and border in the element's total width and height */
+              background-color: #f8f9fa;
+              border: 1px solid #ddd; 
+              border-radius: 8px; /* Rounded corners */
+              transition: transform 0.2s ease; /* Smooth hover effect */
+              max-width: 300px; /* Optional: limit the width of each card */
+              margin-bottom: 16px; /* Space at the bottom of each card */
+              justify-content: center;
+          }
+      
+          .job-card:hover {
+              transform: scale(1.05); /* Slightly enlarge on hover */
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow on hover */
+          }
+      
+          .job-card-body {
+              padding: 16px; /* Space inside the job card */
+          }
+      
+          .job-card h1 {
+              font-size: 1.4rem; /* Adjust font size */
+              margin: 0; /* Remove default margin */
+              color: #fff;
+          }
+      
+          /* Responsive Adjustments */
+          @media (max-width: 992px) {
+              .job-card {
+                  flex: 1 1 calc(33.333% - 16px); /* 3 cards per row on medium screens */
+              }
+          }
+      
+          @media (max-width: 768px) {
+              .job-card {
+                  flex: 1 1 calc(50% - 16px); /* 2 cards per row on small screens */
+              }
+          }
+      
+          @media (max-width: 576px) {
+              .job-card {
+                  flex: 1 1 100%; /* 1 card per row on extra small screens */
+              }
+          }
+      </style>
+      
+      <div class="jobs-container">
+          @foreach ($jobPosting as $position)
+          <div class="job-card">
+              <a href="{{ url('/job-description/'.$position->id)}}">
+                  <div class="job-card-body">
+                      <h1>
+                          @foreach ($positionNames as $positionName)
+                          @if ($positionName->id == $position->position_id)
+                          {{ $positionName->position }}
+                          @endif
+                          @endforeach
+                      </h1>
+                  </div>
+              </a>
           </div>
-          
-        </div>
           @endforeach
+      </div>
+      
 
           {{-- @foreach ($jobPosting as $position)
           <div class="col-sm-4">

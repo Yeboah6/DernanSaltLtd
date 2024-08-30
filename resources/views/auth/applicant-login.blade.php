@@ -104,8 +104,8 @@
 						@csrf
 					<div class="card-body">
 						<img src="../assets/images/Asset4@4x.png" alt="" class="img-fluid mb-4" style="width:6.5em">
-						<h4 class="mb-3 f-w-400">Create an account</h4>
-						<p style="font-weight: bold">Provide the information requested.</p>
+						<h4 class="mb-3 f-w-400">Log In your account</h4>
+						{{-- <p style="font-weight: bold">Provide the information requested.</p> --}}
 						<hr>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Username">Email</label>
@@ -113,16 +113,11 @@
 							<span class="text-danger">@error('email'){{ $message }} @enderror</span>
 						</div>
 						<div class="form-group mb-4">
-							<label class="floating-label" for="Username">First Name</label>
-							<input type="text" class="form-control" name="first_name" required value="{{old('first_name')}}">
-							<span class="text-danger">@error('first_name'){{ $message }} @enderror</span>
+							<label class="floating-label" for="Username">Password</label>
+							<input type="text" class="form-control" name="password" required>
+							<span class="text-danger">@error('password'){{ $message }} @enderror</span>
 						</div>
-						<div class="form-group mb-4">
-							<label class="floating-label" for="Username">Last Name</label>
-							<input type="text" class="form-control" name="last_name" required value="{{old('last_name')}}">
-							<span class="text-danger">@error('last_name'){{ $message }} @enderror</span>
-						</div>
-						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Register</button>
+						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Log in</button>
 					</div>
                 </form>
 				</div>

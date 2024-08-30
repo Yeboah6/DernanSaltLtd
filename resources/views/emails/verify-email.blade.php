@@ -40,12 +40,17 @@
 						<h4 class="mb-3 f-w-400">Verify Account</h4>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Username">Email</label>
-							<input type="text" class="form-control" name="email" id="Username">
+							<input type="text" class="form-control" name="email" value="{{old('email')}}">
 							<span class="text-danger">@error('email'){{ $message }} @enderror</span>
 						</div>
                         <div class="form-group mb-4">
 							<label class="floating-label" for="Username">Password</label>
-							<input type="password" class="form-control" name="password" id="Username">
+							<input type="password" class="form-control" name="password">
+							<span class="text-danger">@error('password'){{ $message }} @enderror</span>
+						</div>
+						<div class="form-group mb-4">
+							<label class="floating-label" for="Username">Confirm Password</label>
+							<input type="password" class="form-control" name="password">
 							<span class="text-danger">@error('password'){{ $message }} @enderror</span>
 						</div>
 						<button class="btn btn-block btn-primary mb-4">Login</button>
