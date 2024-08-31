@@ -118,13 +118,13 @@ class MainController extends Controller
         }
     }
 
-        // public function logout() {
-        // $data = array();
-        // if(Session::has('loginId')){
-        //     Session::pull('loginId');
-        //     return redirect('/login');
-        //     }
-        // }
+    // Admin Logout Function
+    public function logout() {
+        if(Session::has('loginId')) {
+            Session::pull('loginId');
+            return redirect('/admin-login');
+        }
+    }
 
     // Display Apply page Function
     public function apply() {
@@ -138,12 +138,18 @@ class MainController extends Controller
 
     // Display Dashboard Function
     public function admindashboard() {
+
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
+
         $applicants = JobDetails::all() -> count();
         $positions = Position::all() -> count();
         $jobPosted = PostJobs::all() -> count();
         $applicantsRejected = JobDetails::where('status', 'Rejected') -> count();
         $applicantsAccepted = JobDetails::where('status', 'Accepted') -> count();
-        return view('dashboard.admin-dashboard', compact('applicants', 'positions', 'jobPosted', 'applicantsRejected', 'applicantsAccepted'));
+        return view('dashboard.admin-dashboard', compact('applicants', 'positions', 'jobPosted', 'applicantsRejected', 'applicantsAccepted', 'data'));
     }
 
     // Display Applicants Page Function

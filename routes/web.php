@@ -18,12 +18,12 @@ Route::get('/jobs', [MainController::class, 'job']) -> name('jobs');
 
 Route::get('/contact', [MainController::class, 'contact']) -> name('contact');
 
-Route::get('/admin-login', [MainController::class, 'adminlogin']) -> name('admin-login');
+Route::get('/admin-login', [MainController::class, 'adminlogin']) -> name('admin-login') -> middleware('alreadyLoggedIn');
 Route::post('/admin-login', [MainController::class, 'log']) -> name('admin-login');
 
+Route::get('/logout', [MainController::class, 'logout']) -> name('logout');
 
-// Route::get('/logout', [MainController::class, 'logout']) -> name('logout');
-Route::get('/admin-dashboard', [MainController::class, 'admindashboard']) -> name('admin-dashboard');
+Route::get('/admin-dashboard', [MainController::class, 'admindashboard']) -> name('admin-dashboard') -> middleware('isLoggedIn');
 
 Route::get('/job-apply', [MainController::class, 'apply']) -> name('job-apply');
 

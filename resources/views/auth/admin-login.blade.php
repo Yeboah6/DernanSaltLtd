@@ -33,10 +33,17 @@
 		</div>
 		<div class="auth-side-form">
 			<div class=" auth-content">
-				{{-- <img src="assets/images/auth/auth-logo-dark.png" alt="" > --}}
                 <img src="assets/images/Dernan-logo.jpg" style="width:4.5em" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
+				<a href="/"><img src="../assets/images/Asset4@4x.png" alt="" class="logo" style="width:100px;margin-top: -100px;margin-left: 110px"></a>
 				<h3 class="mb-4 f-w-400">Login</h3>
 				<form action="{{url('/admin-login')}}" method="POST">
+					
+					@if (Session::has('success'))
+							<div class="alert alert-success">{{ Session::get('success') }}</div>
+						@endif
+						@if (Session::has('fail'))
+							<div class="alert alert-danger">{{ Session::get('fail') }}</div>
+						@endif
 					@csrf
 				<div class="form-group mb-3">
 					<label class="floating-label" for="Email">Email address</label>
