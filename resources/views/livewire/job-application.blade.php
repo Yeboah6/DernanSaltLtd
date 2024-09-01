@@ -85,10 +85,10 @@
             @endif
             
             @if ($currentStep == 1|| $currentStep == 2 || $currentStep == 3 || $currentStep == 4 || $currentStep == 5 || $currentStep == 6)
-                <button type="button" class="btn btn-sm btn-primary" wire:click="increaseStep()">Next</button>
+                <button type="button" class="btn btn-sm btn-success" wire:click="increaseStep()">Save and Continue</button>
             @endif
             @if ($currentStep == 7)
-                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                <button type="submit" class="btn btn-sm btn-success">Submit</button>
             @endif
             
         </div>
@@ -98,6 +98,7 @@
         <fieldset id="personal">
             <input type="text" wire:model="applicant_id" hidden>
             <legend>Personal Information</legend>
+            <h1>{{$message}}</h1>
             <div class="form-group">
                 <label for="first-name">First Name <span>*</span></label>
                 <input type="text" wire:model="first_name" required placeholder="Enter First Name">
@@ -106,7 +107,7 @@
             <div class="form-group">
                 <label for="middle-name">Middle Name <span></span></label>
                 <input type="text" wire:model="middle_name" placeholder="Enter Middle Name">
-                <span class="text-danger">@error('first_name'){{ $message }} @enderror</span>
+                {{-- <span class="text-danger">@error('first_name'){{ $message }} @enderror</span> --}}
             </div>
             <div class="form-group">
                 <label for="last-name">Last Name <span>*</span></label>
@@ -509,10 +510,10 @@
             @endif
             
             @if ($currentStep == 1|| $currentStep == 2 || $currentStep == 3 || $currentStep == 4 || $currentStep == 5 || $currentStep == 6)
-                <button type="button" class="btn btn-sm btn-primary" wire:click="increaseStep()">Next</button>
+                <button type="submit" class="btn btn-sm btn-success" wire:click="increaseStep()">Save and Continue</button>
             @endif
             @if ($currentStep == 7)
-                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                <button type="submit" class="btn btn-sm btn-success">Submit</button>
             @endif
             
         </div>

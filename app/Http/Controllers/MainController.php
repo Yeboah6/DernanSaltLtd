@@ -128,7 +128,11 @@ class MainController extends Controller
 
     // Display Apply page Function
     public function apply() {
-        return view('pages.apply');
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+        return view('pages.apply', compact('data'));
     }
 
       // Display Apply page Function
@@ -154,24 +158,36 @@ class MainController extends Controller
 
     // Display Applicants Page Function
     public function applicant() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
         $applicants = JobDetails::all();
-        return view('pages.applicants', compact('applicants'));
+        return view('pages.applicants', compact('applicants', 'data'));
     }
 
     // Display View Applicants Function
     public function applicants($id) {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
         $applicants = JobDetails::find($id);
         $position = Position::find($id);
-        return view('pages.view-applicants', compact('applicants', 'position'));
+        return view('pages.view-applicants', compact('applicants', 'position', 'data'));
     }
 
     // Display Job Posting Page Function
     public function jobPosting() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
         $position = Position::where('status', 'Available') -> get();
         $jobPosting = PostJobs::all();
         $positionNames = Position::all();
         
-        return view('pages.job-posting', compact('position', 'jobPosting', 'positionNames'));
+        return view('pages.job-posting', compact('position', 'jobPosting', 'positionNames', 'data'));
     }
 
     // Hide Jobs Function
@@ -226,8 +242,12 @@ class MainController extends Controller
 
     // Display Position Page Function
     public function position() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
         $position = Position::all();
-        return view('pages.position', compact('position'));
+        return view('pages.position', compact('position', 'data'));
     }
 
     // public function jobPostingsEdit($id) {
@@ -335,6 +355,7 @@ class MainController extends Controller
         return view('auth.applicant-login');
     }
 
+    // Applicant Login Function
     public function postApplicantlogin(Request $request) {
         $request -> validate([
             'email' => 'required|email',
@@ -355,25 +376,46 @@ class MainController extends Controller
     }
 
     // Display Applicant Sign Up Page Function
-    public function signup() {
-        return view('auth.applicant-sign-up');
+    public function signup($id) {
+        $jobPosted = PostJobs::findOrFail($id);
+        return view('auth.applicant-sign-up', compact('jobPosted'));
     }
 
     // Store Applicant SignUp Function
     public function storeSignUp(Request $request) {
 
-        $applicant = request() -> validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:applicant_logins'
-        ]);
+        $character = 'ID';
+        $pin = mt_rand(10, 99) . mt_rand(10, 99);
+        $applicant_id = $character. '' .$pin;
 
-        ApplicantLogins::insert($applicant);
+        // $applicant = request() -> validate([
+        //     'first_name' => 'required',
+        //     'last_name' => 'required',
+        //     'email' => 'required|email|unique:applicant_logins'
+        // ]);
+
+        // ApplicantLogins::insert($applicant);
+
+        $applicant = new ApplicantLogins();  
+        $applicant -> applicant_id = $applicant_id;
+        $applicant -> first_name = $request -> input('first_name');
+        $applicant -> last_name = $request -> input('last_name');
+        $applicant -> email = $request -> input('email');
+        $applicant -> position = $request -> input('position');
+
+        $applicant -> save();
 
         Mail::to($request -> input('email')) -> send(new VerifyEmail($applicant));
-        // $applicant -> save();
         return redirect() -> back() -> with('success', 'Verification link has been sent your email');
     }
+
+    // Applicant Logout Function
+    // public function applicantlogout() {
+    //         if(Session::has('loginId')) {
+    //             Session::pull('loginId');
+    //         return redirect('/applicant-login');
+    //     }
+    // }
 
     // Display Verify Account Page Function
     public function verifyEmail() {

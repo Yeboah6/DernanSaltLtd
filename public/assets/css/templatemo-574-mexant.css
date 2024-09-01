@@ -332,9 +332,9 @@ header
   transition: all .3s;
 }
 
-.header-area .main-nav .nav li:last-child a:hover {
+/* .header-area .main-nav .nav li:last-child a:hover {
   color: #fff;
-}
+} */
 
 .header-area .main-nav .nav li.has-sub ul.sub-menu li:last-child a,
 .background-header .main-nav .nav li.has-sub ul.sub-menu li:last-child a {

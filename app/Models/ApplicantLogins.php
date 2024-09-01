@@ -12,10 +12,12 @@ class ApplicantLogins extends Model
     protected $table = 'applicant_logins';
 
     protected $fillable = [
+        'applicant_id',
         'first_name',
         'last_name',
         'email',
         'password',
+        'position',
         'verified_at'
     ];
 }

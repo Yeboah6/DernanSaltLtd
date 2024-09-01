@@ -122,6 +122,7 @@
 							<input type="text" class="form-control" name="last_name" required value="{{old('last_name')}}">
 							<span class="text-danger">@error('last_name'){{ $message }} @enderror</span>
 						</div>
+            <input type="text" name="position" hidden value="{{ $jobPosted -> position_id}}">
 						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Register</button>
             <p><a href="/applicant-login">Login</a></p>
           </div>

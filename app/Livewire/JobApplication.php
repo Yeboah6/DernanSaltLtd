@@ -12,7 +12,7 @@ class JobApplication extends Component
 {
 
     use WithFileUploads;
-    public $applicant_id;
+    // public $applicant_id;
     public $first_name;
     public $middle_name;
     public $last_name;
@@ -88,16 +88,16 @@ class JobApplication extends Component
 
     public $status;
 
-    
+    public $message = 'Hello There';
 
-    // public $jobDesc;
+    // public $jobDesc = PostJobs::where('','');
+
 
 
     public $totalSteps = 7;
     public $currentStep = 1;
     
     public function mount() {
-        // $this -> jobDesc = $jobDesc;
         $this -> currentStep = 1;
     }
 
@@ -105,9 +105,7 @@ class JobApplication extends Component
 
     public function render()
     {
-        return view('livewire.job-application', [
-            "position_id" => PostJobs::where('id', 'id') -> get()
-        ]);
+        return view('livewire.job-application');
     }
 
     public function increaseStep() {
@@ -131,7 +129,7 @@ class JobApplication extends Component
         if($this -> currentStep == 1) {
             $this -> validate([
                 'first_name' => 'required|string',
-                'middle_name' => 'required|string',
+                'middle_name' => 'string',
                 'last_name' => 'required|string',
                 'dob' => 'required',
                 'gender' => 'required',
@@ -142,82 +140,78 @@ class JobApplication extends Component
             ]);
         } elseif ($this -> currentStep == 2) {
             $this -> validate([
-                'current_employer' => 'required|string',
-                'company_name' => 'required',
-                'company_address' => 'required',
-                'position_held' => 'required|string',
-                'duration_of_employment_from' => 'required',
-                'duration_of_employment_to' => 'required', 
-                'responsilibities' => 'required|string|min:10|max:500',
+                'current_employer' => 'string',
+                'company_name' => 'string',
+                'company_address' => 'string',
+                'position_held' => 'string',
+                'duration_of_employment_from' => 'string',
+                'duration_of_employment_to' => 'string', 
+                'responsilibities' => 'string|min:10|max:500',
 
-                'current_employer2' => 'required|string',
-                'company_name2' => 'required',
-                'company_address2' => 'required',
-                'position_held2' => 'required|string',
-                'duration_of_employment_from2' => 'required',
-                'duration_of_employment_to2' => 'required',
-                'responsilibities2' => 'required|string|min:10|max:500',
+                'current_employer2' => 'string',
+                'company_name2' => 'string',
+                'company_address2' => 'string',
+                'position_held2' => 'string',
+                'duration_of_employment_from2' => 'string',
+                'duration_of_employment_to2' => 'string',
+                'responsilibities2' => 'string|min:10|max:500',
 
                 // 'position' => 'string'
             ]);
         } elseif ($this -> currentStep == 3) {
             $this -> validate([
-                'year_began' => 'required',
-                'institution_name' => 'required',
-                'certificate' => 'required',
-                'year_of_graduation' => 'required',
+                'year_began' => 'sring',
+                'institution_name' => 'sring',
+                'certificate' => 'sring',
+                'year_of_graduation' => 'sring',
 
-                'year_began2' => 'required',
-                'institution_name2' => 'required',
-                'certificate2' => 'required',
-                'year_of_graduation2' => 'required',
+                'year_began2' => 'sring',
+                'institution_name2' => 'sring',
+                'certificate2' => 'sring',
+                'year_of_graduation2' => 'sring',
 
                 'year_began3' => 'string',
                 'institution_name3' => 'string',
                 'certificate3' => 'string',
                 'year_of_graduation3' => 'string',
 
-                'school_name' => 'required',
-                'secondary_certificate' => 'required',
-                'year_of_completion' => 'required'
+                'school_name' => 'string',
+                'secondary_certificate' => 'string',
+                'year_of_completion' => 'string'
             ]);
         } elseif ($this -> currentStep == 4) {
             $this -> validate([
-                'referee_name' => 'required|string',
-                'referee_position' => 'required|string',
-                'referee_company' => 'required|string',
-                'referee_number' => 'required|string',
-                'referee_email' => 'required|email',
+                'referee_name' => 'string',
+                'referee_position' => 'string',
+                'referee_company' => 'string',
+                'referee_number' => 'string',
+                'referee_email' => 'email',
 
-                'referee_name2' => 'required|string',
-                'referee_position2' => 'required|string',
-                'referee_company2' => 'required|string',
-                'referee_number2' => 'required|string',
-                'referee_email2' => 'required|email'
+                'referee_name2' => 'string',
+                'referee_position2' => 'string',
+                'referee_company2' => 'string',
+                'referee_number2' => 'string',
+                'referee_email2' => 'email'
             ]);
         } elseif ($this -> currentStep == 5) {
             $this -> validate([
-                'skills_certificate' => 'required',
-                'reason' => 'required|min:20|max:500',
-                'availability' => 'required',
+                'skills_certificate' => 'string',
+                'reason' => 'string|min:20|max:500',
+                'availability' => 'string',
             ]);
         } elseif ($this -> currentStep == 6) {
             $this -> validate([
-                'image' => 'required|mimes:jpg,png,jpeg|max:1048576',
-                'cv' => 'required|mimes:pdf,docx,doc|max:1048576',
-                'cerificates_acquired' => 'required|mimes:pdf,docx,doc|max:1048576',
-                'cover_letter' => 'required|mimes:pdf,docx,doc|max:1048576',
-                'other_relevant_doc' => 'required|mimes:pdf,docx,doc|max:1048576',
+                'image' => 'mimes:jpg,png,jpeg|max:1048576',
+                'cv' => 'mimes:pdf,docx,doc|max:1048576',
+                'cerificates_acquired' => 'mimes:pdf,docx,doc|max:1048576',
+                'cover_letter' => 'mimes:pdf,docx,doc|max:1048576',
+                'other_relevant_doc' => 'mimes:pdf,docx,doc|max:1048576',
             ]);
         } 
     }
 
     public function jobapply() {
         $this -> resetErrorBag();
-
-        $character = 'ID';
-        $pin = mt_rand(10, 99) . mt_rand(10, 99);
-        $applicant_id = $character. '' .$pin;
 
         if ($this -> currentStep == 7) {
             $this -> validate([
@@ -240,7 +234,7 @@ class JobApplication extends Component
 
         if ($upload_cv && $upload_cerificates_acquired && $upload_cover_letter && $upload_other_relevant_doc && $upload_image) {
             $values = array(
-            "applicant_id" => $this -> applicant_id = $applicant_id,
+            // "applicant_id" => $this -> applicant_id = $applicant_id,
             "first_name" => $this -> first_name,
             "middle_name" => $this -> middle_name,
             "last_name" => $this -> last_name,
@@ -319,7 +313,7 @@ class JobApplication extends Component
 
             );
             JobDetails::updateOrCreate($values);
-            $this -> reset();
+            // $this -> reset();
             $this -> currentStep = 1;
         }
     }

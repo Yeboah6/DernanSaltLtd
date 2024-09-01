@@ -18,7 +18,7 @@ Route::get('/jobs', [MainController::class, 'job']) -> name('jobs');
 
 Route::get('/contact', [MainController::class, 'contact']) -> name('contact');
 
-Route::get('/admin-login', [MainController::class, 'adminlogin']) -> name('admin-login') -> middleware('alreadyLoggedIn');
+Route::get('/admin-login', [MainController::class, 'adminlogin']) -> name('admin-login');
 Route::post('/admin-login', [MainController::class, 'log']) -> name('admin-login');
 
 Route::get('/logout', [MainController::class, 'logout']) -> name('logout');
@@ -32,22 +32,22 @@ Route::get('/job-form', [MainController::class, 'jobApply']) -> name('job-form')
 // });
 
 
-Route::get('/applicants', [MainController::class, 'applicant']) -> name('applicants');
-Route::get('/applicants/{id}', [MainController::class, 'applicants']) -> name('applicants');
-Route::get('/applicants-reject/{id}', [MainController::class, 'rejectApplicant']) -> name('applicants-reject');
+Route::get('/applicants', [MainController::class, 'applicant']) -> name('applicants') -> middleware('isLoggedIn');
+Route::get('/applicants/{id}', [MainController::class, 'applicants']) -> name('applicants') -> middleware('isLoggedIn');
+Route::get('/applicants-reject/{id}', [MainController::class, 'rejectApplicant']) -> name('applicants-reject') -> middleware('isLoggedIn');
 
-Route::get('/positions', [MainController::class, 'position']) -> name('position');
-Route::post('/positions', [MainController::class, 'positions']) -> name('position');
-Route::get('/positions/{id}', [MainController::class, 'deletePos']) -> name('positions');
-Route::get('/positions-show/{id}', [MainController::class, 'showPos']) -> name('positions-show');
+Route::get('/positions', [MainController::class, 'position']) -> name('position') -> middleware('isLoggedIn');
+Route::post('/positions', [MainController::class, 'positions']) -> name('position') -> middleware('isLoggedIn');
+Route::get('/positions/{id}', [MainController::class, 'deletePos']) -> name('positions') -> middleware('isLoggedIn');
+Route::get('/positions-show/{id}', [MainController::class, 'showPos']) -> name('positions-show') -> middleware('isLoggedIn');
 
 
-Route::get('/job-posting', [MainController::class, 'jobPosting']) -> name('job-posting');
-Route::post('/job-posting', [MainController::class, 'jobPostings']) -> name('job-posting');
+Route::get('/job-posting', [MainController::class, 'jobPosting']) -> name('job-posting') -> middleware('isLoggedIn');
+Route::post('/job-posting', [MainController::class, 'jobPostings']) -> name('job-posting') -> middleware('isLoggedIn');
 
-Route::get('/job-posting/{id}', [MainController::class, 'jobPostingsView']) -> name('job-posting');
-Route::get('/job-posting/{id}', [MainController::class, 'jobPostingHide']) -> name('job-posting');
-Route::get('/job-posting-show/{id}', [MainController::class, 'jobPostingShow']) -> name('job-posting');
+Route::get('/job-posting/{id}', [MainController::class, 'jobPostingsView']) -> name('job-posting') -> middleware('isLoggedIn');
+Route::get('/job-posting/{id}', [MainController::class, 'jobPostingHide']) -> name('job-posting') -> middleware('isLoggedIn');
+Route::get('/job-posting-show/{id}', [MainController::class, 'jobPostingShow']) -> name('job-posting') -> middleware('isLoggedIn');
 
 Route::get('/job-description/{id}', [MainController::class, 'jobDesc']) -> name('job-description');
 
@@ -70,10 +70,13 @@ Route::get('/sales', [MainController::class, 'sales']) -> name('sales');
 Route::get('/marketing', [MainController::class, 'marketing']) -> name('marketing');
 
 Route::get('/applicant-sign-up/{id}', [MainController::class, 'signup']) -> name('applicant-sign-up');
+Route::get('/applicant-sign-up', [MainController::class, 'signup']) -> name('applicant-sign-up');
 Route::post('/applicant-sign-up', [MainController::class, 'storeSignUp']) -> name('applicant-sign-up');
 
 Route::get('/applicant-login', [MainController::class, 'Applicantlogin']) -> name('applicant-login');
 Route::post('/applicant-login', [MainController::class, 'postApplicantlogin']) -> name('applicant-login');
+
+// Route::get('/applicant-logut', [MainController::class, 'applicantlogout']) -> name('applicant-logut');
 
 Route::get('/referee-testimony', [MainController::class, 'refereeTestimony']) -> name('referee-testimony');
 Route::post('/referee-testimony', [MainController::class, 'postRefereeTestimony']) -> name('referee-testimony');
