@@ -60,8 +60,9 @@
               </div>
               <div class="accordion-body">
                   <div class="content">
-                      <p>To be the leading supplier of premium salt products in the global market, recognized for our commitment to quality, sustainability, and community development. 
-                        We aspire to set the industry standard through innovation, excellence, and ethical practices.
+                      <p>
+                        To be the leading provider of sustainable and innovative salt solutions, setting the standard in responsible mining practices while contributing to a healthier and more prosperous world. 
+                        We envision a future where our operations inspire positive change, protect the environment, and create lasting value for our communities, partners, and future generations.
                       </p>
                   </div>
               </div>
@@ -75,8 +76,9 @@
             </div>
             <div class="accordion-body">
                 <div class="content">
-                    <p>At Dernan Salt Limited, our mission is to provide our customers with the highest quality salt products, tailored to meet the diverse needs of various industries. 
-                      We are dedicated to upholding the principles of sustainability in all aspects of our operations, ensuring that our processes are environmentally friendly and socially responsible. We aim to foster long-term relationships with our clients by consistently delivering superior value and exceptional customer service.
+                    <p>
+                      Our mission is to responsibly and sustainably mine high-quality salt, providing essential minerals that support industries, enhance daily life, and promote global health. 
+                      We are committed to innovation, environmental stewardship, and community engagement, ensuring our operations benefit our employees, customers, and the ecosystems we touch
                     </p>
                 </div>
             </div>
@@ -90,15 +92,22 @@
             </div>
             <div class="accordion-body">
                 <div class="content">
-                    <p>Quality: We are committed to maintaining the highest standards in every product we deliver. Our rigorous quality control processes ensure that our customers receive pure, reliable, and consistent salt products.
-<br><br>
-                      Sustainability: We prioritize environmentally friendly practices and are dedicated to reducing our ecological footprint. Our sustainable approach encompasses everything from production to packaging, ensuring that we contribute positively to the environment.
+                    <p>Safety First: Prioritize the health and safety of our employees, contractors, and communities by adhering to strict safety standards and practices.
                       <br><br>
-                      Integrity: We operate with honesty, transparency, and ethical principles. Building trust with our customers, employees, and stakeholders is at the heart of our business.
+                      Environmental Responsibility: Commit to sustainable mining practices that minimize environmental impact and protect natural resources for future generations.
                       <br><br>
-                      Community: We believe in giving back to the communities where we operate. Through job creation, local development projects, and support for education, we strive to make a positive impact on society.
+                      Integrity and Accountability: Operate with honesty, transparency, and ethical standards in all business dealings, taking responsibility for our actions.
                       <br><br>
-                      Innovation: We embrace continuous improvement and innovation in all aspects of our business. By staying ahead of industry trends and investing in advanced technologies, we ensure that we remain at the forefront of the salt industry.</p>
+                      Operational Excellence: Strive for continuous improvement, efficiency, and innovation in our mining processes to deliver high-quality products.
+                      <br><br>
+                      Community Engagement: Foster strong relationships with local communities, contributing positively through employment opportunities, support, and respectful communication.
+                      <br><br>
+                      Employee Empowerment: Invest in our workforce by providing training, development opportunities, and a supportive work environment that values diversity and inclusion.
+                      <br><br>
+                      Customer Focus: Maintain a commitment to delivering reliable, high-quality salt products that meet the evolving needs of our customers.
+                      <br><br>
+                      Sustainability and Stewardship: Promote sustainable practices that ensure the long-term viability of our operations and the ecosystems we impact.
+                    </p>
                 </div>
             </div>
           </article>

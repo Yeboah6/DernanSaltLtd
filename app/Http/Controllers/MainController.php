@@ -18,6 +18,7 @@ use App\Models\RefereeTestimony;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -148,12 +149,12 @@ class MainController extends Controller
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
 
-        $applicants = JobDetails::all() -> count();
+        // $applicants = StepOne::all() -> count();
         $positions = Position::all() -> count();
         $jobPosted = PostJobs::all() -> count();
-        $applicantsRejected = JobDetails::where('status', 'Rejected') -> count();
-        $applicantsAccepted = JobDetails::where('status', 'Accepted') -> count();
-        return view('dashboard.admin-dashboard', compact('applicants', 'positions', 'jobPosted', 'applicantsRejected', 'applicantsAccepted', 'data'));
+        // $applicantsRejected = StepSeven::where('status', 'Rejected') -> count();
+        // $applicantsAccepted = StepSeven::where('status', 'Accepted') -> count();
+        return view('dashboard.admin-dashboard', compact('data', 'positions', 'jobPosted'));
     }
 
     // Display Applicants Page Function
@@ -162,8 +163,11 @@ class MainController extends Controller
         if(Session::has('loginId')) {
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
-        $applicants = JobDetails::all();
-        return view('pages.applicants', compact('applicants', 'data'));
+        // $applicantStepOne = StepOne::all();
+        // $applicantStepTwo = StepTwo::all();
+        // $applicantStepSeven = StepSeven::all();
+        $position = Position::all();
+        return view('pages.applicants', compact('position', 'data'));
     }
 
     // Display View Applicants Function
@@ -172,9 +176,8 @@ class MainController extends Controller
         if(Session::has('loginId')) {
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
-        $applicants = JobDetails::find($id);
-        $position = Position::find($id);
-        return view('pages.view-applicants', compact('applicants', 'position', 'data'));
+        // $position = Position::find($id);
+        return view('pages.view-applicants', compact( 'data',));
     }
 
     // Display Job Posting Page Function
@@ -208,6 +211,11 @@ class MainController extends Controller
         return redirect('/job-posting');
     }
 
+    public function editPostJosted($id) {
+        $edit = PostJobs::findOrFail($id);
+        return view('pages.job-posting', compact('edit'));
+    }
+
     // Adding Job Posting Function
     public function jobPostings(Request $request) {
 
@@ -236,8 +244,12 @@ class MainController extends Controller
 
     // Dislpay View Job Page Function
     public function jobPostingsView($id) {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
         $jobDesc = PostJobs::findOrFail($id);
-        return view('pages.view-job', compact('jobDesc'));
+        return view('pages.view-job', compact('jobDesc', 'data'));
     }
 
     // Display Position Page Function
@@ -246,6 +258,7 @@ class MainController extends Controller
         if(Session::has('loginId')) {
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
+
         $position = Position::all();
         return view('pages.position', compact('position', 'data'));
     }
@@ -366,7 +379,7 @@ class MainController extends Controller
         if($applicant) {
             if(Hash::check($request -> password, $applicant -> password)) {
                 $request -> session() -> put('loginId', $applicant -> id);
-                return redirect('/job-apply');
+                return redirect('/personal-info');
             } else {
                 return back() -> with('fail', 'Incorrect Credentials!!');
             } 
@@ -384,9 +397,9 @@ class MainController extends Controller
     // Store Applicant SignUp Function
     public function storeSignUp(Request $request) {
 
-        $character = 'ID';
-        $pin = mt_rand(10, 99) . mt_rand(10, 99);
-        $applicant_id = $character. '' .$pin;
+        // $character = 'ID';
+        // $pin = mt_rand(10, 99) . mt_rand(10, 99);
+        // $applicant_id = $character. '' .$pin;
 
         // $applicant = request() -> validate([
         //     'first_name' => 'required',
@@ -396,8 +409,7 @@ class MainController extends Controller
 
         // ApplicantLogins::insert($applicant);
 
-        $applicant = new ApplicantLogins();  
-        $applicant -> applicant_id = $applicant_id;
+        $applicant = new ApplicantLogins();
         $applicant -> first_name = $request -> input('first_name');
         $applicant -> last_name = $request -> input('last_name');
         $applicant -> email = $request -> input('email');
@@ -435,7 +447,7 @@ class MainController extends Controller
         if($applicant) {
             if ($request -> confirm_password == $request -> password) {
           $applicant -> password = Hash::make($request -> input('password'));
-            $applicant -> update();
+            $applicant -> update(['verified_at' => now()]);
             return redirect('/applicant-login');
             } else {
                 return back() -> with('fail', "Passwords don't match!!");
@@ -468,4 +480,129 @@ class MainController extends Controller
         $referee -> save();
         return redirect() -> back();
     }
+
+    // public function Form() {
+    //     return view('multiStepForm.step-one-job-form'); 
+    // }
+
+    // public function Form(Request $request) {
+    //     // $data = array();
+    //     // if(Session::has('loginId')) {
+    //     //     $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+    //     // }
+
+    //     return view('form.step-one-job-form');
+    // }
+
+    // public function save(Request $request)
+    // {
+        // Validate the request data
+        // $request->validate([
+        //     'applicant_id' => 'string',
+        //     'first_name' => 'required|string|max:255',
+        //     'middle_name' => 'string|max:255',
+        //     'last_name' => 'required|string|max:255',
+        //     'dob' => 'nullable|string|max:255',
+        //     'gender' => 'required|string',
+        //     'nationality' => 'nullable|string',
+        //     'address' => 'nullable|string|max:255',
+        //     'number' => 'nullable|string|max:255',
+        //     'email' => 'required|email:job_details',
+
+        //     'current_employer' => 'nullable|string|max:255',
+        //     'company_name' => 'nullable|string|max:255',
+        //     'company_address' => 'nullable|string|max:255',
+        //     'position_held' => 'nullable|string|max:255',
+        //     'duration_of_employment_from' => 'nullable|string|max:255',
+        //     'duration_of_employment_to' => 'nullable|string|max:255',
+        //     'responsilibities' => 'nullable|string|max:255',
+
+        //     'image' => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+        //     'cv' => 'nullable|file|mimes:doc,docx,pdf|max:2048',
+        //     'cerificates_acquired' => 'nullable|file|mimes:doc,docx,pdf|max:2048',
+        //     'cover_letter' => 'nullable|file|mimes:doc,docx,pdf|max:2048',
+        //     'other_relevant_doc' => 'nullable|file|mimes:doc,docx,pdf|max:2048',
+
+        //     'agreement' => 'nullable|string|max:255',
+        //     'signature' => 'nullable|string|max:255',
+        //     'date' => 'nullable|string|max:255',
+
+        //     'status' => 'Submitted',
+        // ]);
+
+            // $applicant = new JobDetails();
+
+            // $applicant -> applicant_id = $request -> input('applicant_id');
+            // $applicant -> first_name = $request -> input('first_name');
+            // $applicant -> middle_name = $request -> input('middle_name');
+            // $applicant -> last_name = $request -> input('last_name');
+            // $applicant -> dob = $request -> input('dob');
+            // $applicant -> gender = $request -> input('gender');
+            // $applicant -> nationality = $request -> input('nationality');
+            // $applicant -> address = $request -> input('address');
+            // $applicant -> number = $request -> input('number');
+            // $applicant -> email = $request -> input('email');
+
+        // if($request -> hasFile('image')) {
+        //     $file = $request -> file('image');
+        //     $extension = $file -> getClientOriginalExtension();
+        //     $filename = time().'.'.$extension;
+        //     $file -> move('uploads/applicant-images/', $filename);
+        //     $applicant -> image = $filename;
+        // }
+
+        // if($request -> hasfile('cv')) {
+        //     $file = $request -> file('cv');
+        //     $extension = $file -> getClientOriginalExtension();
+        //     $filename = time().'.'.$extension;
+        //     $file -> move('uploads/applicant-documents/', $filename);
+        //     $applicant -> cv = $filename;
+        // }
+
+        // if($request -> hasfile('cerificates_acquired')) {
+        //     $file = $request -> file('cerificates_acquired');
+        //     $extension = $file -> getClientOriginalExtension();
+        //     $filename = time().'.'.$extension;
+        //     $file -> move('uploads/applicant-documents/', $filename);
+        //     $applicant -> cerificates_acquired = $filename;
+        // }
+
+        // }
+        // Handle file uploads
+        // if ($request->hasFile('image')) {
+        //     if ($applicant->image) {
+        //         Storage::delete($applicant->image);
+        //     }
+        //     $applicant->image = $request->file('image')->store('uploads/applicant-images');
+        // }
+
+        // if ($request->hasFile('cv')) {
+        //     if ($applicant->cv) {
+        //         Storage::delete($applicant->cv);
+        //     }
+        //     $applicant->cv = $request->file('cv')->store('uploads/applicant-documents');
+        // }
+
+        // if ($request->hasFile('cerificates_acquired')) {
+        //     if ($applicant->cerificates_acquired) {
+        //         Storage::delete($applicant->cerificates_acquired);
+        //     }
+        //     $applicant->cerificates_acquired = $request->file('cerificates_acquired')->store('uploads/applicant-documents');
+        // }
+
+         // Save data to the database
+        //  $applicant->fill($request->except(['image', 'cv', 'cerificates_acquired', 'cover_letter','other_relevant_doc']));
+        // $request->session()->put('id', $applicant->id);
+        // dd(Session(['user_id', ]));
+        // $request->session()->put('user_id', $applicant->id);
+        // Session::flash('id', $applicant->id);
+        // $applicant->save();
+ 
+         // Store the user ID in the session
+        //  $request->session()->put('user_id', $applicant->id);
+ 
+         // Redirect back to the form with a success message
+        //  return redirect()->back()->with('success', 'Data saved successfully! You can continue later.');
+    // }
+
 }

@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-auto">
                                 <h6 class="text-muted m-b-10">Applicants</h6>
-                                <h2 class="m-b-0">{{$applicants}}</h2>
+                                <h2 class="m-b-0"></h2>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-auto">
                                 <h6 class="text-muted m-b-10">Accepted</h6>
-                                <h2 class="m-b-0">{{$applicantsAccepted}}</h2>
+                                <h2 class="m-b-0"></h2>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-auto">
                                 <h6 class="text-muted m-b-10">Declined</h6>
-                                <h2 class="m-b-0">{{$applicantsRejected}}</h2>
+                                <h2 class="m-b-0"></h2>
                             </div>
                         </div>
                     </div>

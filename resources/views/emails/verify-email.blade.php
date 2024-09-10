@@ -53,7 +53,7 @@
 							<input type="password" class="form-control" name="confirm_password">
 							<span class="text-danger">@error('password'){{ $message }} @enderror</span>
 						</div>
-						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Login</button>
+						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Set Password</button>
 					</div>
                 </form>
 				</div>

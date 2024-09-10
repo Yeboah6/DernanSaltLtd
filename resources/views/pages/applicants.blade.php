@@ -49,33 +49,45 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($applicants as $applicant)
+                                    {{-- @foreach ($applicantStepOne as $applicant) --}}
+                                        
                                         <tr>
-                                        <td>{{ $applicant -> applicant_id}}</td>
-                                        <td><img src="{{ asset('storage/app/applicants_images/'.$applicant -> image) }}" alt=""></td>
-                                        <td>{{ $applicant -> first_name}} {{ $applicant -> middle_name}} {{ $applicant -> last_name}}</td>
-                                        <td>{{ $applicant -> email}}</td>
-                                        <td>{{ $applicant -> number}}</td>
-                                        <td>{{ $applicant -> position_held}}</td>
-                                        <td>{{ $applicant -> position}}</td>
-                                        {{-- <td>{{ $applicant -> position_held}}</td> --}}
-                                        @if ($applicant -> status == "Submitted")
+                                        {{-- <td>{{ $applicant -> applicant_id}}</td> --}}
+                                        {{-- <td><img src="{{ asset('storage/app/applicants_images/') }}" alt=""></td> --}}
+                                        {{-- <td>{{ $applicant -> first_name}} {{ $applicant -> middle_name}} {{ $applicant -> last_name}}</td> --}}
+                                        {{-- <td>{{ $applicant -> email}}</td> --}}
+                                        {{-- <td>{{ $applicant -> number}}</td> --}}
+                                        {{-- @if ($applicant -> applicant_id == $stepTwo -> applicant_id)
+                                            <td>{{ $stepTwo -> position_held}}</td>
+                                        @endif --}}
+
+                                        {{-- @if ($applicant -> applicant_id == $stepTwo -> applicant_id) --}}
+                                        {{-- @if ($position -> id == $stepTwo -> position) --}}
+                                             {{-- <td>{{ $stepTwo -> position}}</td> --}}
+                                        {{-- @endif --}}
+                                           
+                                        {{-- @endif --}}
+                                        
+                                        {{-- @if ($applicant -> applicant_id == $stepSeven -> applicant_id)
+                                            <td>{{ $stepSeven -> status}}</td>
+
+                                        @endif --}}
+                                        {{-- @if ($stepSeven -> status == "Submitted")
                                             <td style="text-align: center"><span style="background-color: #008B9C;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $applicant -> status}}</span></td>
                                         
-                                        @elseif ($applicant -> status == "Accepted")
+                                        @elseif ($stepSeven -> status == "Accepted")
                                             <td style="text-align: center"><span style="background-color: #0b6e31;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $applicant -> status}}</span></td>
                                         @else
                                             <td style="text-align: center"><span style="background-color: #FF5252;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $applicant -> status}}</span></td>
-                                        @endif
+                                        @endif --}}
                                         
                                         <td>
                                             {{-- <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a> --}}
-                                            <a href="{{url('/applicants/'.$applicant -> id)}}" class="btn btn-info btn-sm"><i class="feather icon-eye"></i>&nbsp;View </a>
+                                            {{-- <a href="{{url('/applicants/'.$applicant -> applicant_id)}}" class="btn btn-info btn-sm"><i class="feather icon-eye"></i>&nbsp;View </a> --}}
                                             {{-- <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a> --}}
                                         </td>
                                     </tr>
-                                    @endforeach
-                                    
+                                    {{-- @endforeach --}}
                                 </tbody>
                             </table>
                         </div>

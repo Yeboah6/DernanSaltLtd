@@ -53,7 +53,7 @@
                                     @foreach ($jobPosting as $posting)
                                         <tr>
                                         <td>
-                                            {{$posting -> id}}
+                                            {{$posting -> job_id}}
                                         </td>
                                         <td>{{$posting -> job_title}}</td>
                                         <td>{{ Str::limit($posting -> job_description, 105) }}</td>
@@ -73,8 +73,8 @@
                                         @endif
                                         
                                         <td>
-                                            <a href="{{ url('/job-posting/'.$posting -> id)}}" class="btn btn-primary btn-sm"><i class="feather icon-eye"></i></a>
-                                            <a href="{{url('/job-posting/'.$posting -> id)}}" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-report2"><i class="feather icon-edit"></i>&nbsp; </a>
+                                            <a href="{{ url('/job-posted/'.$posting -> id)}}" class="btn btn-primary btn-sm"><i class="feather icon-eye"></i></a>
+                                            <a href="{{url('/job-posting/'.$posting -> id)}}" class="btn btn-info btn-sm" data-toggle="modal2" data-target="#modal-report"><i class="feather icon-edit"></i>&nbsp; </a>
                                             @if ($posting -> status == "Available")
                                                 <a href="{{url('/job-posting/'.$posting -> id)}}" class="btn btn-danger btn-sm"><i class="feather icon-eye-off"></i>&nbsp;</a>
                                             @else
@@ -97,7 +97,7 @@
     </div>
 </div>
 
-{{-- <div class="modal fade" id="modal-report2" tabindex="-2" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
+{{-- <div class="modal2 fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -107,7 +107,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('/job-posting/'.$posting -> id) }}" method="POST">
+                <form action="" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col">

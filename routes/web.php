@@ -45,8 +45,9 @@ Route::get('/positions-show/{id}', [MainController::class, 'showPos']) -> name('
 Route::get('/job-posting', [MainController::class, 'jobPosting']) -> name('job-posting') -> middleware('isLoggedIn');
 Route::post('/job-posting', [MainController::class, 'jobPostings']) -> name('job-posting') -> middleware('isLoggedIn');
 
-Route::get('/job-posting/{id}', [MainController::class, 'jobPostingsView']) -> name('job-posting') -> middleware('isLoggedIn');
+Route::get('/job-posted/{id}', [MainController::class, 'jobPostingsView']) -> name('job-posting') -> middleware('isLoggedIn');
 Route::get('/job-posting/{id}', [MainController::class, 'jobPostingHide']) -> name('job-posting') -> middleware('isLoggedIn');
+Route::get('/posted-job/{id}', [MainController::class, 'editPostJosted']) -> name('job-posting') -> middleware('isLoggedIn');
 Route::get('/job-posting-show/{id}', [MainController::class, 'jobPostingShow']) -> name('job-posting') -> middleware('isLoggedIn');
 
 Route::get('/job-description/{id}', [MainController::class, 'jobDesc']) -> name('job-description');
@@ -76,7 +77,7 @@ Route::post('/applicant-sign-up', [MainController::class, 'storeSignUp']) -> nam
 Route::get('/applicant-login', [MainController::class, 'Applicantlogin']) -> name('applicant-login');
 Route::post('/applicant-login', [MainController::class, 'postApplicantlogin']) -> name('applicant-login');
 
-// Route::get('/applicant-logut', [MainController::class, 'applicantlogout']) -> name('applicant-logut');
+// Route::get('/applicant-logout', [MainController::class, 'applicantlogout']) -> name('applicant-logout');
 
 Route::get('/referee-testimony', [MainController::class, 'refereeTestimony']) -> name('referee-testimony');
 Route::post('/referee-testimony', [MainController::class, 'postRefereeTestimony']) -> name('referee-testimony');
@@ -89,12 +90,39 @@ Route::post('/verify-email', [MainController::class, 'postVerifyEmail']) -> name
 Route::get('/choose-account/{id}', [MainController::class, 'chooseAccount']) -> name('choose.account');
 
 
+// Route::get('/new-form', [MultiStepForm::class, 'showForm']) -> name('new-form');
+// Route::post('/new/form', [MultiStepForm::class, 'save']) -> name('new.form');
+// Route::post('/form-two', [MainController::class, 'newForm']) -> name('form-two');
 
 
-// Route::get('/apply/create-step-one', [MultiStepForm::class, 'createStepOne']) -> name('apply.create.step.one');
-// Route::post('/apply/create-step-one', [MultiStepForm::class, 'postCreateStepOne']) -> name('apply.create.step.one');
 
-// Route::get('/apply/create-step-two', [MultiStepForm::class, 'createStepTwo']) -> name('apply.create.step.two');
+
+
+
+Route::get('/personal-info', [MultiStepForm::class, 'personalInfo']) -> name('personal-info');
+Route::post('/personal-info', [MultiStepForm::class, 'postPersonalInfo']) -> name('personal-info');
+
+Route::get('/work-experience', [MultiStepForm::class, 'workExperience']) -> name('work-experience');
+Route::post('/work-experience', [MultiStepForm::class, 'postWorkExperience']) -> name('work-experience');
+
+Route::get('/education', [MultiStepForm::class, 'education']) -> name('education');
+Route::post('/education', [MultiStepForm::class, 'postEducation']) -> name('education');
+
+Route::get('/referee', [MultiStepForm::class, 'referee']) -> name('referee');
+Route::post('/referee', [MultiStepForm::class, 'postReferee']) -> name('referee');
+
+Route::get('/other-relevant', [MultiStepForm::class, 'otherRelevant']) -> name('other-relevant');
+Route::post('/other-relevant', [MultiStepForm::class, 'postOtherRelevant']) -> name('other-relevant');
+
+Route::get('/upload-docs', [MultiStepForm::class, 'uploads']) -> name('uploads');
+Route::post('/upload-docs', [MultiStepForm::class, 'postUploads']) -> name('uploads');
+
+Route::get('/agreement', [MultiStepForm::class, 'agreement']) -> name('agreement');
+Route::post('/agreement', [MultiStepForm::class, 'postAgreement']) -> name('agreement');
+
+
+
+// Route::get('/apply-create-step-two/{applicant_id}', [MultiStepForm::class, 'createStepTwo']) -> name('apply.create.step.two');
 // Route::post('/apply/create-step-two', [MultiStepForm::class, 'postCreateStepTwo']) -> name('apply.create.step.two');
 
 
