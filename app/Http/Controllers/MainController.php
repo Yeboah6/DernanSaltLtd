@@ -11,12 +11,17 @@ use App\Mail\SalesMail;
 use App\Mail\VerifyEmail;
 use App\Models\ApplicantLogins;
 use App\Models\Admin;
+use App\Models\Agreement;
+use App\Models\Education;
+use App\Models\Files;
 use App\Models\JobDetails;
+use App\Models\PersonalInfo;
 use App\Models\Position;
 use App\Models\PostJobs;
 use App\Models\RefereeTestimony;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -163,11 +168,21 @@ class MainController extends Controller
         if(Session::has('loginId')) {
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
-        // $applicantStepOne = StepOne::all();
-        // $applicantStepTwo = StepTwo::all();
-        // $applicantStepSeven = StepSeven::all();
-        $position = Position::all();
-        return view('pages.applicants', compact('position', 'data'));
+
+        // $applicant = PersonalInfo::all();
+        // $applicantAgreement = Agreement::all();
+        // $applicantfile = Files::all();
+
+        $applicant = DB::table('personal_infos')
+        -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+        -> join('files', 'personal_infos.id', '=', 'files.personal_id')
+        // -> select('personal_infos.id')
+        -> get();
+
+        dd($applicant);
+
+        // $position = Position::all();
+        // return view('pages.applicants', compact('data', 'applicant'));
     }
 
     // Display View Applicants Function
@@ -176,8 +191,22 @@ class MainController extends Controller
         if(Session::has('loginId')) {
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
+
+        $applicant = DB::table('personal_infos') -> where('id', $id)
+        -> join('education', 'personal_infos.id', '=', 'education.personal_id')
+        -> get();
+
+        foreach ($applicant as $app) {
+            dd($app);
+        }
+
+        // dd($applicant);
+
+        // $applicant = PersonalInfo::findOrFail($id)
+        //             -> join('education', 'personal_infos.id', '=', 'education.personal_id');
+        // $applicantEdu = Education::where('personal_id', $applicant -> id) -> get();
         // $position = Position::find($id);
-        return view('pages.view-applicants', compact( 'data',));
+        // return view('pages.view-applicants', compact( 'data', 'applicant'));
     }
 
     // Display Job Posting Page Function

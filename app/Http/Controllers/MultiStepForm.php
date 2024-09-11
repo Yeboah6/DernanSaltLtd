@@ -36,7 +36,7 @@ class MultiStepForm extends Controller
         //     }
         // }
 
-        return view('form.personal-info', compact('data', 'applicantData'));
+        return view('form.personal-info', compact('data', 'applicantData')); 
     }
 
     // Store Personal Info Data Function
