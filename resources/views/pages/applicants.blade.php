@@ -50,15 +50,12 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($applicant as $applicant)
-                                        {{-- @foreach ($applicantAgreement as $agreement) --}}
-                                            {{-- @foreach ($applicantfile as $image) --}}
-                                                
-                                           
-                                       
+                                        @foreach ($applicantAgreement as $agreement)
+                                            @foreach ($applicantfile as $image)
                                         
                                         <tr>
                                         <td>{{ $applicant -> applicant_id}}</td>
-                                        <td><img src="{{ asset('uploads/applicant-images/'.$applicant -> image) }}" alt="" style="width: 60%;border-radius: 30px;"></td>
+                                        <td><img src="{{ asset('uploads/applicant-images/'.$image -> image) }}" alt="" style="width: 60%;border-radius: 30px;"></td>
                                         <td>{{ $applicant -> first_name}} {{ $applicant -> middle_name}} {{ $applicant -> last_name}}</td>
                                         <td>{{ $applicant -> email}}</td>
                                         <td>{{ $applicant -> number}}</td>
@@ -78,23 +75,23 @@
                                             <td>{{ $agreement -> status}}</td>
 
                                         @endif --}}
-                                        @if ($applicant -> status == "Submitted")
-                                            <td style="text-align: center"><span style="background-color: #008B9C;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $applicant -> status}}</span></td>
+                                        @if ($agreement -> status == "Submitted")
+                                            <td style="text-align: center"><span style="background-color: #008B9C;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $agreement -> status}}</span></td>
                                         
-                                        @elseif ($applicant -> status == "Accepted")
-                                            <td style="text-align: center"><span style="background-color: #0b6e31;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $applicant -> status}}</span></td>
+                                        @elseif ($agreement -> status == "Accepted")
+                                            <td style="text-align: center"><span style="background-color: #0b6e31;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $agreement -> status}}</span></td>
                                         @else
-                                            <td style="text-align: center"><span style="background-color: #FF5252;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $applicant -> status}}</span></td>
+                                            <td style="text-align: center"><span style="background-color: #FF5252;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $agreement -> status}}</span></td>
                                         @endif
                                         
                                         <td>
-                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                            {{-- <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a> --}}
                                             <a href="{{url('/applicants/'.$applicant -> id)}}" class="btn btn-info btn-sm"><i class="feather icon-eye"></i>&nbsp;View </a>
-                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+                                            {{-- <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a> --}}
                                         </td>
                                     </tr>
-                                    {{-- @endforeach --}}
-                                    {{-- @endforeach --}}
+                                    @endforeach
+                                    @endforeach
                                     @endforeach
                                 </tbody>
                             </table>

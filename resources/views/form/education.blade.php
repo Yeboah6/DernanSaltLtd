@@ -169,22 +169,22 @@
                    <br>
                    <div class="form-group">
                        <label for="first-name">Institution Name <span></span></label>
-                       <input type="text" name="institution_name3" required placeholder="Enter Name of Institution">
+                       <input type="text" name="institution_name3" placeholder="Enter Name of Institution">
                        <span class="text-danger">@error('institution_name3'){{ $message }} @enderror</span>
                    </div>
                    <div class="form-group">
                        <label for="middle-name">Degree/Diploma Obtained <span></span></label>
-                       <input type="text" name="certificate3" required placeholder="Enter Degree/Diploma Obtained">
+                       <input type="text" name="certificate3" placeholder="Enter Degree/Diploma Obtained">
                        <span class="text-danger">@error('certificate3'){{ $message }} @enderror</span>
                    </div>
                    <div class="form-group">
                        <label for="last-name">Year Began <span></span></label>
-                       <input type="month" name="year_began3" required placeholder="Year Began">
+                       <input type="month" name="year_began3" placeholder="Year Began">
                        <span class="text-danger">@error('year_began3'){{ $message }} @enderror</span>
                    </div>
                    <div class="form-group">
                        <label for="dob">Year of Graduation <span></span></label>
-                       <input type="month" name="year_of_graduation3" required placeholder="Year of Graduation">
+                       <input type="month" name="year_of_graduation3" placeholder="Year of Graduation">
                        <span class="text-danger">@error('year_of_graduation3'){{ $message }} @enderror</span>
                    </div>
                    <br>

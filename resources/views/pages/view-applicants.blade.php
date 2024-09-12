@@ -67,8 +67,16 @@
                                         </table>
                                     </div>
                                 </div>
+                                
                             </div>
-                            <div class="col-md-4"></div>
+                            
+                            <div class="col-md-4">
+                                <h3 style="position:absolute; left: -300px;top: 50px;">
+                                    {{$applicant -> applicant_id}}
+                                </h3>
+
+                                <img src="{{ asset('uploads/applicant-images/'.$docs -> image) }}" alt="" style="width: 60%;border-radius: 30px;">
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row invoive-info">
@@ -82,20 +90,20 @@
 
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Educational Background :</h6>
-                                    <h6 class="m-0">{{$applicant -> institution_name}}</h6>
-                                    <p class="m-0 m-t-10">{{$applicant -> highest_qualification}}</p>
-                                    <p class="m-0">{{$applicant -> certificate}}</p>
-                                    <p class="m-0">{{$applicant -> year_of_graduation}}</p>
+                                    <h6 class="m-0">{{$edu -> institution_name}}</h6>
+                                    <p class="m-0 m-t-10">{{$edu -> certificate}}</p>
+                                    <p class="m-0">{{$edu -> year_began}}</p>
+                                    <p class="m-0">{{$edu -> year_of_graduation}}</p>
                                     {{-- <p class="m-0">{{$position -> id -> posi}}</p> --}}
                                 </div>
 
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Referee :</h6>
-                                    <h6 class="m-0">{{$applicant -> referee_name}}</h6>
-                                    <p class="m-0 m-t-10">{{$applicant -> referee_company}}</p>
-                                    <p class="m-0">{{$applicant -> referee_position}}</p>
-                                    <p class="m-0">{{$applicant -> referee_number}}</p>
-                                    <p class="m-0">{{$applicant -> referee_email}}</p>
+                                    <h6 class="m-0">{{$ref -> referee_name}}</h6>
+                                    <p class="m-0 m-t-10">{{$ref -> referee_company}}</p>
+                                    <p class="m-0">{{$ref -> referee_position}}</p>
+                                    <p class="m-0">{{$ref -> referee_number}}</p>
+                                    <p class="m-0">{{$ref -> referee_email}}</p>
                                 </div>
                             </div>
 {{-- <br><hr> --}}
@@ -108,18 +116,40 @@
                                     <p class="m-0">{{$applicant -> responsilibities2}}</p>
                                 </div>
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
-                                    <h6>Secondary School :</h6>
-                                    <h6 class="m-0">{{$applicant -> school_name}}</h6>
-                                    <p class="m-0">{{$applicant -> secondary_certificate}}</p>
-                                    <p class="m-0">{{$applicant -> year_of_completion}}</p>
+                                    <h6>Institution Attended :</h6>
+                                    <h6 class="m-0">{{$edu -> institution_name2}}</h6>
+                                    <p class="m-0 m-t-10">{{$edu -> certificate2}}</p>
+                                    <p class="m-0">{{$edu -> year_began2}}</p>
+                                    <p class="m-0">{{$edu -> year_of_graduation2}}</p>
                                 </div>
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Other Referee :</h6>
-                                    <h6 class="m-0">{{$applicant -> referee_name2}}</h6>
-                                    <p class="m-0 m-t-10">{{$applicant -> referee_company2}}</p>
-                                    <p class="m-0">{{$applicant -> referee_position2}}</p>
-                                    <p class="m-0">{{$applicant -> referee_number2}}</p>
-                                    <p class="m-0">{{$applicant -> referee_email2}}</p>
+                                    <h6 class="m-0">{{$ref -> referee_name2}}</h6>
+                                    <p class="m-0 m-t-10">{{$ref -> referee_company2}}</p>
+                                    <p class="m-0">{{$ref -> referee_position2}}</p>
+                                    <p class="m-0">{{$ref -> referee_number2}}</p>
+                                    <p class="m-0">{{$ref -> referee_email2}}</p>
+                                </div>
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                </div>
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    <h6>Institution Attended :</h6>
+                                    <h6 class="m-0">{{$edu -> institution_name3}}</h6>
+                                    <p class="m-0 m-t-10">{{$edu -> certificate3}}</p>
+                                    <p class="m-0">{{$edu -> year_began3}}</p>
+                                    <p class="m-0">{{$edu -> year_of_graduation3}}</p>
+                                </div>
+
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                </div>
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                </div>
+                                <br><br><br><br><br><br>
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    <h6>Secondary School :</h6>
+                                    <h6 class="m-0">{{$edu -> school_name}}</h6>
+                                    <p class="m-0">{{$edu -> secondary_certificate}}</p>
+                                    <p class="m-0">{{$edu -> year_of_completion}}</p>
                                 </div>
                             </div>
                             </div>
@@ -138,25 +168,33 @@
                                                     <td>
                                                         <h6>CV</h6>
                                                     </td>
-                                                    {{-- <td><a href="{!! route('download', $applicant -> cv) !!}">Download</a></td> --}}
+                                                    <td>
+                                                        <a href="{{ url('/download/'.$docs -> cv)}}" class="btn btn-info btn-sm"><i class="feather icon-download"></i>&nbsp;Download </a>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Certificates Acquired</h6>
                                                     </td>
-                                                    {{-- <td><a href="{{ url('/download/'.$applicant -> cerificates_acquired)}}">Download</a></td> --}}
+                                                    <td>
+                                                        <a href="{{ url('/download/'.$docs -> cerificates_acquired)}}" class="btn btn-info btn-sm"><i class="feather icon-download"></i>&nbsp;Download </a>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Cover Letter</h6>
                                                     </td>
-                                                    {{-- <td><a href="{{ url('/download/'.$applicant -> cover_letter)}}">Download</a></td> --}}
+                                                    <td>
+                                                        <a href="{{ url('/download/'.$docs -> cover_letter)}}" class="btn btn-info btn-sm"><i class="feather icon-download"></i>&nbsp;Download </a>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Other Relevant Documents</h6>
                                                     </td>
-                                                    {{-- <td><a href="{{ url('/download/'.$applicant -> other_relevant_doc)}}">Download</a></td> --}}
+                                                    <td>
+                                                        <a href="{{ url('/download/'.$docs -> other_relevant_doc)}}" class="btn btn-info btn-sm"><i class="feather icon-download"></i>&nbsp;Download </a>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -169,15 +207,15 @@
                                         <tbody>
                                             <tr>
                                                 <th>Skills and Certifications :</th>
-                                                <td>{{$applicant -> skills_certificate}}</td>
+                                                <td>{{$skill -> skills_certificate}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Why do you want to work at Dernan Salt Limited? :</th>
-                                                <td>{{$applicant -> reason}}</td>
+                                                <td>{{$skill -> reason}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Availability :</th>
-                                                <td>{{$applicant -> availability}}</td>
+                                                <td>{{$skill -> availability}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -186,16 +224,16 @@
                             <div class="row col-md-8">
                                 <div class="col-sm-12">
                                     <h6>Agreement and Declaration :</h6>
-                                    <p> {{$applicant -> agreement}} </p>
+                                    <p> {{$agreement -> agreement}} </p>
                                 </div>
                                 <div class="col-sm-12">
                                     <h6>Signature :</h6>
-                                    <p> {{$applicant -> signature}}
+                                    <p> {{$agreement -> signature}}
                                     </p>
                                 </div>
                                 <div class="col-sm-12">
                                     <h6>Date :</h6>
-                                    <p> {{$applicant -> date}}
+                                    <p> {{$agreement -> date}}
                                     </p>
                                 </div>
                             </div>

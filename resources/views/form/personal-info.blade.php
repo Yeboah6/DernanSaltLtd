@@ -120,7 +120,7 @@
                     <div class="form-group">
                         <label for="first-name">First Name <span>*</span></label>
                         {{-- @foreach ($applicantData as $data) --}}
-                            <input type="text" name="first_name" placeholder="Enter First Name" value="{{$applicantData}}" required>
+                            <input type="text" name="first_name" placeholder="Enter First Name" value="{{$data -> first_name}}" required>
                         {{-- @endforeach --}}
                         
                         <span class="text-danger">@error('first_name'){{ $message }} @enderror</span>
@@ -132,7 +132,7 @@
                     </div>
                     <div class="form-group">
                         <label for="last-name">Last Name <span>*</span></label>
-                        <input type="text" name="last_name" required placeholder="Enter Last Name">
+                        <input type="text" name="last_name" value="{{$data -> last_name}}" required placeholder="Enter Last Name">
                         <span class="text-danger">@error('last_name'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">

@@ -77,7 +77,7 @@ Route::post('/applicant-sign-up', [MainController::class, 'storeSignUp']) -> nam
 Route::get('/applicant-login', [MainController::class, 'Applicantlogin']) -> name('applicant-login');
 Route::post('/applicant-login', [MainController::class, 'postApplicantlogin']) -> name('applicant-login');
 
-// Route::get('/applicant-logout', [MainController::class, 'applicantlogout']) -> name('applicant-logout');
+Route::get('/applicant-logout', [MainController::class, 'applicantlogout']) -> name('applicant-logout');
 
 Route::get('/referee-testimony', [MainController::class, 'refereeTestimony']) -> name('referee-testimony');
 Route::post('/referee-testimony', [MainController::class, 'postRefereeTestimony']) -> name('referee-testimony');

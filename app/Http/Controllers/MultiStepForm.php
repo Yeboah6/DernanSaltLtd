@@ -236,11 +236,11 @@ class MultiStepForm extends Controller
         $uploadDoc -> personal_id = $request -> input('personal_id');
 
         $request->validate([
-            'image' => 'mimes:jpeg,png,jpg,svg',
-            'cv' => 'mimes:doc,pdf,docx,zip',
-            'cerificates_acquired' => 'mimes:doc,pdf,docx,zip,',
-            'cover_letter' => 'mimes:doc,pdf,docx,zip,',
-            'other_relevant_doc' => 'mimes:doc,pdf,docx,zip,',
+            'image' => 'mimes:jpeg,png,jpg,svg|max:5048',
+            'cv' => 'mimes:doc,pdf,docx,zip|max:5048',
+            'cerificates_acquired' => 'mimes:doc,pdf,docx,zip|max:5048',
+            'cover_letter' => 'mimes:doc,pdf,docx,zip|max:5048',
+            'other_relevant_doc' => 'mimes:doc,pdf,docx,zip|max:5048',
         ]);
         if($file = $request->hasFile('image')) {
          
