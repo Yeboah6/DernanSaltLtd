@@ -73,7 +73,7 @@
                                         @endif
                                         
                                         <td>
-                                            <a href="{{ url('/job-posting/'.$posting -> id)}}" class="btn btn-primary btn-sm"><i class="feather icon-eye"></i></a>
+                                            <a href="{{ url('/job-posted/'.$posting -> id)}}" class="btn btn-primary btn-sm"><i class="feather icon-eye"></i></a>
                                             <a href="{{url('/job-posting/'.$posting -> id)}}" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-report2"><i class="feather icon-edit"></i>&nbsp; </a>
                                             @if ($posting -> status == "Available")
                                                 <a href="{{url('/job-posting/'.$posting -> id)}}" class="btn btn-danger btn-sm"><i class="feather icon-eye-off"></i>&nbsp;</a>

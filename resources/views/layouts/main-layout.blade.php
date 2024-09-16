@@ -14,6 +14,8 @@
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    {{-- <link rel="stylesheet" href="../assets1/css/style.css"> --}}
+
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="../assets/css/fontawesome.css">
@@ -29,10 +31,19 @@
           font-size: 20px;
         }
 
-        footerLinks-section > p{
+        .footerLinks-section > p > a{
           font-size: 14px;
           color: #F5F7FA;
         }
+
+        .logo {
+          text-align: center;
+        }
+
+        .footerLinks-section {
+          text-align: center;
+        }
+
         .footer-input{
           font-size: 14px;
           outline: 0;
@@ -57,42 +68,36 @@
 @yield('content')
 
 <footer>
-    <div class="container-lg px-md-4">
-      <div class="row justify-content-md-between justify-content-center text-md-start my-5 flex-column flex-md-row text-center">
-        <div class="col-lg-4 h-100 d-flex flex-column mx-auto mx-md-0 mb-lg-0 mb-5">
-          <a href="/" class="logo">
-            <img src="../assets/images/Asset4@4x.png" style="width:130px" alt="">
-          </a>
-          <p style="font-size: 14px;" class="mt-5">Copyright © 2024 Dernan Co., Ltd.
-            <br>All Rights Reserved.
-          </p>
+  <div class="container-lg px-md-4">
+    <div class="row justify-content-md-between justify-content-center text-md-start my-5 flex-column flex-md-row text-center">
+      <div class="col-lg-4 h-100 d-flex flex-column mx-auto mx-md-0 mb-lg-0 mb-5">
+        <a href="/" class="logo">
+          <img src="../assets/images/Asset4@4x.png" style="width:130px" alt="">
+        </a>
+        <p style="font-size: 14px;text-align:center;" class="mt-5">Copyright © 2024 Dernan Co., Ltd.
+          <br>All Rights Reserved.
+        </p>
+      </div>
+      <div class="col-lg-7 col-9 d-flex flex-column flex-md-row px-0 justify-content-lg-end mx-auto mx-md-0">
+        <div class="col-lg-3 footerLinks-section">
+          <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Dernan Salt Ltd</h6>
+          <p><a href="/about-us">About us</a></p>
+          <p><a href="jobs">Job</a></p>
+          <p><a href="/contact">Contact us</a></p>
+          <p><a href="/marketing">Marketing</a></p>
+          <p><a href="/sales">Sales</a></p>
         </div>
-        <div class="col-lg-7 col-9 d-flex flex-column flex-md-row px-0 justify-content-lg-end mx-auto mx-md-0">
-          <div class="col-lg-3 footerLinks-section">
-            <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Company</h6>
-            <p>About us</p>
-            <p>Job</p>
-            <p>Contact us</p>
-          </div>
-          <div class="col-lg-3 footerLinks-section">
-            <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Support</h6>
-            <p>Help center</p>
-            <p>Terms of service</p>
-            <p>Legal</p>
-          </div>
-          <div class="col-lg-4 me-3 me-lg-0">
-            {{-- <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Stay up to date</h6> --}}
-            {{-- <div class="position-relative footerInput-container mx-auto mx-md-0"> --}}
-              {{-- <input type="email" name="" id="" placeholder="Your email address" class="footer-input px-2 py-2 pe-4 rounded-3"> --}}
-              {{-- <div class="position-absolute top-0 end-0 h-100 d-flex align-items-center justify-content-center pe-2">
-                <img src="../assets/icons/Vector.png" class="plane-icon text-white" style="width: 20px; height: 20px;" alt="">
-              </div> --}}
-            {{-- </div> --}}
-          </div>
+        <div class="col-lg-3 footerLinks-section">
+          <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Support</h6>
+          <p>Help center</p>
+          <p>Terms of service</p>
+          <p>Legal</p>
         </div>
+        <div class="col-lg-4 me-3 me-lg-0">  </div>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
  <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->

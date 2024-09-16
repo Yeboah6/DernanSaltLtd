@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RefereeTestimony extends Model
+class Agreement extends Model
 {
     use HasFactory;
 
-    protected $table = 'referee_testimonies'; 
+    protected $table = 'agreements';
+
     protected $fillable = [
         'personal_id',
-
-        'testimony',
-        'document'
+        'agreement',
+        'signature',
+        'date',
+        'status'
     ];
 }

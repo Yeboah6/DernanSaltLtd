@@ -39,6 +39,8 @@
     </div>
 </header>
 
+
+
 <!-- ***** Header Area End ***** -->
 
 @livewireStyles
@@ -46,44 +48,37 @@
 <div class="container">
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-6 offset-md-3">
-            <livewire:job-application>
+            <livewire:job-application :data="$data"/>
         </div>
     </div>
 </div>
 
 <style>
 
-    body {
+    /* body {
         font-family: Arial, sans-serif;
         background-color: #f1f3f4;
         margin: 0;
         padding: 0;
-    }
+    } */
     
-    .header {
+    /* .header {
         text-align: center;
         padding: 20px;
-    }
+    } */
     
-    .logo {
+    /* .logo {
         max-width: 100px;
         margin-bottom: 10px;
-    }
+    } */
     
-    h1 {
+    /* h1 {
         margin: 0;
         font-size: 24px;
         color: #005687;
-    }
+    } */
     
-    .form-title {
-        background-color: #51B3E4;
-        color: white;
-        padding: 10px;
-        border-radius: 4px;
-        margin: 20px 0;
-        text-align: center;
-    }
+    /* 
     
     .account-info {
         background-color: #e7f0f8;
@@ -99,31 +94,37 @@
     
     .info-text {
         color: #666;
-    }
+    } */
     
-    .required-text {
+    /* .required-text {
         color: #d93025;
         font-size: 12px;
     }
-    
-    .application-form {
+ */
+ .form-title {
+        background-color: #51B3E4;
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+        margin: 20px 0;
+        text-align: center;
+    }
+ .application-form {
         margin-top: 20px;
     }
-    
-    fieldset {
+
+ fieldset {
         border: 1px solid #ccc;
         padding: 20px;
         border-radius: 4px;
     }
-    
-    legend {
+ legend {
         font-size: 18px;
         color: white;
         background-color: #51B3E4;
         padding: 5px 10px;
         border-radius: 4px;
-    }
-    
+    } 
     .form-group {
         margin-bottom: 15px;
     }
@@ -157,7 +158,7 @@
     }
 
     .fieldset {
-        /* border: 1px solid #005687; */
+        border: 1px solid #ffffff;
         /* background-color: #005687; */
         width: 240px;
         padding: 10px;
@@ -168,11 +169,56 @@
     }
 
     .fieldset-containter {
-        position: absolute;
-        left: 50px;
-        padding: 10px;
-        margin: 10px;
+        position: relative;
+        /* left: 50px; */
+        /* padding: 10px; */
+        /* margin: 10px; */
 
+    }
+
+    @media screen and (max-width: 450px) {
+
+        /* legend {
+        font-size: 18px;
+        color: white;
+        background-color: #51B3E4;
+        padding: 10px;
+        border-radius: 4px;
+        } */
+
+        /* .fieldset-containter {
+            position: absolute;
+            left: 10px;
+            padding: 10px;
+            margin: 10px;
+        } */
+        /* fieldset {
+            padding: 10px;
+            border: 0;
+        } */
+
+        /* input[type="text"],
+        input[type="date"], 
+        input[type="email"],
+        input[type="file"],
+        input[type='month'],
+        textarea,
+        select {
+            width: calc(50% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        } */
+
+        /* .form-title {
+            background-color: #51B3E4;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 20px 0;
+            text-align: center;
+        } */
     }
     
     </style>

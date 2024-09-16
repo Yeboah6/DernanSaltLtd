@@ -5,15 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RefereeTestimony extends Model
+class Files extends Model
 {
     use HasFactory;
 
-    protected $table = 'referee_testimonies'; 
+    protected $table = 'files';
+
     protected $fillable = [
         'personal_id',
-
-        'testimony',
-        'document'
+        
+        'image',
+        'cv',
+        'cerificates_acquired',
+        'cover_letter',
+        'other_relevant_doc',
     ];
 }

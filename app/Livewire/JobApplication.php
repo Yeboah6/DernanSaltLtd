@@ -12,7 +12,7 @@ class JobApplication extends Component
 {
 
     use WithFileUploads;
-    // public $applicant_id;
+    public $applicant_id;
     public $first_name;
     public $middle_name;
     public $last_name;
@@ -39,7 +39,7 @@ class JobApplication extends Component
     public $duration_of_employment_to2;
     public $responsilibities2;
 
-    public $position_id;
+    public $position;
 
     public $year_began;
     public $institution_name;
@@ -88,7 +88,7 @@ class JobApplication extends Component
 
     public $status;
 
-    public $message = 'Hello There';
+    public $data;
 
     // public $jobDesc = PostJobs::where('','');
 
@@ -97,7 +97,9 @@ class JobApplication extends Component
     public $totalSteps = 7;
     public $currentStep = 1;
     
-    public function mount() {
+    public function mount($data) {
+        $this->applicant_id = $data -> applicant_id;
+        $this->position = $data -> position;
         $this -> currentStep = 1;
     }
 
@@ -128,6 +130,7 @@ class JobApplication extends Component
     public function validateData() {
         if($this -> currentStep == 1) {
             $this -> validate([
+                'applicant_id' => 'string',
                 'first_name' => 'required|string',
                 'middle_name' => 'string',
                 'last_name' => 'required|string',
@@ -160,15 +163,15 @@ class JobApplication extends Component
             ]);
         } elseif ($this -> currentStep == 3) {
             $this -> validate([
-                'year_began' => 'sring',
-                'institution_name' => 'sring',
-                'certificate' => 'sring',
-                'year_of_graduation' => 'sring',
+                'year_began' => 'string',
+                'institution_name' => 'string',
+                'certificate' => 'string',
+                'year_of_graduation' => 'string',
 
-                'year_began2' => 'sring',
-                'institution_name2' => 'sring',
-                'certificate2' => 'sring',
-                'year_of_graduation2' => 'sring',
+                'year_began2' => 'string',
+                'institution_name2' => 'string',
+                'certificate2' => 'string',
+                'year_of_graduation2' => 'string',
 
                 'year_began3' => 'string',
                 'institution_name3' => 'string',
@@ -215,26 +218,34 @@ class JobApplication extends Component
 
         if ($this -> currentStep == 7) {
             $this -> validate([
-                'agreement' => 'required|array|min:1|max:1',
-                'signature' => 'required',
-                'date' => 'required',
+                'agreement' => 'string|array|min:1|max:1',
+                'signature' => 'string',
+                'date' => 'string',
             ]);
         }
-        $image_name = 'IM_'.$this -> image -> getClientOriginalName();
-        $cv_name = 'CV_'.$this -> cv -> getClientOriginalName();
-        $cerificates_acquired_name = 'CA_'.$this -> cerificates_acquired -> getClientOriginalName();
-        $cover_letter_name = 'CL_'.$this -> cover_letter -> getClientOriginalName();
-        $other_relevant_doc_name = 'ORD_'.$this -> other_relevant_doc -> getClientOriginalName();
 
-        $upload_image = $this -> image -> storeAs('applicants_images', $image_name);
-        $upload_cv = $this -> cv -> storeAs('applicants_docs', $cv_name);
-        $upload_cerificates_acquired = $this -> cerificates_acquired -> storeAs('applicants_docs', $cerificates_acquired_name);
-        $upload_cover_letter = $this -> cover_letter -> storeAs('applicants_docs', $cover_letter_name);
-        $upload_other_relevant_doc = $this -> other_relevant_doc -> storeAs('applicants_docs', $other_relevant_doc_name);
+        
+        // $image_name = 'IM_'.$this -> image -> getClientOriginalName();
+        // $cv_name = 'CV_'.$this -> cv -> getClientOriginalName();
+        // $cerificates_acquired_name = 'CA_'.$this -> cerificates_acquired -> getClientOriginalName();
+        // $cover_letter_name = 'CL_'.$this -> cover_letter -> getClientOriginalName();
+        // $other_relevant_doc_name = 'ORD_'.$this -> other_relevant_doc -> getClientOriginalName();
 
-        if ($upload_cv && $upload_cerificates_acquired && $upload_cover_letter && $upload_other_relevant_doc && $upload_image) {
+        // $upload_image = $this -> image -> storeAs('applicants_images', $image_name);
+        // $upload_cv = $this -> cv -> storeAs('applicants_docs', $cv_name);
+        // $upload_cerificates_acquired = $this -> cerificates_acquired -> storeAs('applicants_docs', $cerificates_acquired_name);
+        // $upload_cover_letter = $this -> cover_letter -> storeAs('applicants_docs', $cover_letter_name);
+        // $upload_other_relevant_doc = $this -> other_relevant_doc -> storeAs('applicants_docs', $other_relevant_doc_name);
+
+        // if ($upload_cv && $upload_cerificates_acquired && $upload_cover_letter && $upload_other_relevant_doc && $upload_image) {
             $values = array(
-            // "applicant_id" => $this -> applicant_id = $applicant_id,
+             "applicant_id" => $this -> applicant_id,
+            // $upload_image,
+            // $upload_cv,
+            // $upload_cerificates_acquired,
+            // $upload_cover_letter,
+            // $upload_other_relevant_doc,
+
             "first_name" => $this -> first_name,
             "middle_name" => $this -> middle_name,
             "last_name" => $this -> last_name,
@@ -245,76 +256,141 @@ class JobApplication extends Component
             "number" => $this -> number,
             "email" => $this -> email,
 
-            "current_employer" => $this -> current_employer,
-            "company_name" => $this -> company_name,
-            "company_address" => $this -> company_address,
-            "position_held" => $this -> position_held,
-            "duration_of_employment_from" => $this -> duration_of_employment_from,
-            "duration_of_employment_to" => $this -> duration_of_employment_to,
-            "responsilibities" => $this -> responsilibities,
+            // "current_employer" => $this -> current_employer,
+            // "company_name" => $this -> company_name,
+            // "company_address" => $this -> company_address,
+            // "position_held" => $this -> position_held,
+            // "duration_of_employment_from" => $this -> duration_of_employment_from,
+            // "duration_of_employment_to" => $this -> duration_of_employment_to,
+            // "responsilibities" => $this -> responsilibities,
 
-            "current_employer2" => $this -> current_employer2,
-            "company_name2" => $this -> company_name2,
-            "company_address2" => $this -> company_address2,
-            "position_held2" => $this -> position_held2,
-            "duration_of_employment_from2" => $this -> duration_of_employment_from2,
-            "duration_of_employment_to2" => $this -> duration_of_employment_to2,
-            "responsilibities2" => $this -> responsilibities2,
+            // "current_employer2" => $this -> current_employer2,
+            // "company_name2" => $this -> company_name2,
+            // "company_address2" => $this -> company_address2,
+            // "position_held2" => $this -> position_held2,
+            // "duration_of_employment_from2" => $this -> duration_of_employment_from2,
+            // "duration_of_employment_to2" => $this -> duration_of_employment_to2,
+            // "responsilibities2" => $this -> responsilibities2,
 
             // "position" => $jobDesc = App\Model\JobDetails::find($this -> position),
             // "position" => $this -> position_id,
 
-            "year_began" => $this -> year_began,
-            "institution_name" => $this -> institution_name,
-            "certificate" => $this -> certificate,
-            "year_of_graduation" => $this -> year_of_graduation,
+            // "year_began" => $this -> year_began,
+            // "institution_name" => $this -> institution_name,
+            // "certificate" => $this -> certificate,
+            // "year_of_graduation" => $this -> year_of_graduation,
 
-            "year_began2" => $this -> year_began2,
-            "institution_name2" => $this -> institution_name2,
-            "certificate2" => $this -> certificate2,
-            "year_of_graduation2" => $this -> year_of_graduation2,
+            // "year_began2" => $this -> year_began2,
+            // "institution_name2" => $this -> institution_name2,
+            // "certificate2" => $this -> certificate2,
+            // "year_of_graduation2" => $this -> year_of_graduation2,
 
-            "year_began3" => $this -> year_began3,
-            "institution_name3" => $this -> institution_name3,
-            "certificate3" => $this -> certificate3,
-            "year_of_graduation3" => $this -> year_of_graduation3,
+            // "year_began3" => $this -> year_began3,
+            // "institution_name3" => $this -> institution_name3,
+            // "certificate3" => $this -> certificate3,
+            // "year_of_graduation3" => $this -> year_of_graduation3,
 
-            "school_name" => $this -> school_name,
-            "secondary_certificate" => $this -> secondary_certificate,
-            "year_of_completion" => $this -> year_of_completion,
+            // "school_name" => $this -> school_name,
+            // "secondary_certificate" => $this -> secondary_certificate,
+            // "year_of_completion" => $this -> year_of_completion,
             
-            "referee_name" => $this -> referee_name,
-            "referee_position" => $this -> referee_position,
-            "referee_company" => $this -> referee_company,
-            "referee_number" => $this -> referee_number,
-            "referee_email" => $this -> referee_email,
+            // "referee_name" => $this -> referee_name,
+            // "referee_position" => $this -> referee_position,
+            // "referee_company" => $this -> referee_company,
+            // "referee_number" => $this -> referee_number,
+            // "referee_email" => $this -> referee_email,
 
-            "referee_name2" => $this -> referee_name2,
-            "referee_position2" => $this -> referee_position2,
-            "referee_company2" => $this -> referee_company2,
-            "referee_number2" => $this -> referee_number2,
-            "referee_email2" => $this -> referee_email2,
+            // "referee_name2" => $this -> referee_name2,
+            // "referee_position2" => $this -> referee_position2,
+            // "referee_company2" => $this -> referee_company2,
+            // "referee_number2" => $this -> referee_number2,
+            // "referee_email2" => $this -> referee_email2,
 
-            "skills_certificate" => $this -> skills_certificate,
-            "reason" => $this -> reason,
-            "availability" => $this -> availability,
+            // "skills_certificate" => $this -> skills_certificate,
+            // "reason" => $this -> reason,
+            // "availability" => $this -> availability,
 
-            "image" => $image_name,
-            "cv" => $cv_name,
-            "cerificates_acquired" => $cerificates_acquired_name,
-            "cover_letter" => $cover_letter_name,
-            "other_relevant_doc" => $other_relevant_doc_name,
+            // "image" => $image_name,
+            // "cv" => $cv_name,
+            // "cerificates_acquired" => $cerificates_acquired_name,
+            // "cover_letter" => $cover_letter_name,
+            // "other_relevant_doc" => $other_relevant_doc_name,
 
-            "agreement" => json_encode($this-> agreement),
-            "signature" => $this -> signature,
-            "date" => $this -> date,
+            // "agreement" => json_encode($this-> agreement),
+            // "signature" => $this -> signature,
+            // "date" => $this -> date,
 
-            "status" => $this -> status = "Submitted" 
+            // "status" => $this -> status = "Submitted" 
 
             );
+
+            // dd($values);
             JobDetails::updateOrCreate($values);
             // $this -> reset();
-            $this -> currentStep = 1;
-        }
+            $this -> currentStep ++;
+        // }
+    }
+
+    public function update($applicant_id) {
+        $this -> resetErrorBag();
+        $this -> validate([
+                'current_employer' => 'string',
+                'company_name' => 'string',
+                'company_address' => 'string',
+                'position_held' => 'string',
+                'duration_of_employment_from' => 'string',
+                'duration_of_employment_to' => 'string', 
+                'responsilibities' => 'string|min:10|max:500',
+
+                'current_employer2' => 'string',
+                'company_name2' => 'string',
+                'company_address2' => 'string',
+                'position_held2' => 'string',
+                'duration_of_employment_from2' => 'string',
+                'duration_of_employment_to2' => 'string',
+                'responsilibities2' => 'string|min:10|max:500',
+            ]);
+
+            $update = PostJobs::find($applicant_id) -> update([
+                // "applicant_id" => $this -> applicant_id,
+                'current_employer' => $this -> current_employer,
+                'company_name' => $this -> company_name,
+                'company_address' => $this -> company_address,
+                'position_held' => $this -> position_held,
+                'duration_of_employment_from' => $this -> duration_of_employment_from,
+                'duration_of_employment_to' => $this -> duration_of_employment_to,
+                'responsilibities' => $this -> responsilibities,
+            ]);
+
+            dd($update);
+            // $experience = PostJobs::find($applicant_id);
+            // $this -> current_employer = $experience -> current_employer;
+            // $this -> company_name = $experience -> company_name;
+            // $this -> company_address = $experience -> company_address;
+            // $this -> position_held = $experience -> position_held;
+            // $this -> duration_of_employment_from = $experience -> duration_of_employment_from;
+            // $this -> duration_of_employment_to = $experience -> duration_of_employment_to;
+            // $this -> responsilibities = $experience -> responsilibities;
+        // $values = array(
+            // "current_employer" => $this -> current_employer,
+            // "company_name" => $this -> company_name,
+            // "company_address" => $this -> company_address,
+            // "position_held" => $this -> position_held,
+            // "duration_of_employment_from" => $this -> duration_of_employment_from,
+            // "duration_of_employment_to" => $this -> duration_of_employment_to,
+            // "responsilibities" => $this -> responsilibities,
+
+            // "current_employer2" => $this -> current_employer2,
+            // "company_name2" => $this -> company_name2,
+            // "company_address2" => $this -> company_address2,
+            // "position_held2" => $this -> position_held2,
+            // "duration_of_employment_from2" => $this -> duration_of_employment_from2,
+            // "duration_of_employment_to2" => $this -> duration_of_employment_to2,
+            // "responsilibities2" => $this -> responsilibities2,
+
+            // "applicant_id" => $this -> applicant_id,
+        // );
+        // JobDetails::update($values);
+        // $this -> currentStep ++;
     }
 }

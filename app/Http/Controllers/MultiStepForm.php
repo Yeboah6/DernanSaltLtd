@@ -2,103 +2,331 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agreement;
+use App\Models\ApplicantLogins;
+use App\Models\Education;
+use App\Models\Files;
 use App\Models\JobDetails;
+use App\Models\PersonalInfo;
+use App\Models\RefereeInfo;
+use App\Models\Skills;
+use App\Models\WorkExperience;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use League\CommonMark\Reference\Reference;
 
 class MultiStepForm extends Controller
 {
-    public function createStepOne(Request $request) {
-        $applicant = $request -> session() -> get('applicant');
-        return view('multiStepForm.step-one-job-form', compact('applicant'));
-    }
-
-    public function postCreateStepOne(Request $request) {
-        $validatedData = $request->validate([
-            'first_name' => 'required|string',
-                'middle_name' => 'required|string',
-                'last_name' => 'required|string',
-                'dob' => 'required',
-                'gender' => 'required',
-                'nationality' => 'required|string',
-                'address' => 'required|string',
-                'number' => 'required|digits:10',
-                'email' => 'required|email'
-        ]);
-
-        if (empty($request -> session() -> get('applicant'))) {
-            $applicant = new JobDetails();
-
-            $applicant -> fill($validatedData);
-            $request -> session() -> put('applicant', $applicant);
-        } else {
-            $applicant = $request -> session() -> get('applicant');
-            $applicant -> fill($validatedData);
-            $request -> session() -> put('applicant', $applicant);
+    // Display Personal Info Page Function
+    public function personalInfo() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
         }
 
-        return redirect() -> route('apply.create.step.two');
+        return view('form.personal-info', compact('data'));
     }
 
-    public function createStepTwo(Request $request) {
-        $applicant = $request -> session() -> get('applicant');
+    // Store Personal Info Data Function
+    public function postPersonalInfo(Request $request) {
 
-        return view('multiStepForm.step-two-job-form', compact('applicant'));
+        $character = 'ID';
+        $pin = mt_rand(10, 99) . mt_rand(10, 99);
+        $applicant_id = $character. '' .$pin;
+
+        $personalInfo = new PersonalInfo();
+
+        $personalInfo -> user_id = $request -> input('user_id');
+        $personalInfo -> applicant_id = $applicant_id;
+        $personalInfo -> first_name = $request -> input('first_name');
+        $personalInfo -> middle_name = $request ->input('middle_name') ;
+        $personalInfo -> last_name = $request -> input('last_name');
+        $personalInfo -> dob = $request -> input('dob');
+        $personalInfo -> gender = $request -> input('gender');
+        $personalInfo -> nationality = $request -> input('nationality');
+        $personalInfo -> address = $request -> input('address');
+        $personalInfo -> number = $request -> input('number');
+        $personalInfo -> email = $request -> input('email');
+
+        $saveSuccess = $personalInfo -> save();
+
+        if ($saveSuccess) {
+            session(['personal_info_id' => $personalInfo->id]);
+            return redirect('/work-experience') -> with('success', 'Data Saved Successfully');
+        } else {
+            return redirect() -> back() -> with('fail', 'Data not Saved');
+        }
     }
 
-    public function postCreateStepTwo(Request $request) {
-        $validatedData = $request -> validate([
-            'current_employer' => 'required|string',
-            'company_name' => 'required',
-            'company_address' => 'required',
-            'position_held' => 'required|string',
-            'duration_of_employment_from' => 'required',
-            'duration_of_employment_to' => 'required', 
-            'responsilibities' => 'required|string|min:10|max:500',
+    // Display Work Experience Page Function
+    public function workExperience() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
 
-            'current_employer2' => 'required|string',
-            'company_name2' => 'required',
-            'company_address2' => 'required',
-            'position_held2' => 'required|string',
-            'duration_of_employment_from2' => 'required',
-            'duration_of_employment_to2' => 'required',
-            'responsilibities2' => 'required|string|min:10|max:500',
-            // 'position' => 'string',
+        $personal_id = session('personal_info_id');
+
+        return view('form.work-experience', compact('data', 'personal_id'));
+    }
+
+    // Store Work Experience Data Function
+    public function postWorkExperience(Request $request) {
+        $experience = new WorkExperience();
+
+        $experience -> personal_id = $request -> input('personal_id');
+
+        $experience -> current_employer = $request -> input('current_employer');
+        $experience -> company_name = $request -> input('company_name');
+        $experience -> company_address = $request -> input('company_address');
+        $experience -> position_held = $request -> input('position_held');
+        $experience -> duration_of_employment_from = $request -> input('duration_of_employment_from');
+        $experience -> duration_of_employment_to = $request -> input('duration_of_employment_to');
+        $experience -> responsilibities = $request -> input('responsilibities');
+
+        $experience -> current_employer2 = $request -> input('current_employer2');
+        $experience -> company_name2 = $request -> input('company_name2');
+        $experience -> company_address2 = $request -> input('company_address2');
+        $experience -> position_held2 = $request -> input('position_held2');
+        $experience -> duration_of_employment_from2 = $request -> input('duration_of_employment_from2');
+        $experience -> duration_of_employment_to2 = $request -> input('duration_of_employment_to2');
+        $experience -> responsilibities2 = $request -> input('responsilibities2');
+
+        $experience -> position = $request -> input('position');
+
+        $experience -> save();
+        return redirect('/education') -> with('success', 'Data Saved Successfully');
+    }
+
+    // Display Education Page Function
+    public function education() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+
+        $personal_id = session('personal_info_id');
+
+        return view('form.education', compact('data', 'personal_id'));
+    }
+
+    // Store Education Data Function
+    public function postEducation(Request $request) {
+        $education = new Education();
+
+        $education -> personal_id = $request -> input('personal_id');
+
+        $education -> institution_name = $request -> input('institution_name');
+        $education -> certificate = $request -> input('certificate');
+        $education -> year_began = $request -> input('year_began');
+        $education -> year_of_graduation = $request -> input('year_of_graduation');
+
+        $education -> institution_name2 = $request -> input('institution_name2');
+        $education -> certificate2 = $request -> input('certificate2');
+        $education -> year_began2 = $request -> input('year_began2');
+        $education -> year_of_graduation2 = $request -> input('year_of_graduation2');
+
+        $education -> institution_name3 = $request -> input('institution_name3');
+        $education -> certificate3 = $request -> input('certificate3');
+        $education -> year_began3 = $request -> input('year_began3');
+        $education -> year_of_graduation3 = $request -> input('year_of_graduation3');
+
+        $education -> school_name = $request -> input('school_name');
+        $education -> secondary_certificate = $request -> input('secondary_certificate');
+        $education -> year_of_completion = $request -> input('year_of_completion');
+
+        $education -> save();
+        return redirect('/referee') -> with('success', 'Data Saved Successfully');
+    }
+
+    // Display Referee Page Function
+    public function referee() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+
+        $personal_id = session('personal_info_id');
+
+        return view('form.referee', compact('data', 'personal_id'));
+    }
+
+    // Store Referee Data Function
+    public function postReferee(Request $request) {
+        $referee = new RefereeInfo();
+
+        $referee -> personal_id = $request -> input('personal_id');
+
+        $referee -> referee_name = $request -> input('referee_name');
+        $referee -> referee_position = $request -> input('referee_position');
+        $referee -> referee_company = $request -> input('referee_company');
+        $referee -> referee_number = $request -> input('referee_number');
+        $referee -> referee_email = $request -> input('referee_email');
+
+        $referee -> referee_name2 = $request -> input('referee_name2');
+        $referee -> referee_position2 = $request -> input('referee_position2');
+        $referee -> referee_company2 = $request -> input('referee_company2');
+        $referee -> referee_number2 = $request -> input('referee_number2');
+        $referee -> referee_email2 = $request -> input('referee_email2');
+
+        $referee -> save();
+        return redirect('/other-relevant') -> with('success', 'Data Saved Successfully');
+    }
+
+    // Display Other Relevant Page Function
+    public function otherRelevant() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+
+        $personal_id = session('personal_info_id');
+
+        return view('form.other-relevant', compact('data', 'personal_id'));
+    }
+
+    // Store Other Relevant Data Function
+    public function postOtherRelevant(Request $request) {
+        $otherRelevant = new Skills();
+
+        $otherRelevant -> personal_id = $request -> input('personal_id');
+
+        $otherRelevant -> skills_certificate = $request -> input('skills_certificate');
+        $otherRelevant -> reason = $request -> input('reason');
+        $otherRelevant -> availability = $request -> input('availability');
+
+        $otherRelevant -> save();
+        return redirect('/upload-docs') -> with('success', 'Data Saved Successfully');
+    }
+
+    // Display Uploads Page Function
+    public function uploads() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+
+        $personal_id = session('personal_info_id');
+
+        return view('form.uploads', compact('data', 'personal_id'));
+    }
+
+    // Store Uploads Data Function
+    public function postUploads(Request $request) {
+        $uploadDoc = new Files();
+
+        $uploadDoc -> personal_id = $request -> input('personal_id');
+
+        $request->validate([
+            'image' => 'mimes:jpeg,png,jpg,svg|max:5048',
+            'cv' => 'mimes:doc,pdf,docx,zip|max:5048',
+            'cerificates_acquired' => 'mimes:doc,pdf,docx,zip|max:5048',
+            'cover_letter' => 'mimes:doc,pdf,docx,zip|max:5048',
+            'other_relevant_doc' => 'mimes:doc,pdf,docx,zip|max:5048',
         ]);
+        if($file = $request->hasFile('image')) {
+         
+            $file = $request->file('image');
+            $fileName = 'IM_'.$file->getClientOriginalName();
+            $destinationPath = public_path().'/uploads/applicant-images/';
+            $file->move($destinationPath,$fileName);
+            $uploadDoc -> image = $fileName;
+        }
 
-        $applicant = $request -> session() -> get('applicant');
-        $applicant -> fill($validatedData);
-        $applicant -> session() -> put('applicant', $applicant);
-  
-        return redirect()-> route('apply.create.step.three');
+        if($file = $request->hasFile('cv')) {
+                 
+            $file = $request->file('cv');
+            $fileName = 'CV_'.$file->getClientOriginalName();
+            $destinationPath = public_path().'/uploads/applicant-documents/';
+            $file->move($destinationPath,$fileName);
+            $uploadDoc -> cv = $fileName;
+        }
+
+        if($file = $request->hasFile('cerificates_acquired')) {
+                 
+            $file = $request->file('cerificates_acquired');
+            $fileName = 'CA_'.$file->getClientOriginalName();
+            $destinationPath = public_path().'/uploads/applicant-documents/';
+            $file->move($destinationPath,$fileName);
+            $uploadDoc -> cerificates_acquired = $fileName;
+        }
+
+        if($file = $request->hasFile('cover_letter')) {
+                 
+            $file = $request->file('cover_letter');
+            $fileName = 'CL_'.$file->getClientOriginalName();
+            $destinationPath = public_path().'/uploads/applicant-documents/';
+            $file->move($destinationPath,$fileName);
+            $uploadDoc -> cover_letter = $fileName;
+        }
+
+        if($file = $request->hasFile('other_relevant_doc')) {
+                 
+            $file = $request->file('other_relevant_doc');
+            $fileName = 'ORL_'.$file->getClientOriginalName();
+            $destinationPath = public_path().'/uploads/applicant-documents/';
+            $file->move($destinationPath,$fileName);
+            $uploadDoc -> other_relevant_doc = $fileName;
+        }
+
+        $uploadDoc -> save();
+        return redirect('/agreement') -> with('success', 'Data Saved Successfully');
     }
 
-    public function createStepThree(Request $request) {
-        $applicant = $request -> session() -> get('applicant');
-  
-        return view('multiStepForm.step-three-job-form', compact('applicant'));
+    // Display Agreement Page Function
+    public function agreement() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+
+        $personal_id = session('personal_info_id');
+
+        return view('form.agreement', compact('data', 'personal_id'));
     }
 
-    public function postCreateStepThree(Request $request) {
-        $validatedData = $request -> validate([
-            'institution_name' => 'required',
-            'certificate' => 'required',
-            'year_began' => 'required',
-            'year_of_graduation' => 'required',
+    // Store Agreement Data Function
+    public function postAgreement(Request $request) {
+        $agreement = new Agreement();
 
-            'institution_name2' => 'required',
-            'certificate2' => 'required',
-            'year_began2' => 'required',
-            'year_of_graduation2' => 'required',
+        $agreement -> personal_id = $request -> input('personal_id');
 
-            'school_name' => 'required',
-            'secondary_certificate' => 'required',
-            'year_of_completion' => 'required'
-        ]);
+        $agreement -> agreement = $request -> input('agreement');
+        $agreement -> signature = $request -> input('signature');
+        $agreement -> date = $request -> input('date');
+        $agreement -> status = "Submitted";
 
-        $applicant = $request->session()->get('applicant');
-        $applicant->fill($validatedData);
-        $applicant->session()->put('applicant', $applicant);
-  
-        return redirect()->route('apply.create.step.four');
-    } 
+        $agreement -> save();
+        return redirect('/update-personal-info') -> with('success', 'Application Submitted Successfully');
+    }
+
+
+
+    public function updatePersonalInfo() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+
+        $personal_info = PersonalInfo::all();
+
+        foreach ($personal_info as $id) {
+
+        if ($data -> id == $id -> user_id) {
+            return view('form.update-personal-info', compact('data', 'id'));
+        }
+    }
+        // if(Session::has('loginId')) {
+        //     $personal_info = ApplicantLogins::where('id', '=', PersonalInfo::get('user_id')) -> first();
+        // }
+
+       
+    }
+
+    public function updateworkExperience() {
+        return view('form.update-work-experience');
+    }
+
 }

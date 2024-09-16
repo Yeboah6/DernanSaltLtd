@@ -18,7 +18,13 @@
                         <li><a wire:navigate href="/contact">Contact</a></li> 
                         <li class="scroll-to-section"><a wire:navigate href="/marketing">Marketing</a></li>
                         <li class="scroll-to-section"><a wire:navigate href="/sales">Sales</a></li>
-                        <li class="scroll-to-section"><a wire:navigate href="/admin-login" style=" color: #fff;">Login</a></li>
+
+                        @if (Session::has('loginId'))
+                            <li class=" li-header"><a href="#" style=" color: #fff;">{{$data -> first_name}}</a></li>
+                            <li><a href="applicant-logout"><i class="feather icon-log-out"></i></a></li>
+                        @else
+                            <li class="scroll-to-section"><a wire:navigate href="/applicant-logout" style=" color: #fff;">Login</a></li>
+                        @endif
                     </ul>  
                         {{--  --}}
                     <a class='menu-trigger'>
@@ -33,3 +39,22 @@
 </header>
 
 <!-- ***** Header Area End ***** -->
+
+<style>
+
+.li-header {
+    border: 1px solid #043E76;
+    background-color: #043E76;
+    /* color: #fff; */
+    border-radius: 10px;
+}
+
+.h6-header {
+    border: 1px solid #fff;
+    padding: 10px;
+    margin-left: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+</style>

@@ -38,7 +38,6 @@ return new class extends Migration
 
         Schema::create('applicant_logins', function (Blueprint $table) {
             $table->id();
-            $table -> string('applicant_id');
             $table -> string('first_name');
             $table -> string('last_name');
             $table -> string('email');
@@ -51,10 +50,12 @@ return new class extends Migration
             $table -> timestamps();
         });
 
-        Schema::create('job_details', function (Blueprint $table) {
+        Schema::create('personal_infos', function (Blueprint $table) {
             $table->id();
+            $table -> bigInteger('user_id')->unsigned()->index()->nullable();
+            $table -> foreign('user_id') -> references('id') -> on('applicant_logins') ->onDelete('cascade');
             
-            // Personnal Info
+            $table -> string('applicant_id');
             $table -> string('first_name') -> nullable();
             $table -> string('middle_name') -> nullable();
             $table -> string('last_name') -> nullable();
@@ -64,8 +65,14 @@ return new class extends Migration
             $table -> string('address') -> nullable();
             $table -> string('number') -> nullable();
             $table -> string('email') -> nullable();
+            $table->timestamps();
+        });
 
-            // Work Experience
+        Schema::create('work_experiences', function (Blueprint $table) {
+            $table->id();
+            $table -> bigInteger('personal_id')->unsigned()->index()->nullable();
+            $table -> foreign('personal_id') -> references('id') -> on('personal_infos') ->onDelete('cascade');
+
             $table -> string('current_employer') -> nullable();
             $table -> string('company_name') -> nullable();
             $table -> string('company_address') -> nullable();
@@ -82,10 +89,16 @@ return new class extends Migration
             $table -> string('duration_of_employment_to2') -> nullable();
             $table -> text('responsilibities2') -> nullable();
 
-            $table -> bigInteger('position')->unsigned()->index()->nullable();
-            $table -> foreign('position') -> references('id') -> on('applicant_logins') ->onDelete('cascade');
+            $table -> string('position')->nullable();
+            // $table -> foreign('position_id') -> references('id') -> on('applicant_logins') ->onDelete('cascade');
+            $table->timestamps();
+        });
 
-            // Education Background
+        Schema::create('education', function (Blueprint $table) {
+            $table->id();
+            $table -> bigInteger('personal_id')->unsigned()->index()->nullable();
+            $table -> foreign('personal_id') -> references('id') -> on('personal_infos') ->onDelete('cascade');
+
             $table -> string('institution_name') -> nullable();
             $table -> string('certificate') -> nullable();
             $table -> string('year_of_graduation') -> nullable();
@@ -104,8 +117,14 @@ return new class extends Migration
             $table -> string('school_name') -> nullable();
             $table -> string('secondary_certificate') -> nullable();
             $table -> string('year_of_completion') -> nullable();
+            $table->timestamps();
+        });
 
-            // Referee
+        Schema::create('referee_infos', function (Blueprint $table) {
+            $table->id();
+            $table -> bigInteger('personal_id')->unsigned()->index()->nullable();
+            $table -> foreign('personal_id') -> references('id') -> on('personal_infos') ->onDelete('cascade');
+
             $table -> string('referee_name') -> nullable();
             $table -> string('referee_position') -> nullable();
             $table -> string('referee_company') -> nullable();
@@ -117,36 +136,52 @@ return new class extends Migration
             $table -> string('referee_company2') -> nullable();
             $table -> string('referee_number2') -> nullable();
             $table -> string('referee_email2') -> nullable();
+            $table->timestamps();
+        });
 
-            // Other Relevant Information
+        Schema::create('skills', function (Blueprint $table) {
+            $table->id();
+            $table -> bigInteger('personal_id')->unsigned()->index()->nullable();
+            $table -> foreign('personal_id') -> references('id') -> on('personal_infos') ->onDelete('cascade');
+
             $table -> string('skills_certificate') -> nullable();
             $table -> text('reason') -> nullable(); // Why do you want to work at Dernan Salt Limited?
             $table -> string('availability') -> nullable();
+            $table->timestamps();
+        });
 
-            // Document Uploads
+        Schema::create('files', function (Blueprint $table) {
+            $table->id();
+            $table -> bigInteger('personal_id')->unsigned()->index()->nullable();
+            $table -> foreign('personal_id') -> references('id') -> on('personal_infos') ->onDelete('cascade');
+
             $table -> string('image') -> nullable();
             $table -> string('cv') -> nullable();
             $table -> string('cerificates_acquired') -> nullable();
             $table -> string('cover_letter') -> nullable();
             $table -> string('other_relevant_doc') -> nullable();
+            $table->timestamps();
+        });
 
-            // Agreement and Declaration
-            $table -> string('agreement');
-            $table -> string('signature');
-            $table -> string('date');
+        Schema::create('agreements', function (Blueprint $table) {
+            $table->id();
+            $table -> bigInteger('personal_id')->unsigned()->index()->nullable();
+            $table -> foreign('personal_id') -> references('id') -> on('personal_infos') ->onDelete('cascade');
 
-            $table -> string('status');
-            
+            $table -> string('agreement') -> nullable();
+            $table -> string('signature') -> nullable();
+            $table -> string('date') -> nullable();
+
+            $table -> string('status') -> nullable();
             $table->timestamps();
         });
 
         Schema::create('referee_testimonies', function (Blueprint $table) {
             $table->id();
+            $table -> bigInteger('personal_id')->unsigned()->index()->nullable();
+            $table -> foreign('personal_id') -> references('id') -> on('personal_infos') ->onDelete('cascade');
+
             $table -> string('document');
-
-            $table -> bigInteger('job_details_id')->unsigned()->index()->nullable();
-            $table -> foreign('job_details_id') -> references('id') -> on('job_details') ->onDelete('cascade');
-
             $table -> text('testimony');
             $table->timestamps();
         });
@@ -160,7 +195,103 @@ return new class extends Migration
         Schema::dropIfExists('positions');
         Schema::dropIfExists('post_jobs');
         Schema::dropIfExists('applicant_logins');
-        Schema::dropIfExists('job_details');
+        Schema::dropIfExists('step_ones');
+        Schema::dropIfExists('step_twos');
+        Schema::dropIfExists('step_threes');
+        Schema::dropIfExists('step_fours');
+        Schema::dropIfExists('step_fives');
+        Schema::dropIfExists('step_sixes');
+        Schema::dropIfExists('step_sevens');
         Schema::dropIfExists('referee_testimonies');
     }
 };
+
+// Schema::create('job_details', function (Blueprint $table) {
+            // $table->id();
+            
+            // $table -> string('applicant_id');
+            // // Personnal Info
+            // $table -> string('first_name') -> nullable();
+            // $table -> string('middle_name') -> nullable();
+            // $table -> string('last_name') -> nullable();
+            // $table -> string('dob') -> nullable();
+            // $table -> string('gender') -> nullable();
+            // $table -> string('nationality') -> nullable();
+            // $table -> string('address') -> nullable();
+            // $table -> string('number') -> nullable();
+            // $table -> string('email') -> nullable();
+
+            // // Work Experience
+            // $table -> string('current_employer') -> nullable();
+            // $table -> string('company_name') -> nullable();
+            // $table -> string('company_address') -> nullable();
+            // $table -> string('position_held') -> nullable();
+            // $table -> string('duration_of_employment_from') -> nullable();
+            // $table -> string('duration_of_employment_to') -> nullable();
+            // $table -> text('responsilibities') -> nullable();
+
+            // $table -> string('current_employer2') -> nullable();
+            // $table -> string('company_name2') -> nullable();
+            // $table -> string('company_address2') -> nullable();
+            // $table -> string('position_held2') -> nullable();
+            // $table -> string('duration_of_employment_from2') -> nullable();
+            // $table -> string('duration_of_employment_to2') -> nullable();
+            // $table -> text('responsilibities2') -> nullable();
+
+            // $table -> bigInteger('position')->unsigned()->index()->nullable();
+            // $table -> foreign('position') -> references('id') -> on('applicant_logins') ->onDelete('cascade');
+
+            // // Education Background
+            // $table -> string('institution_name') -> nullable();
+            // $table -> string('certificate') -> nullable();
+            // $table -> string('year_of_graduation') -> nullable();
+            // $table -> string('year_began') -> nullable();
+
+            // $table -> string('institution_name2') -> nullable();
+            // $table -> string('certificate2') -> nullable();
+            // $table -> string('year_of_graduation2') -> nullable();
+            // $table -> string('year_began2') -> nullable();
+
+            // $table -> string('institution_name3') -> nullable();
+            // $table -> string('certificate3') -> nullable();
+            // $table -> string('year_of_graduation3') -> nullable();
+            // $table -> string('year_began3') -> nullable();
+
+            // $table -> string('school_name') -> nullable();
+            // $table -> string('secondary_certificate') -> nullable();
+            // $table -> string('year_of_completion') -> nullable();
+
+            // // Referee
+            // $table -> string('referee_name') -> nullable();
+            // $table -> string('referee_position') -> nullable();
+            // $table -> string('referee_company') -> nullable();
+            // $table -> string('referee_number') -> nullable();
+            // $table -> string('referee_email') -> nullable();
+
+            // $table -> string('referee_name2') -> nullable();
+            // $table -> string('referee_position2') -> nullable();
+            // $table -> string('referee_company2') -> nullable();
+            // $table -> string('referee_number2') -> nullable();
+            // $table -> string('referee_email2') -> nullable();
+
+            // Other Relevant Information
+            // $table -> string('skills_certificate') -> nullable();
+            // $table -> text('reason') -> nullable(); // Why do you want to work at Dernan Salt Limited?
+            // $table -> string('availability') -> nullable();
+
+            // // Document Uploads
+            // $table -> string('image') -> nullable();
+            // $table -> string('cv') -> nullable();
+            // $table -> string('cerificates_acquired') -> nullable();
+            // $table -> string('cover_letter') -> nullable();
+            // $table -> string('other_relevant_doc') -> nullable();
+
+            // // Agreement and Declaration
+            // $table -> string('agreement') -> nullable();
+            // $table -> string('signature') -> nullable();
+            // $table -> string('date') -> nullable();
+
+            // $table -> string('status') -> nullable();
+            
+            // $table->timestamps();
+        // });

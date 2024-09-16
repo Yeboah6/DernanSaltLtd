@@ -56,6 +56,7 @@
 					<span class="text-danger">@error('password'){{ $message }} @enderror</span>
 				</div>
 				<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Login</button>
+				<h5 style="text-align: center;">Applicant <a href="/applicant-login"><span style="color: blue; text-decoration: underline;">Login</span></a></h5>
 			</form>
 			</div>
 		</div>

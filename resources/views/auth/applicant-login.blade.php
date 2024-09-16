@@ -120,7 +120,7 @@
 							<span class="text-danger">@error('password'){{ $message }} @enderror</span>
 						</div>
 						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Log in</button>
-            <p><a href="/applicant-sign-up">Create Account</a></p>
+            {{-- <p><a href="/applicant-sign-up">Create Account</a></p> --}}
           </div>
         </form>
 				</div>

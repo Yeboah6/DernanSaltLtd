@@ -15,8 +15,17 @@ use App\Models\JobDetails;
 use App\Models\Position;
 use App\Models\PostJobs;
 use App\Models\RefereeTestimony;
+use App\Models\StepFive;
+use App\Models\Education;
+use App\Models\PersonalInfo;
+use App\Models\Agreement;
+use App\Models\RefereeInfo;
+use App\Models\Files;
+use App\Models\Skills;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -148,12 +157,18 @@ class MainController extends Controller
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
 
-        $applicants = JobDetails::all() -> count();
         $positions = Position::all() -> count();
         $jobPosted = PostJobs::all() -> count();
-        $applicantsRejected = JobDetails::where('status', 'Rejected') -> count();
-        $applicantsAccepted = JobDetails::where('status', 'Accepted') -> count();
-        return view('dashboard.admin-dashboard', compact('applicants', 'positions', 'jobPosted', 'applicantsRejected', 'applicantsAccepted', 'data'));
+        
+        // $applicantsRejected = StepSeven::where('status', 'Rejected') -> count();
+
+        $applicants = PersonalInfo::all() -> count();
+
+        $applicantsAccepted = Agreement::where('status', 'Accepted') -> count();
+        $applicantsRejected = Agreement::where('status', 'Rejected') -> count();
+
+
+        return view('dashboard.admin-dashboard', compact('data', 'positions', 'jobPosted', 'applicantsAccepted', 'applicantsRejected', 'applicants'));
     }
 
     // Display Applicants Page Function
@@ -162,8 +177,20 @@ class MainController extends Controller
         if(Session::has('loginId')) {
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
-        $applicants = JobDetails::all();
-        return view('pages.applicants', compact('applicants', 'data'));
+
+        $applicant = DB::table('personal_infos')
+        -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
+        -> join('education', 'personal_infos.id', '=', 'education.personal_id')
+        -> join('referee_infos', 'personal_infos.id', '=', 'referee_infos.personal_id')
+        -> join('files', 'personal_infos.id', '=', 'files.personal_id')
+        -> join('skills', 'personal_infos.id', '=', 'skills.personal_id')
+        -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+        // -> select('personal_infos', 'work_experiences', 'referee_infos', 'files', 'skills', 'agreements')
+        // -> select('personal_infos.id')
+        -> get();
+
+        dd($applicant);
+        // return view('pages.applicants', compact('applicant', 'data'));
     }
 
     // Display View Applicants Function
@@ -172,9 +199,34 @@ class MainController extends Controller
         if(Session::has('loginId')) {
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
-        $applicants = JobDetails::find($id);
-        $position = Position::find($id);
-        return view('pages.view-applicants', compact('applicants', 'position', 'data'));
+        $applicant = PersonalInfo::findOrFail($id) -> first();
+        $educaion = Education::all();
+        $referee = RefereeInfo::all();
+        $skills = Skills::all();
+        $docs = Files::all();
+        $agreements = Agreement::all();
+
+        foreach ($educaion as $edu) {
+            foreach ($skills as $skill) {
+                foreach ($referee as $ref) {
+                    foreach ($agreements as $agreement) {
+                        foreach ($docs as $docs) {
+                            if ($edu -> personal_id == $applicant -> id) {
+                                if ($skill -> personal_id == $applicant -> id) {
+                                    if ($ref -> personal_id == $applicant -> id) {
+                                        if ($agreement -> personal_id == $applicant -> id) {
+                                            if ($applicant -> id == $docs -> personal_id) {
+                                                return view('pages.view-applicants', compact( 'data', 'applicant', 'docs', 'agreement', 'ref', 'skill', 'edu'));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // Display Job Posting Page Function
@@ -183,10 +235,11 @@ class MainController extends Controller
         if(Session::has('loginId')) {
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
+
         $position = Position::where('status', 'Available') -> get();
         $jobPosting = PostJobs::all();
         $positionNames = Position::all();
-        
+
         return view('pages.job-posting', compact('position', 'jobPosting', 'positionNames', 'data'));
     }
 
@@ -236,8 +289,13 @@ class MainController extends Controller
 
     // Dislpay View Job Page Function
     public function jobPostingsView($id) {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
+
         $jobDesc = PostJobs::findOrFail($id);
-        return view('pages.view-job', compact('jobDesc'));
+        return view('pages.view-job', compact('jobDesc', 'data'));
     }
 
     // Display Position Page Function
@@ -295,16 +353,7 @@ class MainController extends Controller
 
     // Download Document Function
     public function download($file) {
-        return response()->download(storage_path('/storage/app/applicants_docs/'. $file));
- 
-        // if(Storage::disk('local') -> exists("applicants_docs/".$request -> file)) {
-        //     $path = Storage::disk('local') -> path("applicants_docs/".$request -> file);
-        //     $content = file_get_contents($path);
-        //     return response($content) -> withHeaders([
-        //         'content-Type' => mime_content_type($path)
-        //     ]);
-        // }
-        // dd('Ok');
+        return response()->download(public_path('uploads/applicant-documents/'. $file));
     }
 
     // Display Sales Page Function
@@ -356,6 +405,17 @@ class MainController extends Controller
     }
 
     // Applicant Login Function
+
+    // public function postApplicantlogin(Request $request) {
+    //     $credentials = $request -> only('email', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+    //         return redirect() -> intended('/personal-info');
+    //     }
+
+    //     return redirect('/applicant-login') -> with('fail', 'Invalid credentials. Please try again.');
+    // }
+
     public function postApplicantlogin(Request $request) {
         $request -> validate([
             'email' => 'required|email',
@@ -366,7 +426,7 @@ class MainController extends Controller
         if($applicant) {
             if(Hash::check($request -> password, $applicant -> password)) {
                 $request -> session() -> put('loginId', $applicant -> id);
-                return redirect('/job-apply');
+                return redirect('/personal-info');
             } else {
                 return back() -> with('fail', 'Incorrect Credentials!!');
             } 
@@ -382,22 +442,29 @@ class MainController extends Controller
     }
 
     // Store Applicant SignUp Function
+    // public function storeSignUp(Request $request) {
+    //     $request->validate([
+    //         'first_name' => 'required',
+    //         'last_name' => 'required',
+    //         'email' => 'required|email|unique:applicant_logins',
+    //         // 'position_id' => 'required',
+    //     ]);
+
+    //     ApplicantLogins::create([
+    //         'first_name' => $request -> first_name,
+    //         'last_name' => $request -> last_name,
+    //         'email' => $request -> email,
+    //         // 'position' => $request -> position_id,
+    //     ]);
+
+    //     // Mail::to($request -> input('email')) -> send(new VerifyEmail($applicant));
+    //     return redirect() -> back() -> with('success', 'Verification link has been sent your email');
+    // }
+
     public function storeSignUp(Request $request) {
 
-        $character = 'ID';
-        $pin = mt_rand(10, 99) . mt_rand(10, 99);
-        $applicant_id = $character. '' .$pin;
+        $applicant = new ApplicantLogins();   
 
-        // $applicant = request() -> validate([
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'email' => 'required|email|unique:applicant_logins'
-        // ]);
-
-        // ApplicantLogins::insert($applicant);
-
-        $applicant = new ApplicantLogins();  
-        $applicant -> applicant_id = $applicant_id;
         $applicant -> first_name = $request -> input('first_name');
         $applicant -> last_name = $request -> input('last_name');
         $applicant -> email = $request -> input('email');
@@ -410,12 +477,12 @@ class MainController extends Controller
     }
 
     // Applicant Logout Function
-    // public function applicantlogout() {
-    //         if(Session::has('loginId')) {
-    //             Session::pull('loginId');
-    //         return redirect('/applicant-login');
-    //     }
-    // }
+    public function applicantlogout() {
+            if(Session::has('loginId')) {
+                Session::pull('loginId');
+            return redirect('/applicant-login');
+        }
+    }
 
     // Display Verify Account Page Function
     public function verifyEmail() {
@@ -434,8 +501,8 @@ class MainController extends Controller
         $applicant = ApplicantLogins::where('email', '=', $request -> email) -> first();
         if($applicant) {
             if ($request -> confirm_password == $request -> password) {
-          $applicant -> password = Hash::make($request -> input('password'));
-            $applicant -> update();
+                $applicant -> password = Hash::make($request -> input('password'));
+            $applicant -> update(['verified_at' => now()]);
             return redirect('/applicant-login');
             } else {
                 return back() -> with('fail', "Passwords don't match!!");
@@ -467,5 +534,9 @@ class MainController extends Controller
         // = time().'.'.$request -> file('doc') -> getClientOriginalExtension();
         $referee -> save();
         return redirect() -> back();
+    }
+
+    public function info() {
+        return view('multiStepForm.pernonal'); 
     }
 }

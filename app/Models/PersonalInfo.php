@@ -5,18 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ApplicantLogins extends Model
+class PersonalInfo extends Model
 {
     use HasFactory;
 
-    protected $table = 'applicant_logins';
+    protected $table = 'personal_infos';
 
     protected $fillable = [
+        'user_id',
+        
+        'applicant_id',
         'first_name',
+        'middle_name',
         'last_name',
+        'dob',
+        'gender',
+        'nationality',
+        'address',
+        'number',
         'email',
-        'password',
-        'position',
-        'verified_at'
     ];
 }
