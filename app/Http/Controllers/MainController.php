@@ -7,6 +7,7 @@ use App\Mail\ContactUs;
 use App\Mail\MarketingMail;
 use App\Mail\RefereeMail;
 use App\Mail\RejectMail;
+use App\Mail\ResetPassword;
 use App\Mail\SalesMail;
 use App\Mail\VerifyEmail;
 use App\Models\ApplicantLogins;
@@ -171,6 +172,43 @@ class MainController extends Controller
         return view('dashboard.admin-dashboard', compact('data', 'positions', 'jobPosted', 'applicantsAccepted', 'applicantsRejected', 'applicants'));
     }
 
+    // Display Admin Profile Page Function
+    public function adminProfile() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
+
+        return view('auth.profile', compact('data'));
+    }
+
+    // Update Admin Profile Function
+    public function postAdminProfile(Request $request) {
+        $request -> validate([
+            'email' => 'required|email',
+            'new_email' => 'required|email|unique:admins',
+            'new_password' => 'required|min:8|max:12',
+            'confirm_password' => 'required|min:8|max:12',
+        ]);
+
+        $profile = Admin::where('email', '=', $request -> email) -> first();
+
+        if($profile) {
+            if ($request -> confirm_password == $request -> new_password) {
+                $profile -> email = $request -> input('email');
+                $profile -> password = Hash::make($request -> input('new_password'));
+            $profile -> update();
+            return redirect('/admin-profile') -> with('success', 'Admin Info Updated Successfully');
+            } else {
+                return back() -> with('fail', "Passwords don't match!!");
+            }
+        } else {
+            return back() -> with('fail', 'Incorrect Credentials!!');
+        }
+
+        // $profile -> email 
+    }
+
     // Display Applicants Page Function
     public function applicant() {
         $data = array();
@@ -180,17 +218,22 @@ class MainController extends Controller
 
         $applicant = DB::table('personal_infos')
         -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
-        -> join('education', 'personal_infos.id', '=', 'education.personal_id')
+        // -> join('education', 'personal_infos.id', '=', 'education.personal_id')
         -> join('referee_infos', 'personal_infos.id', '=', 'referee_infos.personal_id')
         -> join('files', 'personal_infos.id', '=', 'files.personal_id')
         -> join('skills', 'personal_infos.id', '=', 'skills.personal_id')
         -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
-        // -> select('personal_infos', 'work_experiences', 'referee_infos', 'files', 'skills', 'agreements')
-        // -> select('personal_infos.id')
         -> get();
 
-        dd($applicant);
-        // return view('pages.applicants', compact('applicant', 'data'));
+        $positions = Position::all();
+
+        // foreach ($positions as $position) {
+        //     if ($position -> id == $applicant -> position) {
+        //         return view('pages.applicants', compact('applicant', 'data', 'position'));
+        //     }
+        // }
+        // dd($applicant);
+        return view('pages.applicants', compact('applicant', 'data', 'positions'));
     }
 
     // Display View Applicants Function
@@ -199,35 +242,20 @@ class MainController extends Controller
         if(Session::has('loginId')) {
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
-        $applicant = PersonalInfo::findOrFail($id) -> first();
-        $educaion = Education::all();
-        $referee = RefereeInfo::all();
-        $skills = Skills::all();
-        $docs = Files::all();
-        $agreements = Agreement::all();
 
-        foreach ($educaion as $edu) {
-            foreach ($skills as $skill) {
-                foreach ($referee as $ref) {
-                    foreach ($agreements as $agreement) {
-                        foreach ($docs as $docs) {
-                            if ($edu -> personal_id == $applicant -> id) {
-                                if ($skill -> personal_id == $applicant -> id) {
-                                    if ($ref -> personal_id == $applicant -> id) {
-                                        if ($agreement -> personal_id == $applicant -> id) {
-                                            if ($applicant -> id == $docs -> personal_id) {
-                                                return view('pages.view-applicants', compact( 'data', 'applicant', 'docs', 'agreement', 'ref', 'skill', 'edu'));
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+        $applicants = DB::table('personal_infos') -> where('id', $id)
+        -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
+        -> join('education', 'personal_infos.id', '=', 'education.personal_id')
+        -> join('referee_infos', 'personal_infos.id', '=', 'referee_infos.personal_id')
+        -> join('files', 'personal_infos.id', '=', 'files.personal_id')
+        -> join('skills', 'personal_infos.id', '=', 'skills.personal_id')
+        -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+        -> get();
+
+    return view('pages.view-applicants', compact( 'data', 'applicants'));
+ }
+
+
 
     // Display Job Posting Page Function
     public function jobPosting() {
@@ -442,25 +470,6 @@ class MainController extends Controller
     }
 
     // Store Applicant SignUp Function
-    // public function storeSignUp(Request $request) {
-    //     $request->validate([
-    //         'first_name' => 'required',
-    //         'last_name' => 'required',
-    //         'email' => 'required|email|unique:applicant_logins',
-    //         // 'position_id' => 'required',
-    //     ]);
-
-    //     ApplicantLogins::create([
-    //         'first_name' => $request -> first_name,
-    //         'last_name' => $request -> last_name,
-    //         'email' => $request -> email,
-    //         // 'position' => $request -> position_id,
-    //     ]);
-
-    //     // Mail::to($request -> input('email')) -> send(new VerifyEmail($applicant));
-    //     return redirect() -> back() -> with('success', 'Verification link has been sent your email');
-    // }
-
     public function storeSignUp(Request $request) {
 
         $applicant = new ApplicantLogins();   
@@ -478,9 +487,9 @@ class MainController extends Controller
 
     // Applicant Logout Function
     public function applicantlogout() {
-            if(Session::has('loginId')) {
-                Session::pull('loginId');
-            return redirect('/applicant-login');
+        if(Session::has('loginId')) {
+            Session::pull('loginId');
+        return redirect('/applicant-login');
         }
     }
 
@@ -512,6 +521,37 @@ class MainController extends Controller
         }
     }
 
+    // Display Reset Password Page Function
+    public function resetPassword() {
+        return view('auth.reset-password');
+    }
+
+    // Reset Password Function
+    public function postResetPassword(Request $request) {
+        $request -> validate([
+            'email' => 'required|email',
+        ]);
+
+        $reset = ApplicantLogins::where('email', '=', $request -> email) -> first();
+        if ($reset) {
+            Mail::to($reset -> email) -> send(new ResetPassword($reset));
+            return redirect() -> back() -> with('success', 'Reset Password Link has been sent to your Email');
+        }
+    }
+
+    // Display Email Reset Password Page Function
+    public function sendResetPassword() {
+        return view('emails.reset-password');
+    }
+
+    public function postSendResetPassword(Request $request) {
+        $reset  = ApplicantLogins::where('email', '=', $request -> email) -> first();
+
+        if ($reset) {
+
+        }
+    }
+
     // Display Referee Testimony Page Function
     public function refereeTestimony() {
         return view('pages.referee-testimony');
@@ -531,7 +571,7 @@ class MainController extends Controller
             $file -> move('uploads/refereeDocuments', $filename);
             $referee -> document = $filename;
         }
-        // = time().'.'.$request -> file('doc') -> getClientOriginalExtension();
+
         $referee -> save();
         return redirect() -> back();
     }

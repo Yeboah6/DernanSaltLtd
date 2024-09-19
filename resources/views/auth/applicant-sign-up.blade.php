@@ -12,43 +12,51 @@
     <title>Dernan Salt Ltd</title>
 
     <!-- Bootstrap core CSS -->
-    {{-- <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="../assets/css/fontawesome.css">
     <link rel="stylesheet" href="../assets/css/templatemo-574-mexant.css">
-    {{-- <link rel="stylesheet" href="../assets/css/owl.css"> --}}
-    {{-- <link rel="stylesheet" href="../assets/css/animate.css"> --}}
-    {{-- <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"> --}}
+    <link rel="stylesheet" href="../assets/css/owl.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
 
 	<link rel="stylesheet" href="../assets/css/style.css">
 
-<style>
-        .footer-text{
-          font-size: 20px;
-        }
+  <style>
+    .footer-text{
+      font-size: 20px;
+    }
+    .footerLinks-section > p > a{
+      font-size: 14px;
+      color: #F5F7FA;
+    }
 
-        footerLinks-section > p{
-          font-size: 14px;
-          color: #F5F7FA;
-        }
-        .footer-input{
-          font-size: 14px;
-          outline: 0;
-          border: 0;
-          background-color: #FFFFFF48;
-          color: #D9DBE1;
-        }
-        .footer-input::placeholder{
-          color: #FFFFFF7A;
-        }
-        /* .plane-icon{
-          filter: invert(1);
-        } */
-        .footerInput-container{
-          width: fit-content;
-        }
+    .logo {
+      text-align: center;
+    }
+
+    .footerLinks-section {
+      text-align: center;
+    }
+
+    .footer-input{
+      font-size: 14px;
+      outline: 0;
+      border: 0;
+      background-color: #FFFFFF48;
+      color: #D9DBE1;
+    }
+    .footer-input::placeholder{
+      color: #FFFFFF7A;
+    }
+    /* .plane-icon{
+      filter: invert(1);
+    } */
+    .footerInput-container{
+      width: fit-content;
+    }
 </style>
   </head>
 
@@ -136,53 +144,42 @@
 </div>
 
 <footer>
-    <div class="container-lg px-md-4">
-      <div class="row justify-content-md-between justify-content-center text-md-start my-5 flex-column flex-md-row text-center">
-        <div class="col-lg-4 h-100 d-flex flex-column mx-auto mx-md-0 mb-lg-0 mb-5">
-          <a href="/" class="logo">
-            <img src="../assets/images/Asset4@4x.png" style="width:130px" alt="">
-          </a>
-          <p style="font-size: 14px;" class="mt-5">Copyright © 2024 Dernan Co., Ltd.
-            <br>All Rights Reserved.
-          </p>
+  <div class="container-lg px-md-4">
+    <div class="row justify-content-md-between justify-content-center text-md-start my-5 flex-column flex-md-row text-center">
+      <div class="col-lg-4 h-100 d-flex flex-column mx-auto mx-md-0 mb-lg-0 mb-5">
+        <a href="/" class="logo">
+          <img src="../assets/images/Asset4@4x.png" style="width:130px" alt="">
+        </a>
+        <p style="font-size: 14px;text-align:center;" class="mt-5">Copyright © 2024 Dernan Co., Ltd.
+          <br>All Rights Reserved.
+        </p>
+      </div>
+      <div class="col-lg-7 col-9 d-flex flex-column flex-md-row px-0 justify-content-lg-end mx-auto mx-md-0">
+        <div class="col-lg-3 footerLinks-section">
+          <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Dernan Salt Ltd</h6>
+          <p><a href="/about-us">About us</a></p>
+          <p><a href="jobs">Job</a></p>
+          <p><a href="/contact">Contact us</a></p>
+          <p><a href="/marketing">Marketing</a></p>
+          <p><a href="/sales">Sales</a></p>
         </div>
-        <div class="col-lg-7 col-9 d-flex flex-column flex-md-row px-0 justify-content-lg-end mx-auto mx-md-0">
-          <div class="col-lg-3 footerLinks-section">
-            <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Company</h6>
-            <p>About us</p>
-            <p>Job</p>
-            <p>Contact us</p>
-          </div>
-          <div class="col-lg-3 footerLinks-section">
-            <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Support</h6>
-            <p>Help center</p>
-            <p>Terms of service</p>
-            <p>Legal</p>
-          </div>
-          <div class="col-lg-4 me-3 me-lg-0">
-          </div>
+        <div class="col-lg-3 footerLinks-section">
+          <h6 class="footer-text text-white mb-md-4 mb-2 mt-3 mt-md-0">Support</h6>
+          <p>Help center</p>
+          <p>Terms of service</p>
+          <p>Legal</p>
         </div>
+        <div class="col-lg-4 me-3 me-lg-0">  </div>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
   <!-- Required Js -->
 <script src="../assets/js/vendor-all.min.js"></script>
 <script src="../assets/js/plugins/bootstrap.min.js"></script>
 <script src="../assets/js/ripple.js"></script>
 <script src="../assets/js/pcoded.min.js"></script>
-
- <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
-  {{-- <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <script src="../assets/js/isotope.min.js"></script>
-  <script src="../assets/js/owl-carousel.js"></script>
-
-  <script src="../assets/js/tabs.js"></script>
-  <script src="../assets/js/swiper.js"></script>
-  <script src="../assets/js/custom.js"></script> --}}
 
 </body>
 </html>

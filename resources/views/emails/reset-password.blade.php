@@ -34,7 +34,7 @@
 						@csrf
 					<div class="card-body">
 						<img src="../assets/images/Asset4@4x.png" alt="" class="img-fluid mb-4" style="width:6.5em">
-						<h6 class="mb-3 f-w-400">Set Password | Verify Account</h6>
+						<h6 class="mb-3 f-w-400">Reset Password</h6>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Username">Email</label>
 							<input type="text" class="form-control" name="email" value="{{old('email')}}">

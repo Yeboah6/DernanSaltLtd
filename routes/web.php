@@ -25,6 +25,9 @@ Route::get('/admin-logout', [MainController::class, 'logout']) -> name('admin-lo
 
 Route::get('/admin-dashboard', [MainController::class, 'admindashboard']) -> name('admin-dashboard') -> middleware('isLoggedIn');
 
+Route::get('/admin-profile', [MainController::class, 'adminProfile']) -> name('admin-profile') -> middleware('isLoggedIn');
+Route::post('/admin-profile', [MainController::class, 'postAdminProfile']) -> name('admin-profile') -> middleware('isLoggedIn');
+
 Route::get('/job-apply', [MainController::class, 'apply']) -> name('job-apply');
 
 
@@ -82,6 +85,12 @@ Route::get('/referee-testimony', [MainController::class, 'refereeTestimony']) ->
 Route::post('/referee-testimony', [MainController::class, 'postRefereeTestimony']) -> name('referee-testimony');
 
 
+Route::get('/reset-password', [MainController::class, 'resetPassword']) -> name('reset-password');
+Route::post('/reset-password', [MainController::class, 'postResetPassword']) -> name('reset-password');
+
+Route::get('/send-reset-password', [MainController::class, 'sendResetPassword']) -> name('send-reset-password');
+Route::post('/send-reset-password', [MainController::class, 'postSendResetPassword']) -> name('send-reset-password');
+
 
 Route::get('/verify-email', [MainController::class, 'verifyEmail']) -> name('verify.email');
 Route::post('/verify-email', [MainController::class, 'postVerifyEmail']) -> name('verify.email');
@@ -91,34 +100,32 @@ Route::get('/choose-account/{id}', [MainController::class, 'chooseAccount']) -> 
 
 // Route::get('/info', [MainController::class, 'info']) -> name('info');
 
-Route::get('/personal-info', [MultiStepForm::class, 'personalInfo']) -> name('personal-info');
-Route::post('/personal-info', [MultiStepForm::class, 'postPersonalInfo']) -> name('personal-info');
+Route::get('/personal-info', [MultiStepForm::class, 'personalInfo']) -> name('personal-info') -> middleware('applicantIsLoggedIn');
+Route::post('/personal-info', [MultiStepForm::class, 'postPersonalInfo']) -> name('personal-info') -> middleware('applicantIsLoggedIn');
 
 Route::get('/update-personal-info', [MultiStepForm::class, 'updatePersonalInfo']) -> name('update-personal-info');
 // Route::post('/personal-info', [MultiStepForm::class, 'postPersonalInfo']) -> name('personal-info');
 
-Route::get('/work-experience', [MultiStepForm::class, 'workExperience']) -> name('work-experience');
-Route::post('/work-experience', [MultiStepForm::class, 'postWorkExperience']) -> name('work-experience');
+Route::get('/work-experience', [MultiStepForm::class, 'workExperience']) -> name('work-experience') -> middleware('applicantIsLoggedIn');
+Route::post('/work-experience', [MultiStepForm::class, 'postWorkExperience']) -> name('work-experience')-> middleware('applicantIsLoggedIn');
 
 Route::get('/update-work-experience', [MultiStepForm::class, 'updateworkExperience']) -> name('update-work-experience');
 // Route::post('/update-personal-info', [MultiStepForm::class, 'updatePersonalInfo']) -> name('update-personal-info');
 
-Route::get('/education', [MultiStepForm::class, 'education']) -> name('education');
-Route::post('/education', [MultiStepForm::class, 'postEducation']) -> name('education');
+Route::get('/education', [MultiStepForm::class, 'education']) -> name('education')-> middleware('applicantIsLoggedIn');
+Route::post('/education', [MultiStepForm::class, 'postEducation']) -> name('education')-> middleware('applicantIsLoggedIn');
 
-Route::get('/referee', [MultiStepForm::class, 'referee']) -> name('referee');
-Route::post('/referee', [MultiStepForm::class, 'postReferee']) -> name('referee');
+Route::get('/referee', [MultiStepForm::class, 'referee']) -> name('referee')-> middleware('applicantIsLoggedIn');
+Route::post('/referee', [MultiStepForm::class, 'postReferee']) -> name('referee')-> middleware('applicantIsLoggedIn');
 
-Route::get('/other-relevant', [MultiStepForm::class, 'otherRelevant']) -> name('other-relevant');
-Route::post('/other-relevant', [MultiStepForm::class, 'postOtherRelevant']) -> name('other-relevant');
+Route::get('/other-relevant', [MultiStepForm::class, 'otherRelevant']) -> name('other-relevant')-> middleware('applicantIsLoggedIn');
+Route::post('/other-relevant', [MultiStepForm::class, 'postOtherRelevant']) -> name('other-relevant')-> middleware('applicantIsLoggedIn');
 
-Route::get('/upload-docs', [MultiStepForm::class, 'uploads']) -> name('uploads');
-Route::post('/upload-docs', [MultiStepForm::class, 'postUploads']) -> name('uploads');
+Route::get('/upload-docs', [MultiStepForm::class, 'uploads']) -> name('uploads')-> middleware('applicantIsLoggedIn');
+Route::post('/upload-docs', [MultiStepForm::class, 'postUploads']) -> name('uploads')-> middleware('applicantIsLoggedIn');
 
-Route::get('/agreement', [MultiStepForm::class, 'agreement']) -> name('agreement');
-Route::post('/agreement', [MultiStepForm::class, 'postAgreement']) -> name('agreement');
-
-
+Route::get('/agreement', [MultiStepForm::class, 'agreement']) -> name('agreement')-> middleware('applicantIsLoggedIn');
+Route::post('/agreement', [MultiStepForm::class, 'postAgreement']) -> name('agreement')-> middleware('applicantIsLoggedIn');
 
 
 // Route::get('/apply/create-step-one', [MultiStepForm::class, 'createStepOne']) -> name('apply.create.step.one');

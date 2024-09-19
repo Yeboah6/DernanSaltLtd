@@ -110,7 +110,7 @@
                 @csrf
 
                 <div class="card-footer text-right">
-                    <a href="/update-personal-info"><button type="button" class="btn btn-danger">Back</button></a>
+                    <a href="/personal-info"><button type="button" class="btn btn-danger">Back</button></a>
                     <button type="submit" class="btn btn-success">Save</button>
                     <a href="/education"><button type="button" class="btn btn-primary">Next</button></a>
                 </div>
@@ -189,13 +189,13 @@
                         <textarea name="responsilibities2" cols="70" rows="6" required></textarea>
                         <span class="text-danger">@error('responsilibities2'){{ $message }} @enderror</span>
                     </div>
-                    
+
                     <input type="text" name="position" value="{{$data -> position}}" hidden>
-               
+
 
                 </fieldset>
                 <div class="card-footer text-right">
-                    <a href="/update-personal-info"><button type="button" class="btn btn-danger">Back</button></a>
+                    <a href="/personal-info"><button type="button" class="btn btn-danger">Back</button></a>
                     <button type="submit" class="btn btn-success">Save</button>
                     <a href="/education"><button type="button" class="btn btn-primary">Next</button></a>
                 </div>

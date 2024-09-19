@@ -13,7 +13,7 @@
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../assets/css1/bootstrap.min.css">
-
+    <link rel="icon" href="../assets1/images/favicon.ico" type="image/x-icon">
     <!-- Style -->
     <link rel="stylesheet" href="../assets/css1/style.css">
 

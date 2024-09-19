@@ -128,7 +128,7 @@
                     </div>
                     <div class="form-group">
                         <label for="middle-name">Middle Name <span></span></label>
-                        <input type="text" name="middle_name" placeholder="Enter Middle Name">
+                        <input type="text" name="middle_name" placeholder="Enter Middle Name" value="{{$id -> middle_name}}">
                         <span class="text-danger">@error('middle_name'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
@@ -138,7 +138,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dob">Date of Birth <span>*</span></label>
-                        <input type="date" name="dob" required placeholder="Enter Last Name">
+                        <input type="date" name="dob" required placeholder="Enter Last Name" value="{{$id -> dob}}">
                         <span class="text-danger">@error('dob'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
@@ -149,17 +149,17 @@
                     </div>
                     <div class="form-group">
                         <label for="nationality">Nationality <span>*</span></label>
-                        <input type="text" name="nationality" required placeholder="Enter Nationality. Eg; Ghanaian">
+                        <input type="text" name="nationality" required placeholder="Enter Nationality. Eg; Ghanaian" value="{{$id -> nationality}}">
                         <span class="text-danger">@error('nationality'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="full-name">Address <span>*</span></label>
-                        <input type="text" name="address" required placeholder="Enter Address">
+                        <input type="text" name="address" required placeholder="Enter Address" value="{{$id -> address}}">
                         <span class="text-danger">@error('address'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="full-name">Phone Number <span>*</span></label>
-                        <input type="text" name="number" required placeholder="Enter Phone Number">
+                        <input type="text" name="number" required placeholder="Enter Phone Number" value="{{$id -> number}}">
                         <span class="text-danger">@error('number'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">

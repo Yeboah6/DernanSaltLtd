@@ -74,10 +74,10 @@
                             <div class="row invoive-info">
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Work Experience :</h6>
-                                    <h6 class="m-0">{{$applicants2 -> current_employer}}</h6>
-                                    <p class="m-0 m-t-10">{{$applicants2 -> position_held}}</p>
-                                    <p class="m-0">{{$applicants2 -> duration_of_employment}}</p>
-                                    <p class="m-0">{{$applicants2 -> responsilibities}}</p>
+                                    <h6 class="m-0">{{$applicants -> current_employer}}</h6>
+                                    <p class="m-0 m-t-10">{{$applicants -> position_held}}</p>
+                                    <p class="m-0">{{$applicants -> duration_of_employment}}</p>
+                                    <p class="m-0">{{$applicants -> responsilibities}}</p>
                                 </div>
 
                                 <div class="col-md-4 col-xs-12 invoice-client-info">

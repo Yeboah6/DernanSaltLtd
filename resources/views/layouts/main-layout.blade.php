@@ -11,6 +11,8 @@
 
     <title>Dernan Salt Ltd</title>
 
+    <link rel="icon" href="../assets1/images/favicon.ico" type="image/x-icon">
+
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -30,7 +32,6 @@
         .footer-text{
           font-size: 20px;
         }
-
         .footerLinks-section > p > a{
           font-size: 14px;
           color: #F5F7FA;

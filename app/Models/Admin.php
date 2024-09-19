@@ -13,6 +13,8 @@ class Admin extends Model
 
     protected $fillable = [
         'email',
-        'password'
+        'new_email',
+        'new_password',
+        'confirm_password'
     ];
 }

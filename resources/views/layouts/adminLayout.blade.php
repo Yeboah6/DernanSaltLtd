@@ -13,7 +13,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
-    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets1/images/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="../assets/css/dataTables.bootstrap4.min.css">
     <!-- vendor css -->

@@ -26,8 +26,18 @@ class MultiStepForm extends Controller
             $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
         }
 
-        return view('form.personal-info', compact('data'));
+        $personal_info = PersonalInfo::all();
+
+        foreach ($personal_info as $id) {
+
+        if ($data -> id == $id -> user_id) {
+            return view('form.personal-info', compact('data', 'id'));
+            // return view('form.update-personal-info', compact('data', 'id'));
+        }
+
+        // return view('form.personal-info', compact('data'));
     }
+}
 
     // Store Personal Info Data Function
     public function postPersonalInfo(Request $request) {
@@ -304,26 +314,22 @@ class MultiStepForm extends Controller
 
 
 
-    public function updatePersonalInfo() {
-        $data = array();
-        if(Session::has('loginId')) {
-            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
-        }
+    // public function updatePersonalInfo() {
+    //     $data = array();
+    //     if(Session::has('loginId')) {
+    //         $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+    //     }
 
-        $personal_info = PersonalInfo::all();
+    //     $personal_info = PersonalInfo::all();
 
-        foreach ($personal_info as $id) {
+    //     foreach ($personal_info as $id) {
 
-        if ($data -> id == $id -> user_id) {
-            return view('form.update-personal-info', compact('data', 'id'));
-        }
-    }
-        // if(Session::has('loginId')) {
-        //     $personal_info = ApplicantLogins::where('id', '=', PersonalInfo::get('user_id')) -> first();
-        // }
-
+    //     if ($data -> id == $id -> user_id) {
+    //         return view('form.update-personal-info', compact('data', 'id'));
+    //     }
+    // }
        
-    }
+    // }
 
     public function updateworkExperience() {
         return view('form.update-work-experience');
