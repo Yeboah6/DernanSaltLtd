@@ -15,6 +15,9 @@
     <!-- Favicon icon -->
     <link rel="icon" href="../assets1/images/favicon.ico" type="image/x-icon">
 
+    <!-- pnotify-custom css -->
+	{{-- <link rel="stylesheet" href="../assets1/css/plugins/PNotifyBrightTheme.css"> --}}
+
     <link rel="stylesheet" href="../assets/css/dataTables.bootstrap4.min.css">
     <!-- vendor css -->
     <link rel="stylesheet" href="../assets1/css/style.css">

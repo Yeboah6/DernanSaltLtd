@@ -110,7 +110,7 @@
                 @csrf
 
                 <div class="card-footer text-right">
-                    <a href="/update-work-experience"><button type="button" class="btn btn-danger">Back</button></a>
+                    <a href="/work-experience"><button type="button" class="btn btn-danger">Back</button></a>
                     <button type="submit" class="btn btn-success">Save</button>
                     <a href="/referee"><button type="button" class="btn btn-primary">Next</button></a>
                 </div>
@@ -211,7 +211,7 @@
                    </div>
                 </fieldset>
                 <div class="card-footer text-right">
-                    <a href="/update-work-experience"><button type="button" class="btn btn-danger">Back</button></a>
+                    <a href="/work-experience"><button type="button" class="btn btn-danger">Back</button></a>
                     <button type="submit" class="btn btn-success">Save</button>
                     <a href="/referee"><button type="button" class="btn btn-primary">Next</button></a>
                 </div>

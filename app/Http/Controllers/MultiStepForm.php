@@ -32,10 +32,7 @@ class MultiStepForm extends Controller
 
         if ($data -> id == $id -> user_id) {
             return view('form.personal-info', compact('data', 'id'));
-            // return view('form.update-personal-info', compact('data', 'id'));
         }
-
-        // return view('form.personal-info', compact('data'));
     }
 }
 
@@ -79,7 +76,23 @@ class MultiStepForm extends Controller
 
         $personal_id = session('personal_info_id');
 
-        return view('form.work-experience', compact('data', 'personal_id'));
+        $workExperience = WorkExperience::all();
+        $personal_info = PersonalInfo::all();
+
+        foreach ($personal_info as $id) {
+            if ($data -> id == $id -> user_id) {
+                foreach ($workExperience as $expe) {
+                    if ($expe -> personal_id == $id -> id) {
+                    return view('form.work-experience', compact('data', 'personal_id', 'expe'));
+                    // dd($expe);
+                    }
+                }
+            }
+            // foreach ($workExperience as $expe) {
+                
+            // }
+        }
+        // return view('form.work-experience', compact('data', 'personal_id', 'expe'));
     }
 
     // Store Work Experience Data Function

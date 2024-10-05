@@ -16,6 +16,8 @@
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="../assets1/css/plugins/daterangepicker.css">
+
     {{-- <link rel="stylesheet" href="../assets1/css/style.css"> --}}
 
 
@@ -111,6 +113,13 @@
   <script src="../assets/js/tabs.js"></script>
   <script src="../assets/js/swiper.js"></script>
   <script src="../assets/js/custom.js"></script>
+
+  
+<!-- datepicker js -->
+<script src="../assets1/js/plugins/moment.min.js"></script>
+<script src="../assets1/js/plugins/daterangepicker.js"></script>
+<script src="../assets1/js/pages/ac-datepicker.js"></script>
+
 
 </body>
 </html>

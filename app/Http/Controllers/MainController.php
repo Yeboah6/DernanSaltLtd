@@ -6,6 +6,7 @@ use App\Mail\ApplicantMail;
 use App\Mail\ContactUs;
 use App\Mail\MarketingMail;
 use App\Mail\RefereeMail;
+use App\Mail\RefereeMail2;
 use App\Mail\RejectMail;
 use App\Mail\ResetPassword;
 use App\Mail\SalesMail;
@@ -71,28 +72,52 @@ class MainController extends Controller
 
     // Sending Rejected Email Function
     public function reject_send_mail($id) {
-        $rejected = JobDetails::find($id);
+        // $rejected = JobDetails::find($id);
 
-        Mail::to($rejected -> email) -> send(new RejectMail($rejected));
+        // 
 
-        $rejected -> status = "Rejected";
-        $rejected -> update();
+        $applicants = DB::table('personal_infos')
+        -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+        -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
+        -> where('personal_infos.id', $id)
+        -> get();
 
-        return redirect('/admin-dashboard');
+        foreach ($applicants as $applicant) {
+            DB::table('agreements')
+            ->where('personal_id', $applicant->id)
+            ->update(['status' => 'Rejected']);
+
+            Mail::to($applicant -> email) -> send(new RejectMail($applicant));
+ 
+            return redirect('/admin-dashboard') -> with('success', 'Message sent successfully');
+        }
     }
 
     // Sending Accept Email Function
     public function accept_send_mail($id) {
-        $accepted = JobDetails::find($id);
+        // $accepted = JobDetails::find($id);
 
-        Mail::to($accepted -> email) -> send(new ApplicantMail($accepted));
-        Mail::to($accepted -> referee_email) -> send(new RefereeMail($accepted));
-        Mail::to($accepted -> referee_email2) -> send(new RefereeMail($accepted));
+        $applicants = DB::table('personal_infos')
+        -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+        -> join('referee_infos', 'personal_infos.id', '=', 'referee_infos.personal_id')
+        -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
+        -> where('personal_infos.id', $id)
+        -> get();
 
-        $accepted -> status = "Accepted";
-        $accepted -> update();
+        foreach ($applicants as $applicant) {
 
-        return redirect('/admin-dashboard');
+            // dd($applicant);
+            DB::table('agreements')
+            ->where('personal_id', $applicant->id)
+            ->update(['status' => 'Accepted']);
+
+            Mail::to($applicant -> email) -> send(new ApplicantMail($applicant));
+            Mail::to($applicant -> referee_email) -> send(new RefereeMail($applicant));
+            Mail::to($applicant -> referee_email2) -> send(new RefereeMail2($applicant));
+ 
+            return redirect('/admin-dashboard') -> with('success', 'Message sent successfully');
+        }
+
     }
 
     // Sending Referee Email Function
@@ -163,7 +188,11 @@ class MainController extends Controller
         
         // $applicantsRejected = StepSeven::where('status', 'Rejected') -> count();
 
-        $applicants = PersonalInfo::all() -> count();
+        // $applicants = PersonalInfo::all() -> count();
+
+        $applicants = DB::table('personal_infos')
+        -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+        -> count();
 
         $applicantsAccepted = Agreement::where('status', 'Accepted') -> count();
         $applicantsRejected = Agreement::where('status', 'Rejected') -> count();
@@ -223,6 +252,7 @@ class MainController extends Controller
         -> join('files', 'personal_infos.id', '=', 'files.personal_id')
         -> join('skills', 'personal_infos.id', '=', 'skills.personal_id')
         -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+        -> join('positions', 'work_experiences.position', '=', 'positions.id')
         -> get();
 
         $positions = Position::all();
@@ -243,14 +273,17 @@ class MainController extends Controller
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
 
-        $applicants = DB::table('personal_infos') -> where('id', $id)
+        $applicants = DB::table('personal_infos')
         -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
         -> join('education', 'personal_infos.id', '=', 'education.personal_id')
         -> join('referee_infos', 'personal_infos.id', '=', 'referee_infos.personal_id')
         -> join('files', 'personal_infos.id', '=', 'files.personal_id')
         -> join('skills', 'personal_infos.id', '=', 'skills.personal_id')
         -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+        -> where('personal_infos.id', $id)
         -> get();
+
+        // dd($applicants);
 
     return view('pages.view-applicants', compact( 'data', 'applicants'));
  }

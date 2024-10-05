@@ -1,11 +1,10 @@
 <x-mail::message>
-# 
 
 <img src="../assets/images/Asset4@4x.png" alt="Dernan Salt">
 
-<h3>Dear {{ $accepted['first_name'] }} {{ $accepted['middle_name'] }} {{ $accepted['last_name'] }}</h3>
+<h3>Dear {{ $applicant -> first_name }} {{ $applicant -> middle_name }} {{ $applicant -> last_name }}</h3>
 <hr>
-<p>We are pleased to inform you that your application for the {{$accepted['position']}} position at Dernan Salt Limited has been reviewed, 
+<p>We are pleased to inform you that your application for the {{$applicant-> position}} position at Dernan Salt Limited has been reviewed, 
     and you have been selected to proceed to the interview phase of our recruitment process. 
 <br>
     Please reply to this email to confirm your availability and schedule your interview.

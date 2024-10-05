@@ -114,11 +114,24 @@
 							<input type="text" class="form-control" name="email" required value="{{old('email')}}">
 							<span class="text-danger">@error('email'){{ $message }} @enderror</span>
 						</div>
-						<div class="form-group mb-4">
+						{{-- <div class="form-group mb-4">
 							<label class="floating-label" for="Username">Password</label>
-							<input type="password" class="form-control" name="password" required>
+							<input type="password" id="myInput" class="form-control" name="password" required> <i class="fas fa-eye" onclick="myFunction()"></i>
 							<span class="text-danger">@error('password'){{ $message }} @enderror</span>
-						</div>
+						</div> --}}
+            <div class="form-group mb-4">
+              <label class="floating-label" for="Username">Password</label>
+              <div class="input-group">
+                  <input type="password" id="myInput" class="form-control" name="password" required>
+                  <div class="input-group-append">
+                      <span class="input-group-text">
+                          <i class="fas fa-eye" id="togglePassword" onclick="myFunction()"></i>
+                      </span>
+                  </div>
+              </div>
+              <span class="text-danger">@error('password'){{ $message }} @enderror</span>
+          </div>
+              
 						<button type="submit" class="btn btn-block btn-primary mb-4" style="background-color: #51B3E4">Log in</button>
             <p><a href="/reset-password">Reset Password</a></p>
           </div>
@@ -168,23 +181,27 @@
     </div>
   </footer>
 
+  <script>
+    function myFunction() {
+        var input = document.getElementById("myInput");
+        var eyeIcon = document.getElementById("togglePassword");
+        if (input.type === "password") {
+            input.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        }
+    }
+</script>
+
   <!-- Required Js -->
 <script src="../assets/js/vendor-all.min.js"></script>
 <script src="../assets/js/plugins/bootstrap.min.js"></script>
 <script src="../assets/js/ripple.js"></script>
 <script src="../assets/js/pcoded.min.js"></script>
-
- <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
-  {{-- <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <script src="../assets/js/isotope.min.js"></script>
-  <script src="../assets/js/owl-carousel.js"></script>
-
-  <script src="../assets/js/tabs.js"></script>
-  <script src="../assets/js/swiper.js"></script>
-  <script src="../assets/js/custom.js"></script> --}}
 
 </body>
 </html>

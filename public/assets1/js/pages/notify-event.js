@@ -39,7 +39,7 @@ $(function() {
     $('#pnotify-success').on('click', function () {
        new PNotify.alert({
             title: 'Success notice',
-            text: 'Check me out! I\'m a notice.',
+            text: 'Check out! I\'m a notice.',
             type: 'success'
         });
     });

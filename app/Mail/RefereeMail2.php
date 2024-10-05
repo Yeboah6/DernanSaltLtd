@@ -10,11 +10,10 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ApplicantMail extends Mailable
+class RefereeMail2 extends Mailable
 {
     use Queueable, SerializesModels;
     public $applicant;
-
     /**
      * Create a new message instance.
      */
@@ -29,7 +28,7 @@ class ApplicantMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Interview Invitation at Dernan Salt Limited",
+            subject: 'Request for Reference Letter from Dernan Salt Ltd',
             from: new Address('yeboahs324@gmail.com', 'Dernan Salt Ltd')
         );
     }
@@ -40,7 +39,7 @@ class ApplicantMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.applicantMail',
+            markdown: 'emails.refereeMail2',
         );
     }
 

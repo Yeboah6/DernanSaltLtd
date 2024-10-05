@@ -13,14 +13,14 @@ use Illuminate\Queue\SerializesModels;
 class RejectMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $rejected;
+    public $applicant;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($rejected)
+    public function __construct($applicant)
     {
-        $this -> rejected = $rejected;
+        $this -> applicant = $applicant;
     }
 
     /**

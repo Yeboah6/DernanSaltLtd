@@ -2,7 +2,7 @@
 
 <img src="../assets/images/Asset4@4x.png" alt="Dernan Salt">
 
-<p>Dear {{$applicant -> referee_name}},</p>
+<p>Dear {{$applicant -> referee_name2}},</p>
 <p>I hope you are doing well. {{$applicant -> first_name}} {{$applicant -> middle_name}} {{$applicant -> last_name}} has applied for a position with our organization and has listed you as a reference. 
     We would greatly appreciate your providing a brief recommendation letter to support their application. </p>
 

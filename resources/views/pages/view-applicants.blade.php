@@ -5,6 +5,29 @@
 @include('includes.sidenav')
 @include('includes.adminHeader')
 
+<style>
+
+    .applicant_id {
+        position: absolute;
+        left:450px;
+        top:50px;
+    }
+
+@media screen and (max-width: 450px) {
+    .applicant_id {
+        position: relative;
+        left:15px;
+        top:0;
+    }
+
+    .applicant-image {
+        margin-left: 50px;
+    }
+
+}
+
+</style>
+
 <!-- [ Main Content ] start -->
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -33,9 +56,12 @@
                                     <div class="col-sm-12">
                                         <table class="table table-responsive invoice-table table-borderless p-l-20">
                                             <tbody>
+                                                @foreach ($applicants as $applicants)
+                                                    
+                                                
                                                 <tr>
-                                                    <td><a href="index.html" class="b-brand">
-                                                            <img class="img-fluid" src="../assets/images/Asset4@4x.png" style="width:6.5em;" alt="Dernan Salt Logo">
+                                                    <td><a href="/" class="b-brand">
+                                                            <img class="applicant-image" src="../assets/images/Asset4@4x.png" style="width:6.5em;" alt="Applicant Image">
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -67,8 +93,13 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="applicant_id">
+                                    <h4 style="font-size:2rem">{{ $applicants -> applicant_id}}</h4>
+                                </div>
                             </div>
-                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <img src="{{ asset('../uploads/applicant-images/'.$applicants -> image) }}" alt="Applicant_image" style="border-radius:10px;width:50%;">
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row invoive-info">
@@ -76,17 +107,17 @@
                                     <h6>Work Experience :</h6>
                                     <h6 class="m-0">{{$applicants -> current_employer}}</h6>
                                     <p class="m-0 m-t-10">{{$applicants -> position_held}}</p>
-                                    <p class="m-0">{{$applicants -> duration_of_employment}}</p>
+                                    <p class="m-0">{{$applicants -> duration_of_employment_from}}</p>
+                                    <p class="m-0">{{$applicants -> duration_of_employment_to}}</p>
                                     <p class="m-0">{{$applicants -> responsilibities}}</p>
                                 </div>
 
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Educational Background :</h6>
                                     <h6 class="m-0">{{$applicants -> institution_name}}</h6>
-                                    <p class="m-0 m-t-10">{{$applicants -> highest_qualification}}</p>
                                     <p class="m-0">{{$applicants -> certificate}}</p>
+                                    <p class="m-0 m-t-10">{{$applicants -> year_began}}</p>
                                     <p class="m-0">{{$applicants -> year_of_graduation}}</p>
-                                    {{-- <p class="m-0">{{$position -> id -> posi}}</p> --}}
                                 </div>
 
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
@@ -104,14 +135,16 @@
                                     <h6>Previous Work :</h6>
                                     <h6 class="m-0">{{$applicants -> current_employer2}}</h6>
                                     <p class="m-0 m-t-10">{{$applicants -> position_held2}}</p>
-                                    <p class="m-0">{{$applicants -> duration_of_employment2}}</p>
+                                    <p class="m-0">{{$applicants -> duration_of_employment_from2}}</p>
+                                    <p class="m-0">{{$applicants -> duration_of_employment_to2}}</p>
                                     <p class="m-0">{{$applicants -> responsilibities2}}</p>
                                 </div>
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
-                                    <h6>Secondary School :</h6>
-                                    <h6 class="m-0">{{$applicants -> school_name}}</h6>
-                                    <p class="m-0">{{$applicants -> secondary_certificate}}</p>
-                                    <p class="m-0">{{$applicants -> year_of_completion}}</p>
+                                    <h6>Educational Background :</h6>
+                                    <h6 class="m-0">{{$applicants -> institution_name2}}</h6>
+                                    <p class="m-0">{{$applicants -> certificate2}}</p>
+                                    <p class="m-0 m-t-10">{{$applicants -> year_began2}}</p>
+                                    <p class="m-0">{{$applicants -> year_of_graduation2}}</p>
                                 </div>
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Other Referee :</h6>
@@ -120,6 +153,51 @@
                                     <p class="m-0">{{$applicants -> referee_position2}}</p>
                                     <p class="m-0">{{$applicants -> referee_number2}}</p>
                                     <p class="m-0">{{$applicants -> referee_email2}}</p>
+                                </div>
+                            </div>
+
+                            <div class="row invoive-info">
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    {{-- <h6>Educational Background :</h6> --}}
+                                </div>
+
+                                @if ($applicants -> institution_name3 === !null)
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    <h6>Educational Background :</h6>
+                                    <h6 class="m-0">{{$applicants -> institution_name3}}</h6>
+                                    <p class="m-0">{{$applicants -> certificate3}}</p>
+                                    <p class="m-0 m-t-10">{{$applicants -> year_began3}}</p>
+                                    <p class="m-0">{{$applicants -> year_of_graduation3}}</p>
+                                </div>
+
+                                @endif
+                                
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    {{-- <h6>Educational Background :</h6> --}}
+                                </div>
+
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    {{-- <h6>Educational Background :</h6> --}}
+                                </div>
+                            </div>
+
+                            <div class="row invoive-info">
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    {{-- <h6>Educational Background :</h6> --}}
+                                </div>
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    <h6>Secondary School :</h6>
+                                    <h6 class="m-0">{{$applicants -> school_name}}</h6>
+                                    <p class="m-0">{{$applicants -> secondary_certificate}}</p>
+                                    <p class="m-0">{{$applicants -> year_of_completion}}</p>
+                                </div>
+
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    {{-- <h6>Educational Background :</h6> --}}
+                                </div>
+
+                                <div class="col-md-4 col-xs-12 invoice-client-info">
+                                    {{-- <h6>Educational Background :</h6> --}}
                                 </div>
                             </div>
                             </div>
@@ -138,25 +216,25 @@
                                                     <td>
                                                         <h6>CV</h6>
                                                     </td>
-                                                    {{-- <td><a href="{!! route('download', $applicants -> cv) !!}">Download</a></td> --}}
+                                                    <td><a class="btn waves-effect waves-light btn-primary m-b" href="{!! route('download', $applicants -> cv) !!}"><i class="feather icon-download"></i> </a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Certificates Acquired</h6>
                                                     </td>
-                                                    {{-- <td><a href="{{ url('/download/'.$applicants -> cerificates_acquired)}}">Download</a></td> --}}
+                                                    <td><a class="btn waves-effect waves-light btn-primary m-b" href="{{ url('/download/'.$applicants -> cerificates_acquired)}}"><i class="feather icon-download"></i> </a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Cover Letter</h6>
                                                     </td>
-                                                    {{-- <td><a href="{{ url('/download/'.$applicants -> cover_letter)}}">Download</a></td> --}}
+                                                    <td><a class="btn waves-effect waves-light btn-primary m-b" href="{{ url('/download/'.$applicants -> cover_letter)}}"><i class="feather icon-download"></i> </a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Other Relevant Documents</h6>
                                                     </td>
-                                                    {{-- <td><a href="{{ url('/download/'.$applicants -> other_relevant_doc)}}">Download</a></td> --}}
+                                                    <td><a class="btn waves-effect waves-light btn-primary m-b-10 " href="{{ url('/download/'.$applicants -> other_relevant_doc)}}"><i class="feather icon-download"></i> </a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -168,15 +246,18 @@
                                     <table class="table table-responsive invoice-table invoice-total">
                                         <tbody>
                                             <tr>
-                                                <th>Skills and Certifications :</th>
+                                                <th>Skills and Certifications: </th>
+                                                {{-- <br><hr> --}}
                                                 <td>{{$applicants -> skills_certificate}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Why do you want to work at Dernan Salt Limited? :</th>
+                                                <th>Why do you want to work at Dernan Salt Limited?: </th>
+                                                {{-- <br><hr> --}}
                                                 <td>{{$applicants -> reason}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Availability :</th>
+                                                <th>Availability: </th>
+                                                {{-- <br><hr> --}}
                                                 <td>{{$applicants -> availability}}</td>
                                             </tr>
                                         </tbody>
@@ -185,26 +266,27 @@
                             </div>
                             <div class="row col-md-8">
                                 <div class="col-sm-12">
-                                    <h6>Agreement and Declaration :</h6>
+                                    <h6>Agreement and Declaration</h6>
                                     <p> {{$applicants -> agreement}} </p>
                                 </div>
                                 <div class="col-sm-12">
-                                    <h6>Signature :</h6>
+                                    <h6>Signature</h6>
                                     <p> {{$applicants -> signature}}
                                     </p>
                                 </div>
                                 <div class="col-sm-12">
-                                    <h6>Date :</h6>
+                                    <h6>Date</h6>
                                     <p> {{$applicants -> date}}
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                     <div class="row text-center">
                         <div class="col-sm-12 invoice-btn-group text-center">
                             <button type="button" class="btn waves-effect waves-light btn-primary btn-print-invoice m-b-10">Print</button>
-                            <a href="{{url('/accept-send/mail/'.$applicants -> id)}}" class="btn waves-effect waves-light btn-success m-b-10">Accepted</a>
+                            <a href="{{url('/accept-send/mail/'.$applicants -> id)}}" type="button" class="btn waves-effect waves-light btn-success m-b-10">Accepted</a>
                             <a href="{{url('/reject-send/mail/'.$applicants -> id)}}" type="button" class="btn waves-effect waves-light btn-danger m-b-10 ">Rejected</a>
                         </div>
                     </div>
@@ -224,7 +306,153 @@
     <script src="../assets/js/pcoded.min.js"></script>
 	<script src="../assets/js/menu-setting.min.js"></script>
 
+
+    <script>
+    function printData() {
+        // Get the content you want to print
+        var divToPrint = document.getElementById("printTable");
+
+        // Create a new window for printing
+        var newWin = window.open("");
+
+        // Add styles for printing
+        var styles = `
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 20px;
+                }
+                .invoice-contact, .invoive-info, .invoice-total {
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+                h6 {
+                    font-size: 1.1rem;
+                    margin: 5px 0;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: left;
+                }
+                .btn {
+                    display: none; /* Hide buttons when printing */
+                }
+                @media print {
+                    .btn {
+                        display: none; /* Ensure buttons don't show in print */
+                    }
+                }
+            </style>
+        `;
+
+        // Write the content and styles to the new window's document
+        newWin.document.write(`
+            <html>
+            <head>
+                <title>Print Applicant Details</title>
+                ${styles}
+            </head>
+            <body>
+                ${divToPrint.outerHTML}
+            </body>
+            </html>
+        `);
+
+        // Wait for the content to be fully loaded, then trigger the print
+        newWin.document.close(); // Close the document
+        newWin.focus(); // Focus on the new window
+        newWin.print(); // Trigger the print
+        newWin.close(); // Close the window after printing
+    }
+
+    // Add event listener to the print button
+    $('.btn-print-invoice').on('click', function() {
+        printData();
+    });
+</script>
+
 <script>
+    function printData() {
+        // Get the content you want to print
+        var divToPrint = document.getElementById("printTable");
+
+        // Create a new window for printing
+        var newWin = window.open("");
+
+        // Add styles for printing
+        var styles = `
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 20px;
+                }
+                .invoice-contact, .invoive-info, .invoice-total {
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+                h6 {
+                    font-size: 1.1rem;
+                    margin: 5px 0;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: left;
+                }
+                .applicant-image {
+                    border-radius: 10px;
+                    width: 150px;
+                    height: auto;
+                    margin-bottom: 20px;
+                }
+                .btn {
+                    display: none; /* Hide buttons when printing */
+                }
+                @media print {
+                    .btn {
+                        display: none; /* Ensure buttons don't show in print */
+                    }
+                }
+            </style>
+        `;
+
+        // Write the content and styles to the new window's document
+        newWin.document.write(`
+            <html>
+            <head>
+                <title>Print Applicant Details</title>
+                ${styles}
+            </head>
+            <body>
+                ${divToPrint.outerHTML}
+            </body>
+            </html>
+        `);
+
+        // Wait for the content to be fully loaded, then trigger the print
+        newWin.document.close(); // Close the document
+        newWin.focus(); // Focus on the new window
+        newWin.print(); // Trigger the print
+        newWin.close(); // Close the window after printing
+    }
+
+    // Add event listener to the print button
+    $('.btn-print-invoice').on('click', function() {
+        printData();
+    });
+</script>
+
+
+{{-- <script>
     function printData() {
         var divToPrint = document.getElementById("printTable");
         newWin = window.open("");
@@ -235,7 +463,7 @@
     $('.btn-print-invoice').on('click', function() {
         printData();
     })
-</script>
+</script> --}}
 
 
 @endsection

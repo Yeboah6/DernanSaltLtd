@@ -4,6 +4,7 @@ Thank you for registering for a Dernan Salt Ltd Account.
 Your account has been created, you can sign in after you have activated your account.
 
 <x-mail::button :url="'http://127.0.0.1:8000/verify-email'">
+{{-- <x-mail::button :url="'https://dernansalt.com.gh/verify-email'"> --}}
 Verify Account
 </x-mail::button>
 

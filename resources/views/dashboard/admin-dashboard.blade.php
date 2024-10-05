@@ -15,7 +15,14 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Dashboard</h5>
+                            <h5 class="m-b-10">Dashboard</h5> 
+
+                            @if (Session::has('success'))
+							<div class="alert alert-success" style="text-align: center;font-size:1rem;font-weight:bold;">{{ Session::get('success') }}</div>
+						@endif
+						@if (Session::has('fail'))
+							<div class="alert alert-danger">{{ Session::get('fail') }}</div>
+						@endif
                         </div>
                     </div>
                 </div>
@@ -120,15 +127,16 @@
 <!-- [ Main Content ] end -->
     
 
-    <!-- Required Js -->
-    <script src="assets/js/vendor-all.min1.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
-    <script src="assets/js/ripple1.js"></script>
-    <script src="assets/js/pcoded.min1.js"></script>
-	<script src="assets/js/menu-setting.min.js"></script>
+ <!-- Required Js -->
+ <script src="assets/js/vendor-all.min.js"></script>
+ <script src="assets/js/plugins/bootstrap.min.js"></script>
+ <script src="assets/js/ripple.js"></script>
+ <script src="assets/js/pcoded.min.js"></script>
+ <script src="assets/js/menu-setting.min.js"></script>
 
 <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
 <script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
+
 <!-- Apex Chart -->
 {{-- <script src="assets/js/plugins/apexcharts.min.js"></script> --}}
 <script>

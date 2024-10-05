@@ -13,13 +13,13 @@ use Illuminate\Queue\SerializesModels;
 class RefereeMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $referee;
+    public $applicant;
     /**
      * Create a new message instance.
      */
-    public function __construct($referee)
+    public function __construct($applicant)
     {
-        $this -> referee = $referee;
+        $this -> applicant = $applicant;
     }
 
     /**
@@ -28,8 +28,8 @@ class RefereeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Referee Mail',
-            from: new Address('yeboahs324@gmail.com', 'Dernan Salt Ltd Referee')
+            subject: 'Request for Reference Letter from Dernan Salt Ltd',
+            from: new Address('yeboahs324@gmail.com', 'Dernan Salt Ltd')
         );
     }
 
