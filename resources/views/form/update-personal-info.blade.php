@@ -99,7 +99,7 @@
         <div class="col-md-6 offset-md-3">
             <h2 class="form-title" style="margin-top: 50px">Job Application Form</h2>
 
-            <form action="{{url('/personal-info')}}" method="POST">
+            <form action="{{url('/update-personal-info')}}" method="POST">
                 @if (Session::has('success'))
 				    	<div class="alert alert-success">{{ Session::get('success') }}</div>
 				    @endif
@@ -109,12 +109,13 @@
 
                 @csrf
 
-                <div class="card-footer text-right">
+                <div class="footer text-right">
                     <button type="submit" class="btn btn-success">Save</button>
-                     <a href="/update-work-experience"><button type="button" class="btn btn-primary">Next</button></a>
+                     <a href="/work-experience"><button type="button" class="btn btn-primary">Next</button></a>
                 </div>
+                <br>
                 <fieldset id="personal">
-                    <input type="text" name="user_id" hidden>
+                    <input type="text" name="user_id" value="{{ $id -> user_id}}" hidden>
                     <input type="text" name="applicant_id" hidden>
                     <legend>Personal Information</legend>
                     <div class="form-group">
@@ -139,8 +140,8 @@
                     </div>
                     <div class="form-group">
                         <label>Gender <span>*</span></label>
-                        <label><input type="radio" name="gender" value="Male"> Male</label>
-                        <label><input type="radio" name="gender" value="Female"> Female</label>
+                        <label><input type="radio" name="gender" value="Male" {{ $id -> gender == 'Male' ? 'checked' : '' }}> Male</label>
+                        <label><input type="radio" name="gender" value="Female" {{ $id -> gender == 'Female' ? 'checked' : '' }}> Female</label>
                         <span class="text-danger">@error('gender'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
@@ -167,7 +168,7 @@
 
                 <div class="card-footer text-right">
                     <button type="submit" class="btn btn-success">Save</button>
-                     <a href="/update-work-experience"><button type="button" class="btn btn-primary">Next</button></a>
+                     <a href="/work-experience"><button type="button" class="btn btn-primary">Next</button></a>
                 </div>
             </form>
         </div>

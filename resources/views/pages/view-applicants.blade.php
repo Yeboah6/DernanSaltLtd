@@ -161,7 +161,7 @@
                                     {{-- <h6>Educational Background :</h6> --}}
                                 </div>
 
-                                @if ($applicants -> institution_name3 === !null)
+                                {{-- @if ($applicants -> institution_name3 === null) --}}
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Educational Background :</h6>
                                     <h6 class="m-0">{{$applicants -> institution_name3}}</h6>
@@ -170,7 +170,7 @@
                                     <p class="m-0">{{$applicants -> year_of_graduation3}}</p>
                                 </div>
 
-                                @endif
+                                {{-- @endif --}}
                                 
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     {{-- <h6>Educational Background :</h6> --}}

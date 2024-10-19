@@ -71,7 +71,7 @@
                                         @else
                                             <td style="text-align: center"><span style="background-color: #FF5252;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{$posting -> status}}</span></td>
                                         @endif
-                                        
+
                                         <td>
                                             <a href="{{ url('/job-posted/'.$posting -> id)}}" class="btn btn-primary btn-sm"><i class="feather icon-eye"></i></a>
                                             <a href="{{url('/job-posting/'.$posting -> id)}}" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-report2"><i class="feather icon-edit"></i>&nbsp; </a>
@@ -80,11 +80,11 @@
                                             @else
                                                 <a href="{{url('/job-posting-show/'.$posting -> id)}}" class="btn btn-danger btn-sm"><i class="feather icon-eye"></i>&nbsp;</a>
                                             @endif
-                                            
+
                                         </td>
                                     </tr>
                                     @endforeach
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -97,7 +97,47 @@
     </div>
 </div>
 
-{{-- <div class="modal fade" id="modal-report2" tabindex="-2" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
+{{-- <div class="modal fade" id="modal-report2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Department</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="floating-label" for="Name">Name</label>
+                                <input type="text" class="form-control" id="Name" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group fill">
+                                <label class="floating-label" for="Icon">Icon</label>
+                                <input type="file" class="form-control" id="Icon" placeholder="sdf">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="floating-label" for="Description">Description</label>
+                                <textarea class="form-control" id="Description" rows="3"></textarea>
+                            </div>
+                            <button class="btn btn-primary">Submit</button>
+                            <button class="btn btn-danger">Clear</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+
+<div class="modal fade" id="modal-report2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -132,28 +172,22 @@
                                 <textarea class="form-control" name="job_description" rows="3" value="{{$posting -> job_description}}"></textarea>
                             </div>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="floating-label">Key Responsibilities</label>
-                                <textarea class="form-control" name="key_responsibilities" rows="3" value=""></textarea>
-                            </div>
-                        </div>
                         <div class="col">
                             <div class="form-group">
                                 <label class="floating-label">Education</label>
-                                <input type="text" class="form-control" name="education" value="">
+                                <input type="text" class="form-control" name="education" value="{{$posting -> education}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="floating-label">Experience</label>
-                                <input type="text" class="form-control" name="experience" value="">
+                                <input type="text" class="form-control" name="experience" value="{{$posting -> experience}}">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label">Personal Attributes</label>
-                                <textarea class="form-control" name="personal_attributes" rows="3" value=""></textarea>
+                                <textarea class="form-control" name="personal_attributes" rows="3" value="">{{$posting -> personal_attributes}}</textarea>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -162,7 +196,7 @@
                                 <select class="form-control" name="position">
                                     <option value=""></option>
                                     @foreach ($position as $position)
-                                         <option value="{{$position -> position}}">{{$position -> position}}</option>
+                                         {{-- <option value="{{$position -> position}}">{{$position -> position}}</option> --}}
                                     @endforeach
                                 </select>
                             </div>
@@ -187,7 +221,7 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 <!-- Job Posting -->
 <div class="modal fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -250,7 +284,7 @@
                                 <select class="form-control" name="position">
                                     <option value=""></option>
                                     @foreach ($position as $position)
-                                         <option value="{{$position -> id}}">{{$position -> position}}</option>
+                                         {{-- <option value="{{$position -> position}}">{{$position -> position}}</option> --}}
                                     @endforeach
                                 </select>
                             </div>

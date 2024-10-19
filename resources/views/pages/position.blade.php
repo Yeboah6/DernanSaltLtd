@@ -51,10 +51,10 @@
                                         <tr>
                                         <td>{{ $position -> id }}</td>
                                         <td>{{ $position -> position }}</td>
-                                        @if ($position -> status == "Available")
-                                            <td><span style="background-color: #008B9C;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $position -> status }}</span></td>
+                                        @if ($position -> position_status == "Available")
+                                            <td><span style="background-color: #008B9C;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $position -> position_status }}</span></td>
                                         @else
-                                            <td><span style="background-color: #FF5252;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $position -> status }}</span></td>
+                                            <td><span style="background-color: #FF5252;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{ $position -> position_status }}</span></td>
                                         @endif
                                         
                                         <td>

@@ -288,8 +288,6 @@ class MainController extends Controller
     return view('pages.view-applicants', compact( 'data', 'applicants'));
  }
 
-
-
     // Display Job Posting Page Function
     public function jobPosting() {
         $data = array();
@@ -297,9 +295,10 @@ class MainController extends Controller
             $data = Admin::where('id', '=', Session::get('loginId')) -> first();
         }
 
-        $position = Position::where('status', 'Available') -> get();
+        $position = Position::where('position_status', 'Available') -> get();
         $jobPosting = PostJobs::all();
         $positionNames = Position::all();
+        // $postingEdit = PostJobs::findOrFail($id);
 
         return view('pages.job-posting', compact('position', 'jobPosting', 'positionNames', 'data'));
     }
@@ -358,6 +357,12 @@ class MainController extends Controller
         $jobDesc = PostJobs::findOrFail($id);
         return view('pages.view-job', compact('jobDesc', 'data'));
     }
+
+    // public function jobPostingEdit($id) {
+    //     $postingEdit = PostJobs::findOrFail($id);
+
+    //     return view('pages.job-posting', compact('postingEdit'));
+    // }
 
     // Display Position Page Function
     public function position() {
@@ -466,17 +471,6 @@ class MainController extends Controller
     }
 
     // Applicant Login Function
-
-    // public function postApplicantlogin(Request $request) {
-    //     $credentials = $request -> only('email', 'password');
-
-    //     if (Auth::attempt($credentials)) {
-    //         return redirect() -> intended('/personal-info');
-    //     }
-
-    //     return redirect('/applicant-login') -> with('fail', 'Invalid credentials. Please try again.');
-    // }
-
     public function postApplicantlogin(Request $request) {
         $request -> validate([
             'email' => 'required|email',

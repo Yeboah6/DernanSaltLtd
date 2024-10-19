@@ -48,6 +48,9 @@ Route::get('/positions-show/{id}', [MainController::class, 'showPos']) -> name('
 Route::get('/job-posting', [MainController::class, 'jobPosting']) -> name('job-posting') -> middleware('isLoggedIn');
 Route::post('/job-posting', [MainController::class, 'jobPostings']) -> name('job-posting') -> middleware('isLoggedIn');
 
+Route::get('/job-posting-edit/{id}', [MainController::class, 'jobPostingEdit']) -> name('job-posting-edit') -> middleware('isLoggedIn');
+
+
 Route::get('/job-posted/{id}', [MainController::class, 'jobPostingsView']) -> name('job-posting') -> middleware('isLoggedIn');
 Route::get('/job-posting/{id}', [MainController::class, 'jobPostingHide']) -> name('job-posting') -> middleware('isLoggedIn');
 Route::get('/job-posting-show/{id}', [MainController::class, 'jobPostingShow']) -> name('job-posting') -> middleware('isLoggedIn');
@@ -103,29 +106,37 @@ Route::get('/choose-account/{id}', [MainController::class, 'chooseAccount']) -> 
 Route::get('/personal-info', [MultiStepForm::class, 'personalInfo']) -> name('personal-info') -> middleware('applicantIsLoggedIn');
 Route::post('/personal-info', [MultiStepForm::class, 'postPersonalInfo']) -> name('personal-info') -> middleware('applicantIsLoggedIn');
 
-Route::get('/update-personal-info', [MultiStepForm::class, 'updatePersonalInfo']) -> name('update-personal-info');
-// Route::post('/personal-info', [MultiStepForm::class, 'postPersonalInfo']) -> name('personal-info');
+Route::post('/update-personal-info', [MultiStepForm::class, 'updatePersonalInfo']) -> name('update-personal-info');
 
 Route::get('/work-experience', [MultiStepForm::class, 'workExperience']) -> name('work-experience') -> middleware('applicantIsLoggedIn');
 Route::post('/work-experience', [MultiStepForm::class, 'postWorkExperience']) -> name('work-experience')-> middleware('applicantIsLoggedIn');
 
-Route::get('/update-work-experience', [MultiStepForm::class, 'updateworkExperience']) -> name('update-work-experience');
-// Route::post('/update-personal-info', [MultiStepForm::class, 'updatePersonalInfo']) -> name('update-personal-info');
+Route::post('/update-work-experience', [MultiStepForm::class, 'updateworkExperience']) -> name('update-work-experience');
 
 Route::get('/education', [MultiStepForm::class, 'education']) -> name('education')-> middleware('applicantIsLoggedIn');
 Route::post('/education', [MultiStepForm::class, 'postEducation']) -> name('education')-> middleware('applicantIsLoggedIn');
 
+Route::post('/update-education', [MultiStepForm::class, 'updateEducation']) -> name('update-education');
+
 Route::get('/referee', [MultiStepForm::class, 'referee']) -> name('referee')-> middleware('applicantIsLoggedIn');
 Route::post('/referee', [MultiStepForm::class, 'postReferee']) -> name('referee')-> middleware('applicantIsLoggedIn');
+
+Route::post('/update-referee', [MultiStepForm::class, 'updateReferee']) -> name('update-referee');
 
 Route::get('/other-relevant', [MultiStepForm::class, 'otherRelevant']) -> name('other-relevant')-> middleware('applicantIsLoggedIn');
 Route::post('/other-relevant', [MultiStepForm::class, 'postOtherRelevant']) -> name('other-relevant')-> middleware('applicantIsLoggedIn');
 
+Route::post('/update-other-relevant', [MultiStepForm::class, 'updateOtherRelevant']) -> name('update-other-relevant');
+
 Route::get('/upload-docs', [MultiStepForm::class, 'uploads']) -> name('uploads')-> middleware('applicantIsLoggedIn');
 Route::post('/upload-docs', [MultiStepForm::class, 'postUploads']) -> name('uploads')-> middleware('applicantIsLoggedIn');
 
+Route::post('/update-upload-docs', [MultiStepForm::class, 'updateUploads']) -> name('update-uploads');
+
 Route::get('/agreement', [MultiStepForm::class, 'agreement']) -> name('agreement')-> middleware('applicantIsLoggedIn');
 Route::post('/agreement', [MultiStepForm::class, 'postAgreement']) -> name('agreement')-> middleware('applicantIsLoggedIn');
+
+Route::post('/update-agreement', [MultiStepForm::class, 'updateAgreement']) -> name('update-agreement');
 
 
 // Route::get('/apply/create-step-one', [MultiStepForm::class, 'createStepOne']) -> name('apply.create.step.one');

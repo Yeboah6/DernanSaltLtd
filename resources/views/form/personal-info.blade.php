@@ -123,22 +123,22 @@
                     <legend>Personal Information</legend>
                     <div class="form-group">
                         <label for="first-name">First Name <span>*</span></label>
-                            <input type="text" name="first_name" placeholder="Enter First Name"  required value="{{$data -> first_name}}">
+                            <input type="text" name="first_name" placeholder="Enter First Name"  required>
                         <span class="text-danger">@error('first_name'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="middle-name">Middle Name <span></span></label>
-                        <input type="text" name="middle_name" placeholder="Enter Middle Name" value="{{$id -> middle_name}}">
+                        <input type="text" name="middle_name" placeholder="Enter Middle Name">
                         <span class="text-danger">@error('middle_name'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="last-name">Last Name <span>*</span></label>
-                        <input type="text" name="last_name" required placeholder="Enter Last Name" value="{{$data -> last_name}}">
+                        <input type="text" name="last_name" required placeholder="Enter Last Name">
                         <span class="text-danger">@error('last_name'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="dob">Date of Birth <span>*</span></label>
-                        <input type="date" name="dob" required placeholder="Enter Last Name" value="{{$id -> dob}}">
+                        <input type="date" name="dob" required placeholder="Enter Last Name">
                         <span class="text-danger">@error('dob'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
@@ -149,22 +149,22 @@
                     </div>
                     <div class="form-group">
                         <label for="nationality">Nationality <span>*</span></label>
-                        <input type="text" name="nationality" required placeholder="Enter Nationality. Eg; Ghanaian" value="{{$id -> nationality}}">
+                        <input type="text" name="nationality" required placeholder="Enter Nationality. Eg; Ghanaian">
                         <span class="text-danger">@error('nationality'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="full-name">Address <span>*</span></label>
-                        <input type="text" name="address" required placeholder="Enter Address" value="{{$id -> address}}">
+                        <input type="text" name="address" required placeholder="Enter Address">
                         <span class="text-danger">@error('address'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="full-name">Phone Number <span>*</span></label>
-                        <input type="text" name="number" required placeholder="Enter Phone Number" value="{{$id -> number}}">
+                        <input type="text" name="number" required placeholder="Enter Phone Number">
                         <span class="text-danger">@error('number'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="full-name">Email <span>*</span></label>
-                        <input type="email" name="email" value="{{$data -> email}}" placeholder="Enter Email Eg; youremail@gmail.com">
+                        <input type="email" name="email" placeholder="Enter Email Eg; youremail@gmail.com">
                         <span class="text-danger">@error('email'){{ $message }} @enderror</span>
                     </div>
                 </fieldset>
