@@ -139,6 +139,9 @@ Route::post('/agreement', [MultiStepForm::class, 'postAgreement']) -> name('agre
 Route::post('/update-agreement', [MultiStepForm::class, 'updateAgreement']) -> name('update-agreement');
 
 
+Route::get('/preview-application', [MainController::class, 'previewApplication']) -> name('preview-application');
+
+
 // Route::get('/apply/create-step-one', [MultiStepForm::class, 'createStepOne']) -> name('apply.create.step.one');
 // Route::post('/apply/create-step-one', [MultiStepForm::class, 'postCreateStepOne']) -> name('apply.create.step.one');
 

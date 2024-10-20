@@ -247,7 +247,7 @@ class MainController extends Controller
 
         $applicant = DB::table('personal_infos')
         -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
-        // -> join('education', 'personal_infos.id', '=', 'education.personal_id')
+        -> join('education', 'personal_infos.id', '=', 'education.personal_id')
         -> join('referee_infos', 'personal_infos.id', '=', 'referee_infos.personal_id')
         -> join('files', 'personal_infos.id', '=', 'files.personal_id')
         -> join('skills', 'personal_infos.id', '=', 'skills.personal_id')
@@ -297,10 +297,14 @@ class MainController extends Controller
 
         $position = Position::where('position_status', 'Available') -> get();
         $jobPosting = PostJobs::all();
-        $positionNames = Position::all();
-        // $postingEdit = PostJobs::findOrFail($id);
 
-        return view('pages.job-posting', compact('position', 'jobPosting', 'positionNames', 'data'));
+
+        // $position_id = $request -> input('position_id');
+        // $edit_position = Position::where('id', $position_id) -> first();
+
+        // dd($position);
+
+        return view('pages.job-posting', compact('position', 'jobPosting', 'data'));
     }
 
     // Hide Jobs Function
@@ -384,7 +388,7 @@ class MainController extends Controller
         $position = new Position();
 
         $position -> position = $request -> input('position');
-        $position -> status = "Available";
+        $position -> position_status = "Available";
 
         $position -> save();
         return redirect('/positions');
@@ -394,7 +398,7 @@ class MainController extends Controller
     public function deletePos($id) {
         $position = Position::findOrFail($id);
 
-        $position -> status = "Unavailable";
+        $position -> position_status = "Unavailable";
 
         $position -> update();
         return redirect('/positions');
@@ -404,7 +408,7 @@ class MainController extends Controller
     public function showPos($id) {
         $show = Position::find($id);
 
-        $show -> status = "Available";
+        $show -> position_status = "Available";
 
         $show -> update();
         return redirect('/positions');
@@ -603,7 +607,32 @@ class MainController extends Controller
         return redirect() -> back();
     }
 
-    public function info() {
-        return view('multiStepForm.pernonal'); 
+    public function previewApplication() {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+
+        $info = ApplicantLogins::all();
+
+        foreach ($info as $info) {
+            $details = PersonalInfo::where('user_id', $info -> id ) -> get();
+        }
+
+        
+
+        // $applicants = DB::table('personal_infos')
+        // -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
+        // -> join('education', 'personal_infos.id', '=', 'education.personal_id')
+        // -> join('referee_infos', 'personal_infos.id', '=', 'referee_infos.personal_id')
+        // -> join('files', 'personal_infos.id', '=', 'files.personal_id')
+        // -> join('skills', 'personal_infos.id', '=', 'skills.personal_id')
+        // -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+        // -> where('personal_infos.id', $data -> id)
+        // -> get();
+
+        // dd($details);
+
+        return view('pages.preview-application', compact('data', 'details'));
     }
 }

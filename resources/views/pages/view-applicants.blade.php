@@ -58,7 +58,6 @@
                                             <tbody>
                                                 @foreach ($applicants as $applicants)
                                                     
-                                                
                                                 <tr>
                                                     <td><a href="/" class="b-brand">
                                                             <img class="applicant-image" src="../assets/images/Asset4@4x.png" style="width:6.5em;" alt="Applicant Image">

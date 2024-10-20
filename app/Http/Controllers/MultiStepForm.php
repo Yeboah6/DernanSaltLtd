@@ -65,7 +65,7 @@ class MultiStepForm extends Controller
         $saveSuccess = $personalInfo -> save();
 
         if ($saveSuccess) {
-            session(['personal_info_id' => $personalInfo->id]);
+            session(['personal_info_id' => $personalInfo -> id]);
             return redirect('/work-experience') -> with('success', 'Data Saved Successfully');
         } else {
             return redirect() -> back() -> with('fail', 'Data not Saved');
@@ -191,7 +191,15 @@ class MultiStepForm extends Controller
             $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
         }
 
-        $personal_id = session('personal_info_id');
+        $info = ApplicantLogins::all();
+
+        foreach ($info as $info) {
+            $details = PersonalInfo::where('user_id', $info -> id ) -> get();
+        }
+
+        // $id = PersonalInfo::where('user_id', $data -> id) -> get();
+
+        // $personal_id = $id -> id;
 
         $referee = RefereeInfo::all();
         $personal_info = PersonalInfo::all();

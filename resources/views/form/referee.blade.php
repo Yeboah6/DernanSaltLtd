@@ -116,7 +116,7 @@
 
                 <fieldset>
                     <legend>Referees</legend>
-                        <input type="text" name="personal_id" hidden value="{{$personal_id}}">
+                        <input type="text" name="personal_id" value="{{$personal_id}}">
                     
                     <div class="form-group">
                         <label for="first-name">Name <span>*</span></label>

@@ -58,11 +58,11 @@
                                         <td>{{$posting -> job_title}}</td>
                                         <td>{{ Str::limit($posting -> job_description, 105) }}</td>
                                         <td>
-                                            @foreach ($positionNames as $positionName)
+                                            {{-- @foreach ($positionNames as $positionName)
                                                 @if ($positionName -> id == $posting -> position_id)
                                                     {{ $positionName -> position }}
                                                 @endif
-                                            @endforeach
+                                            @endforeach --}}
                                         </td>
                                         {{-- {{$posting -> position_id}} --}}
                                         <td>{{$posting -> deadline}}</td>
@@ -97,47 +97,8 @@
     </div>
 </div>
 
+
 {{-- <div class="modal fade" id="modal-report2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Department</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="floating-label" for="Name">Name</label>
-                                <input type="text" class="form-control" id="Name" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group fill">
-                                <label class="floating-label" for="Icon">Icon</label>
-                                <input type="file" class="form-control" id="Icon" placeholder="sdf">
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="floating-label" for="Description">Description</label>
-                                <textarea class="form-control" id="Description" rows="3"></textarea>
-                            </div>
-                            <button class="btn btn-primary">Submit</button>
-                            <button class="btn btn-danger">Clear</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
-
-<div class="modal fade" id="modal-report2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -149,6 +110,9 @@
             <div class="modal-body">
                 <form action="{{ url('/job-posting/'.$posting -> id) }}" method="POST">
                     @csrf
+
+                    <input type="text" name="position_id" value="{{ $posting -> id}}">
+
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
@@ -158,9 +122,10 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="floating-label">Job Type</label>
-                                <select class="form-control" name="job_type" value="{{$posting -> job_type}}">
-                                    <option value=""></option>
+                                <label class="floating-label">Permanent</label>
+                                <select class="form-control" name="job_type">
+                                    <option value="{{$posting -> job_type}}">{{$posting -> job_type}}</option>
+                                    <option value="Contract">Contract</option>
                                     <option value="Full Time">Full Time</option>
                                     <option value="Part Time">Part Time</option>
                                 </select>
@@ -169,7 +134,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label">Job Description</label>
-                                <textarea class="form-control" name="job_description" rows="3" value="{{$posting -> job_description}}"></textarea>
+                                <textarea class="form-control" name="job_description" rows="3">{{$posting -> job_description}}</textarea>
                             </div>
                         </div>
                         <div class="col">
@@ -187,7 +152,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label">Personal Attributes</label>
-                                <textarea class="form-control" name="personal_attributes" rows="3" value="">{{$posting -> personal_attributes}}</textarea>
+                                <textarea class="form-control" name="personal_attributes" rows="3">{{$posting -> personal_attributes}}</textarea>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -196,7 +161,7 @@
                                 <select class="form-control" name="position">
                                     <option value=""></option>
                                     @foreach ($position as $position)
-                                         {{-- <option value="{{$position -> position}}">{{$position -> position}}</option> --}}
+                                         <option value="{{$position -> position}}">{{$position -> position}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -204,7 +169,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="floating-label">Skills and Competencies</label>
-                                <input type="text" class="form-control" name="skills_competencies" value="">
+                                <input type="text" class="form-control" name="skills_competencies" value="{{$position -> skills_competencies}}">
                             </div>
                         </div>
                         <div class="col">
@@ -221,7 +186,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- Job Posting -->
 <div class="modal fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -284,7 +249,7 @@
                                 <select class="form-control" name="position">
                                     <option value=""></option>
                                     @foreach ($position as $position)
-                                         {{-- <option value="{{$position -> position}}">{{$position -> position}}</option> --}}
+                                        <option value="{{$position -> id}}">{{$position -> position}}</option>
                                     @endforeach
                                 </select>
                             </div>

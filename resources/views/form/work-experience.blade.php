@@ -122,35 +122,35 @@
                     
                     <div class="form-group">
                         <label for="first-name">Current/Most Recent Employer <span>*</span></label>
-                        <input type="text" name="current_employer" required placeholder="Enter Current/Most Recent Employer" value="{{$expe -> current_employer}}">
+                        <input type="text" name="current_employer" required placeholder="Enter Current/Most Recent Employer" >
                         <span class="text-danger">@error('current_employer'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label>Company Name <span>*</span></label>
-                        <input type="text" name="company_name" required placeholder="Enter Company Name" value="{{$expe -> company_name}}">
+                        <input type="text" name="company_name" required placeholder="Enter Company Name" >
                         <span class="text-danger">@error('company_name'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label>Company Address <span>*</span></label>
-                        <input type="text" name="company_address" required placeholder="Enter Company Address" value="{{$expe -> company_address}}">
+                        <input type="text" name="company_address" required placeholder="Enter Company Address" >
                         <span class="text-danger">@error('company_address'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="middle-name">Position Held <span>*</span></label>
-                        <input type="text" name="position_held" required placeholder="Enter Position Held" value="{{$expe -> position_held}}">
+                        <input type="text" name="position_held" required placeholder="Enter Position Held">
                         <span class="text-danger">@error('position_held'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="last-name">Duration of Employment (From - To) <span>*</span></label>
-                        <input type="month" name="duration_of_employment_from" required placeholder="Enter Duration of Employment (From)" value="{{$expe -> duration_of_employment_from}}"> 
+                        <input type="month" name="duration_of_employment_from" required placeholder="Enter Duration of Employment (From)"> 
                         <span class="text-danger">@error('duration_of_employment_from'){{ $message }} @enderror</span>
                         <br><br>
-                        <input type="month" name="duration_of_employment_to"  placeholder="Enter Duration of Employment (To)" value="{{$expe -> duration_of_employment_to}}">
+                        <input type="month" name="duration_of_employment_to"  placeholder="Enter Duration of Employment (To)">
                         <span class="text-danger">@error('duration_of_employment_to'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="dob">Responsibilities <span>*</span></label>
-                        <textarea name="responsilibities" cols="70" rows="6">{{$expe -> responsilibities}}</textarea>
+                        <textarea name="responsilibities" cols="70" rows="6"></textarea>
                         <span class="text-danger">@error('responsilibities'){{ $message }} @enderror</span>
                     </div>
                     <br>
@@ -158,35 +158,35 @@
                     <br>
                     <div class="form-group">
                         <label>Previous Employer <span>*</span></label>
-                        <input type="text" name="current_employer2" required placeholder="Enter Previous Employer" value="{{$expe -> current_employer2}}">
+                        <input type="text" name="current_employer2" required placeholder="Enter Previous Employer">
                         <span class="text-danger">@error('current_employer2'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label>Company Name <span>*</span></label>
-                        <input type="text" name="company_name2" required placeholder="Enter Company Name" value="{{$expe -> company_name2}}">
+                        <input type="text" name="company_name2" required placeholder="Enter Company Name">
                         <span class="text-danger">@error('company_name2'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label>Company Address <span>*</span></label>
-                        <input type="text" name="company_address2" required placeholder="Enter Company Address" value="{{$expe -> company_address2}}">
+                        <input type="text" name="company_address2" required placeholder="Enter Company Address">
                         <span class="text-danger">@error('company_address2'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="nationality">Position Held <span>*</span></label>
-                        <input type="text" name="position_held2" required placeholder="Enter Position Held" value="{{$expe -> position_held2}}">
+                        <input type="text" name="position_held2" required placeholder="Enter Position Held">
                         <span class="text-danger">@error('position_held2'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="last-name">Duration of Employment (From - To) <span>*</span></label>
-                        <input type="month" name="duration_of_employment_from2" required placeholder="Select Duration of Employment (From)" value="{{$expe -> duration_of_employment_from2}}"> 
+                        <input type="month" name="duration_of_employment_from2" required placeholder="Select Duration of Employment (From)"> 
                         <span class="text-danger">@error('duration_of_employment_from2'){{ $message }} @enderror</span>
                         <br><br>
-                        <input type="month" name="duration_of_employment_to2" required placeholder="Select Duration of Employment (To)" value="{{$expe -> duration_of_employment_to2}}">
+                        <input type="month" name="duration_of_employment_to2" required placeholder="Select Duration of Employment (To)">
                         <span class="text-danger">@error('duration_of_employment_to2'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="full-name">Responsibilities <span>*</span></label>
-                        <textarea name="responsilibities2" cols="70" rows="6" required>{{$expe -> responsilibities2}}</textarea>
+                        <textarea name="responsilibities2" cols="70" rows="6" required></textarea>
                         <span class="text-danger">@error('responsilibities2'){{ $message }} @enderror</span>
                     </div>
 
