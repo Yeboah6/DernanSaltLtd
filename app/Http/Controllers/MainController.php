@@ -36,16 +36,28 @@ class MainController extends Controller
 {
     // Dislpay Home Page Function
     public function home() {
-        return view('pages.index');
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
+        return view('pages.index', compact('data'));
     }
 
     // Dislpay About Page Function
     public function about() {
-        return view('pages.about-us');
+            $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
+        return view('pages.about-us', compact('data'));
     }
 
     // Display Jobs Page Function
     public function job() {
+            $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
         $jobPosting = PostJobs::where('status', 'Available') -> get();
         $positionNames = Position::all();
 
@@ -54,7 +66,11 @@ class MainController extends Controller
     
     // Display Contact Page Function
     public function contact() {
-        return view('pages.contact-us');
+            $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
+        return view('pages.contact-us', compact('data'));
     }
 
     // Send Contact Us Email Message Function
@@ -72,9 +88,6 @@ class MainController extends Controller
 
     // Sending Rejected Email Function
     public function reject_send_mail($id) {
-        // $rejected = JobDetails::find($id);
-
-        // 
 
         $applicants = DB::table('personal_infos')
         -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
@@ -87,11 +100,19 @@ class MainController extends Controller
             ->where('personal_id', $applicant->id)
             ->update(['status' => 'Rejected']);
 
-            Mail::to($applicant -> email) -> send(new RejectMail($applicant));
+            Mail::to($applicant -> email) -> queue(new RejectMail($applicant));
  
             return redirect('/admin-dashboard') -> with('success', 'Message sent successfully');
         }
     }
+
+
+
+
+
+
+
+    
 
     // Sending Accept Email Function
     public function accept_send_mail($id) {
@@ -215,27 +236,27 @@ class MainController extends Controller
     public function postAdminProfile(Request $request) {
         $request -> validate([
             'email' => 'required|email',
-            'new_email' => 'required|email|unique:admins',
+            'new_email' => 'required|email|unique:admins,email,' . Admin::where('email', $request->email)->value('id'),
             'new_password' => 'required|min:8|max:12',
             'confirm_password' => 'required|min:8|max:12',
         ]);
 
+           // Check if passwords match
+        if ($request->input('new_password') !== $request->input('confirm_password')) {
+            return back()->with('fail', "Passwords don't match!!");
+        }
+
         $profile = Admin::where('email', '=', $request -> email) -> first();
 
         if($profile) {
-            if ($request -> confirm_password == $request -> new_password) {
-                $profile -> email = $request -> input('email');
-                $profile -> password = Hash::make($request -> input('new_password'));
-            $profile -> update();
-            return redirect('/admin-profile') -> with('success', 'Admin Info Updated Successfully');
-            } else {
-                return back() -> with('fail', "Passwords don't match!!");
-            }
+             // Update email and password if valid
+            $profile -> email = $request->input('new_email');
+            $profile -> password = Hash::make($request->input('new_password'));
+            $profile -> save();
+            return back() -> with('success', 'Admin Info Updated Successfully');
         } else {
             return back() -> with('fail', 'Incorrect Credentials!!');
         }
-
-        // $profile -> email 
     }
 
     // Display Applicants Page Function
@@ -557,7 +578,7 @@ class MainController extends Controller
         return view('auth.reset-password');
     }
 
-    // Reset Password Function
+    // Send Email Reset Password Function
     public function postResetPassword(Request $request) {
         $request -> validate([
             'email' => 'required|email',
@@ -566,21 +587,13 @@ class MainController extends Controller
         $reset = ApplicantLogins::where('email', '=', $request -> email) -> first();
         if ($reset) {
             Mail::to($reset -> email) -> send(new ResetPassword($reset));
-            return redirect() -> back() -> with('success', 'Reset Password Link has been sent to your Email');
+            return redirect('/applicant-login')-> with('success', 'Reset Password Link has been sent to your Email');
         }
     }
 
     // Display Email Reset Password Page Function
     public function sendResetPassword() {
         return view('emails.reset-password');
-    }
-
-    public function postSendResetPassword(Request $request) {
-        $reset  = ApplicantLogins::where('email', '=', $request -> email) -> first();
-
-        if ($reset) {
-
-        }
     }
 
     // Display Referee Testimony Page Function
@@ -616,12 +629,20 @@ class MainController extends Controller
         $info = ApplicantLogins::all();
 
         foreach ($info as $info) {
-            $details = PersonalInfo::where('user_id', $info -> id ) -> get();
+            $details = DB::table('personal_infos')
+            -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
+            -> join('education', 'personal_infos.id', '=', 'education.personal_id')
+            -> join('referee_infos', 'personal_infos.id', '=', 'referee_infos.personal_id')
+            -> join('files', 'personal_infos.id', '=', 'files.personal_id')
+            -> join('skills', 'personal_infos.id', '=', 'skills.personal_id')
+            -> join('agreements', 'personal_infos.id', '=', 'agreements.personal_id')
+            -> where('personal_infos.id', $data -> id)
+            -> get();
         }
 
         
 
-        // $applicants = DB::table('personal_infos')
+        // $details = DB::table('personal_infos')
         // -> join('work_experiences', 'personal_infos.id', '=', 'work_experiences.personal_id')
         // -> join('education', 'personal_infos.id', '=', 'education.personal_id')
         // -> join('referee_infos', 'personal_infos.id', '=', 'referee_infos.personal_id')

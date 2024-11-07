@@ -84,13 +84,13 @@
 </style>
 
 <ul class="fieldset-containter">
-        <li class="fieldset" style="background-color: #51B3E4;color:#fff;"> Personal Information</li>  
-        <li class="fieldset">Work Experience</li>
-        <li class="fieldset">Educational Background</li>
-        <li class="fieldset">Referee</li>
-        <li class="fieldset">Other Relevant</li>
-        <li class="fieldset">Document Uploads</li>
-        <li class="fieldset agree">Agreement and Declaration</li>
+        <a href="/personal-info"><li class="fieldset" style="background-color: #51B3E4;color:#fff;"> Personal Information</li></a>  
+        <a href="/work-experience"><li class="fieldset">Work Experience</li></a>
+        <a href="/education"><li class="fieldset">Educational Background</li></a>
+        <a href="/referee"><li class="fieldset">Referee</li></a>
+        <a href="/other-relevant"><li class="fieldset">Other Relevant</li></a>
+        <a href="/upload-docs"><li class="fieldset">Document Uploads</li></a>
+        <a href="/agreement"><li class="fieldset agree">Agreement and Declaration</li></a>
 
         <ul>
             <a href="preview-application"><li class="fieldset">Preview Application</li></a>
@@ -119,53 +119,53 @@
                 </div>
                 <br>
                 <fieldset id="personal">
-                    <input type="text" name="user_id" value="{{ $id -> user_id}}" hidden>
+                    <input type="text" name="user_id" value="{{ $personal_info -> user_id}}" hidden>
                     <input type="text" name="applicant_id" hidden>
                     <legend>Personal Information</legend>
                     <div class="form-group">
                         <label for="first-name">First Name <span>*</span></label>
-                            <input type="text" name="first_name" placeholder="Enter First Name" value="{{ $id -> first_name}}"  required>
+                            <input type="text" name="first_name" placeholder="Enter First Name" value="{{ $personal_info -> first_name}}"  required>
                         <span class="text-danger">@error('first_name'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="middle-name">Middle Name <span></span></label>
-                        <input type="text" name="middle_name" placeholder="Enter Middle Name" value="{{ $id -> middle_name}}">
+                        <input type="text" name="middle_name" placeholder="Enter Middle Name" value="{{ $personal_info -> middle_name}}">
                         <span class="text-danger">@error('middle_name'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="last-name">Last Name <span>*</span></label>
-                        <input type="text" name="last_name" required placeholder="Enter Last Name" value="{{ $id -> last_name}}">
+                        <input type="text" name="last_name" required placeholder="Enter Last Name" value="{{ $personal_info -> last_name}}">
                         <span class="text-danger">@error('last_name'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="dob">Date of Birth <span>*</span></label>
-                        <input type="date" name="dob" required placeholder="Enter Last Name" value="{{ $id -> dob}}">
+                        <input type="date" name="dob" required placeholder="Enter Last Name" value="{{ $personal_info -> dob}}">
                         <span class="text-danger">@error('dob'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label>Gender <span>*</span></label>
-                        <label><input type="radio" name="gender" value="Male" {{ $id -> gender == 'Male' ? 'checked' : '' }}> Male</label>
-                        <label><input type="radio" name="gender" value="Female" {{ $id -> gender == 'Female' ? 'checked' : '' }}> Female</label>
+                        <label><input type="radio" name="gender" value="Male" {{ $personal_info -> gender == 'Male' ? 'checked' : '' }}> Male</label>
+                        <label><input type="radio" name="gender" value="Female" {{ $personal_info -> gender == 'Female' ? 'checked' : '' }}> Female</label>
                         <span class="text-danger">@error('gender'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="nationality">Nationality <span>*</span></label>
-                        <input type="text" name="nationality" required placeholder="Enter Nationality. Eg; Ghanaian" value="{{ $id -> nationality}}">
+                        <input type="text" name="nationality" required placeholder="Enter Nationality. Eg; Ghanaian" value="{{ $personal_info -> nationality}}">
                         <span class="text-danger">@error('nationality'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="full-name">Address <span>*</span></label>
-                        <input type="text" name="address" required placeholder="Enter Address" value="{{ $id -> address}}">
+                        <input type="text" name="address" required placeholder="Enter Address" value="{{ $personal_info -> address}}">
                         <span class="text-danger">@error('address'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="full-name">Phone Number <span>*</span></label>
-                        <input type="text" name="number" required placeholder="Enter Phone Number" value="{{ $id -> number}}">
+                        <input type="text" name="number" required placeholder="Enter Phone Number" value="{{ $personal_info -> number}}">
                         <span class="text-danger">@error('number'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="full-name">Email <span>*</span></label>
-                        <input type="email" name="email" required value="{{ $id -> email}}" placeholder="Enter Email Eg; youremail@gmail.com">
+                        <input type="email" name="email" required value="{{ $personal_info -> email}}" placeholder="Enter Email Eg; youremail@gmail.com">
                         <span class="text-danger">@error('email'){{ $message }} @enderror</span>
                     </div>
                 </fieldset>

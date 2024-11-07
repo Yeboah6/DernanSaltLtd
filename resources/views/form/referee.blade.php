@@ -108,15 +108,15 @@
 
                 @csrf
 
-                <div class="card-footer text-right">
+                <div class="footer text-right">
                     <a href="/education"><button type="button" class="btn btn-danger">Back</button></a>
                     <button type="submit" class="btn btn-success">Save</button>
                     <a href="/other-relevant"><button type="button" class="btn btn-primary">Next</button></a>
                 </div>
-
+<br>
                 <fieldset>
                     <legend>Referees</legend>
-                        <input type="text" name="personal_id" value="{{$personal_id}}">
+                        <input type="text" name="personal_id" value="{{$personal_id}}" hidden>
                     
                     <div class="form-group">
                         <label for="first-name">Name <span>*</span></label>

@@ -21,56 +21,117 @@ class MultiStepForm extends Controller
 {
     // Display Personal Info Page Function
     public function personalInfo() {
-        $data = array();
+        // Initialize $data as null
+        $data = null;
+    
+        // Check if the user is logged in via session
         if(Session::has('loginId')) {
-            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+            // Fetch the user's login data
+            $data = ApplicantLogins::find(Session::get('loginId'));
         }
-
-        $personal_info = PersonalInfo::all();
-
-        if ($personal_info -> isEmpty()) {
-
-            return view('form.personal-info', compact('data'));
-        } else {
-            foreach ($personal_info as $id) {
-                if ($data -> id == $id -> user_id) {
-                    return view('form.update-personal-info', compact('data', 'id'));
-                }
+    
+        // Ensure the user is logged in
+        if ($data) {
+            // Retrieve the user's personal information
+            $personal_info = PersonalInfo::where('user_id', $data -> id) -> first();
+    
+            // Check if personal info exists for the user
+            if (!$personal_info) {
+                // No personal info found, render personal info form view
+                return view('form.personal-info', compact('data'));
+            } else {
+                // Personal info found, render update form view
+                return view('form.update-personal-info', compact('data', 'personal_info'));
             }
-        }    
-        
+        }
+    
+        // Handle the case where the session is missing or invalid
+        return redirect()->route('login')->with('error', 'Please log in to access this page.');
     }
+    
 
     // Store Personal Info Data Function
+
     public function postPersonalInfo(Request $request) {
 
-        $character = 'ID';
-        $pin = mt_rand(10, 99) . mt_rand(10, 99);
-        $applicant_id = $character. '' .$pin;
-
+        // Validate the form data
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:applicant_logins,id',
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'dob' => 'required|date',
+            'gender' => 'required|string',
+            'nationality' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'number' => 'required|string|max:20',
+            'email' => 'required|email|max:255'
+        ]);
+    
+        // Generate applicant ID
+        $applicant_id = 'ID' . mt_rand(1000, 9999);
+    
+        // Create a new PersonalInfo instance
         $personalInfo = new PersonalInfo();
-
-        $personalInfo -> user_id = $request -> input('user_id');
-        $personalInfo -> applicant_id = $applicant_id;
-        $personalInfo -> first_name = $request -> input('first_name');
-        $personalInfo -> middle_name = $request ->input('middle_name') ;
-        $personalInfo -> last_name = $request -> input('last_name');
-        $personalInfo -> dob = $request -> input('dob');
-        $personalInfo -> gender = $request -> input('gender');
-        $personalInfo -> nationality = $request -> input('nationality');
-        $personalInfo -> address = $request -> input('address');
-        $personalInfo -> number = $request -> input('number');
-        $personalInfo -> email = $request -> input('email');
-
-        $saveSuccess = $personalInfo -> save();
-
-        if ($saveSuccess) {
-            session(['personal_info_id' => $personalInfo -> id]);
-            return redirect('/work-experience') -> with('success', 'Data Saved Successfully');
+    
+        // Fill data into the model
+        $personalInfo->fill([
+            'user_id' => $validatedData['user_id'],
+            'applicant_id' => $applicant_id,
+            'first_name' => $validatedData['first_name'],
+            'middle_name' => $validatedData['middle_name'] ?? null, // Middle name can be nullable
+            'last_name' => $validatedData['last_name'],
+            'dob' => $validatedData['dob'],
+            'gender' => $validatedData['gender'],
+            'nationality' => $validatedData['nationality'],
+            'address' => $validatedData['address'],
+            'number' => $validatedData['number'],
+            'email' => $validatedData['email'],
+        ]);
+    
+        // Save the personal information
+        if ($personalInfo->save()) {
+            // Store the personal_info_id in the session if save is successful
+            session(['personal_info_id' => $personalInfo->id]);
+    
+            // Redirect to work experience page with success message
+            return redirect('/work-experience')->with('success', 'Data saved successfully');
         } else {
-            return redirect() -> back() -> with('fail', 'Data not Saved');
+            // Redirect back with failure message
+            return redirect()->back()->with('fail', 'Data not saved');
         }
     }
+    
+
+    // public function postPersonalInfo(Request $request) {
+
+    //     $character = 'ID';
+    //     $pin = mt_rand(10, 99) . mt_rand(10, 99);
+    //     $applicant_id = $character. '' .$pin;
+
+    //     $personalInfo = new PersonalInfo();
+
+    //     $personalInfo -> user_id = $request -> input('user_id');
+    //     $personalInfo -> applicant_id = $applicant_id;
+    //     $personalInfo -> first_name = $request -> input('first_name');
+    //     $personalInfo -> middle_name = $request ->input('middle_name') ;
+    //     $personalInfo -> last_name = $request -> input('last_name');
+    //     $personalInfo -> dob = $request -> input('dob');
+    //     $personalInfo -> gender = $request -> input('gender');
+    //     $personalInfo -> nationality = $request -> input('nationality');
+    //     $personalInfo -> address = $request -> input('address');
+    //     $personalInfo -> number = $request -> input('number');
+    //     $personalInfo -> email = $request -> input('email');
+
+    //     $saveSuccess = $personalInfo -> save();
+
+    //     if ($saveSuccess) {
+    //        session(['personal_info_id' => $personalInfo -> id]);
+    //         return redirect('/work-experience') -> with('success', 'Data Saved Successfully');
+    //     } else {
+    //         return redirect() -> back() -> with('fail', 'Data not Saved');
+    //     }
+    // }
 
     // Display Work Experience Page Function
     public function workExperience() {
@@ -83,6 +144,8 @@ class MultiStepForm extends Controller
 
         $workExperience = WorkExperience::all();
         $personal_info = PersonalInfo::all();
+
+        // dd($personal_id);
 
         if ($workExperience -> isEmpty()) {
             return view('form.work-experience', compact('data', 'personal_id'));
@@ -197,9 +260,7 @@ class MultiStepForm extends Controller
             $details = PersonalInfo::where('user_id', $info -> id ) -> get();
         }
 
-        // $id = PersonalInfo::where('user_id', $data -> id) -> get();
-
-        // $personal_id = $id -> id;
+        $personal_id = session('personal_info_id');
 
         $referee = RefereeInfo::all();
         $personal_info = PersonalInfo::all();
@@ -415,7 +476,7 @@ class MultiStepForm extends Controller
         $agreement -> status = "Submitted";
 
         $agreement -> save();
-        return redirect('/update-personal-info') -> with('success', 'Application Submitted Successfully');
+        return redirect('/personal-info') -> with('success', 'Application Submitted Successfully');
     }
 
     // Update Personal Info Function

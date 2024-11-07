@@ -126,7 +126,7 @@
                     </div>
                     <div class="form-group">
                         <label for="middle-name">Why do you want to work at Dernan Salt Limited? <span>*</span></label>
-                        <textarea name="reason" cols="70" rows="6" required placeholder="Enter Why do you want to work at Dernan Salt Limited? Not more than 500 words"></textarea>
+                        <textarea name="reason" cols="70" rows="6" required placeholder="Enter Why do you want to work at Dernan Salt Limited? Not more than 200 words"></textarea>
                         <span class="text-danger">@error('reason'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">

@@ -111,6 +111,12 @@
         </div>
         <div class="col-lg-10 offset-lg-1">
           <form id="contact" action="{{url('/marketing')}}" method="POST">
+            @if (Session::has('success'))
+							<div class="alert alert-success">{{ Session::get('success') }}</div>
+						@endif
+						@if (Session::has('fail'))
+							<div class="alert alert-danger">{{ Session::get('fail') }}</div>
+						@endif
             @csrf
             <div class="row">
               <div class="col-lg-6">

@@ -90,6 +90,10 @@
     <li class="fieldset">Other Relevant</li>
     <li class="fieldset" style="background-color: #51B3E4;color:#fff;">Document Uploads</li>
     <li class="fieldset agree">Agreement and Declaration</li>
+
+    <ul>
+        <a href="preview-application"><li class="fieldset">Preview Application</li></a>
+    </ul>
 </ul>
 
 <div class="container">

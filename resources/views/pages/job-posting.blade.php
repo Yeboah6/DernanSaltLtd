@@ -53,16 +53,16 @@
                                     @foreach ($jobPosting as $posting)
                                         <tr>
                                         <td>
-                                            {{$posting -> id}}
+                                            {{$posting -> job_id}}
                                         </td>
                                         <td>{{$posting -> job_title}}</td>
                                         <td>{{ Str::limit($posting -> job_description, 105) }}</td>
                                         <td>
-                                            {{-- @foreach ($positionNames as $positionName)
+                                            @foreach ($positionNames as $positionName)
                                                 @if ($positionName -> id == $posting -> position_id)
                                                     {{ $positionName -> position }}
                                                 @endif
-                                            @endforeach --}}
+                                            @endforeach
                                         </td>
                                         {{-- {{$posting -> position_id}} --}}
                                         <td>{{$posting -> deadline}}</td>
@@ -98,7 +98,7 @@
 </div>
 
 
-{{-- <div class="modal fade" id="modal-report2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-report2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -186,7 +186,7 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 <!-- Job Posting -->
 <div class="modal fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -249,7 +249,7 @@
                                 <select class="form-control" name="position">
                                     <option value=""></option>
                                     @foreach ($position as $position)
-                                        <option value="{{$position -> id}}">{{$position -> position}}</option>
+                                        {{-- <option value="{{$position -> id}}">{{$position -> position}}</option> --}}
                                     @endforeach
                                 </select>
                             </div>

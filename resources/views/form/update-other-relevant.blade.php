@@ -84,13 +84,17 @@
 </style>
 
 <ul class="fieldset-containter">
-    <li class="fieldset"> Personal Information</li>  
-    <li class="fieldset">Work Experience</li>
-    <li class="fieldset">Educational Background</li>
-    <li class="fieldset">Referee</li>
-    <li class="fieldset" style="background-color: #51B3E4;color:#fff;">Other Relevant</li>
-    <li class="fieldset">Document Uploads</li>
-    <li class="fieldset agree">Agreement and Declaration</li>
+    <a href="/personal-info"><li class="fieldset"> Personal Information</li></a> 
+    <a href="/work-experience"><li class="fieldset">Work Experience</li></a>
+    <a href="/education"><li class="fieldset">Educational Background</li></a>
+    <a href="/referee"><li class="fieldset">Referee</li></a>
+    <a href="/other-relevant"><li class="fieldset" style="background-color: #51B3E4;color:#fff;">Other Relevant</li></a>
+    <a href="/upload-docs"><li class="fieldset">Document Uploads</li></a>
+    <a href="/agreement"><li class="fieldset agree">Agreement and Declaration</li></a>
+
+    <ul>
+        <a href="preview-application"><li class="fieldset">Preview Application</li></a>
+    </ul>
 </ul>
 
 <div class="container">
@@ -126,7 +130,7 @@
                     </div>
                     <div class="form-group">
                         <label for="middle-name">Why do you want to work at Dernan Salt Limited? <span>*</span></label>
-                        <textarea name="reason" cols="70" rows="6" required placeholder="Enter Why do you want to work at Dernan Salt Limited? Not more than 500 words">{{$other -> reason}}</textarea>
+                        <textarea name="reason" cols="70" rows="6" required placeholder="Enter Why do you want to work at Dernan Salt Limited? Not more than 200 words">{{$other -> reason}}</textarea>
                         <span class="text-danger">@error('reason'){{ $message }} @enderror</span>
                     </div>
                     <div class="form-group">

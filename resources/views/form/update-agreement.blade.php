@@ -84,13 +84,17 @@
 </style>
 
 <ul class="fieldset-containter">
-    <li class="fieldset"> Personal Information</li>  
-    <li class="fieldset">Work Experience</li>
-    <li class="fieldset">Educational Background</li>
-    <li class="fieldset">Referee</li>
-    <li class="fieldset">Other Relevant</li>
-    <li class="fieldset">Document Uploads</li>
-    <li class="fieldset agree" style="background-color: #51B3E4;color:#fff;">Agreement and Declaration</li>
+    <a href="/personal-info"><li class="fieldset"> Personal Information</li></a>
+    <a href="/work-experience"><li class="fieldset">Work Experience</li></a>
+    <a href="/education"><li class="fieldset">Educational Background</li></a>
+    <a href="/referee"><li class="fieldset">Referee</li></a>
+    <a href="/other-relevant"><li class="fieldset">Other Relevant</li></a>
+    <a href="/upload-docs"><li class="fieldset">Document Uploads</li></a>
+    <a href="/agreement"><li class="fieldset agree" style="background-color: #51B3E4;color:#fff;">Agreement and Declaration</li>
+
+    <ul>
+        <a href="preview-application"><li class="fieldset">Preview Application</li></a>
+    </ul>
 </ul>
 
 <div class="container">

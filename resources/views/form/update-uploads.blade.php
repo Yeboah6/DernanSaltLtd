@@ -80,13 +80,17 @@
 </style>
 
 <ul class="fieldset-containter">
-    <li class="fieldset">Personal Information</li>  
-    <li class="fieldset">Work Experience</li>
-    <li class="fieldset">Educational Background</li>
-    <li class="fieldset">Referee</li>
-    <li class="fieldset">Other Relevant</li>
-    <li class="fieldset" style="background-color: #51B3E4;color:#fff;">Document Uploads</li>
-    <li class="fieldset agree">Agreement and Declaration</li>
+    <a href="/personal-info"><li class="fieldset">Personal Information</li></a>
+    <a href="/work-experience"><li class="fieldset">Work Experience</li></a>
+    <a href="/education"><li class="fieldset">Educational Background</li></a>
+    <a href="/referee"><li class="fieldset">Referee</li></a>
+    <a href="/other-relevant"><li class="fieldset">Other Relevant</li></a>
+    <a href="/upload-docs"><li class="fieldset" style="background-color: #51B3E4;color:#fff;">Document Uploads</li></a>
+    <a href="/agreement"><li class="fieldset agree">Agreement and Declaration</li></a>
+
+    <ul>
+        <a href="preview-application"><li class="fieldset">Preview Application</li></a>
+    </ul>
 </ul>
 
 <div class="container">
@@ -135,7 +139,7 @@
                         <input type="file" name="cv">
                         
                         @if($doc && $doc->cv)
-                            <!-- Preview CV file if exists (download link or embedded if PDF) -->
+                            <!-- Preview CV file if exists (view link or embedded if PDF) -->
                             <a href="{{ asset('uploads/applicant-documents/' . $doc->cv) }}" target="_blank">View Uploaded CV</a>
                         @endif
                         

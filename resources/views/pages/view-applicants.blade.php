@@ -24,6 +24,17 @@
         margin-left: 50px;
     }
 
+    .row .col-sm-12 h6 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+}
+
+.row .col-sm-12 p {
+    font-size: 1rem;
+    color: #555;
+}
+
 }
 
 </style>

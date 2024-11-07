@@ -16,7 +16,7 @@
                              <div class="col-md-8 mt-md-4">
                                  <div class="row">
                                      <div class="col-md-6">
-                                        <a href="https://dernansalt.com.gh/" class="mb-1 text-muted d-flex align-items-end text-h-primary"><i class="feather icon-globe mr-2 f-18"></i>https://dernansalt.com.gh</a>
+                                        <a href="https://dernansalt.com.gh/" class="mb-1 text-muted d-flex align-items-end text-h-primary" target="_blank"><i class="feather icon-globe mr-2 f-18"></i>https://dernansalt.com.gh</a>
                                         <div class="clearfix"></div>
                                         <a href="mailto:{{$data -> email}}" class="mb-1 text-muted d-flex align-items-end text-h-primary"><i class="feather icon-mail mr-2 f-18"></i>{{$data -> email}}</a>
                                         <div class="clearfix"></div>
@@ -74,7 +74,7 @@
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label font-weight-bolder">New Email</label>
                                             <div class="col-sm-9">
-                                                <input type="email" class="form-control" name="new_email" placeholder="Enter Email" value="{{old('new_email')}}">
+                                                <input type="email" class="form-control" name="new_email" placeholder="Enter New Email" value="{{old('new_email')}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">

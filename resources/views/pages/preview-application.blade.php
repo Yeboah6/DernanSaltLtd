@@ -2,6 +2,8 @@
 @section('content')
 @include('includes.applicant-header')
 
+
+
 <style>
 
     .applicant_id {
@@ -103,7 +105,7 @@
                             <div class="row invoive-info">
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Work Experience :</h6>
-                                    <h6 class="m-0">{{$details -> current_employer}}</h6>
+                                    <p class="m-0">{{$details -> current_employer}}</p>
                                     <p class="m-0 m-t-10">{{$details -> position_held}}</p>
                                     <p class="m-0">{{$details -> duration_of_employment_from}}</p>
                                     <p class="m-0">{{$details -> duration_of_employment_to}}</p>
@@ -112,7 +114,7 @@
 
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Educational Background :</h6>
-                                    <h6 class="m-0">{{$details -> institution_name}}</h6>
+                                    <p class="m-0">{{$details -> institution_name}}</p>
                                     <p class="m-0">{{$details -> certificate}}</p>
                                     <p class="m-0 m-t-10">{{$details -> year_began}}</p>
                                     <p class="m-0">{{$details -> year_of_graduation}}</p>
@@ -120,18 +122,19 @@
 
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Referee :</h6>
-                                    <h6 class="m-0">{{$details -> referee_name}}</h6>
+                                    <p class="m-0">{{$details -> referee_name}}</p>
                                     <p class="m-0 m-t-10">{{$details -> referee_company}}</p>
                                     <p class="m-0">{{$details -> referee_position}}</p>
                                     <p class="m-0">{{$details -> referee_number}}</p>
                                     <p class="m-0">{{$details -> referee_email}}</p>
+                                    <br>
                                 </div>
                             </div>
 {{-- <br><hr> --}}
                             <div class="row invoive-info">
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Previous Work :</h6>
-                                    <h6 class="m-0">{{$details -> current_employer2}}</h6>
+                                    <p class="m-0">{{$details -> current_employer2}}</p>
                                     <p class="m-0 m-t-10">{{$details -> position_held2}}</p>
                                     <p class="m-0">{{$details -> duration_of_employment_from2}}</p>
                                     <p class="m-0">{{$details -> duration_of_employment_to2}}</p>
@@ -139,14 +142,14 @@
                                 </div>
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Educational Background :</h6>
-                                    <h6 class="m-0">{{$details -> institution_name2}}</h6>
+                                    <p class="m-0">{{$details -> institution_name2}}</p>
                                     <p class="m-0">{{$details -> certificate2}}</p>
                                     <p class="m-0 m-t-10">{{$details -> year_began2}}</p>
                                     <p class="m-0">{{$details -> year_of_graduation2}}</p>
                                 </div>
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Other Referee :</h6>
-                                    <h6 class="m-0">{{$details -> referee_name2}}</h6>
+                                    <p class="m-0">{{$details -> referee_name2}}</p>
                                     <p class="m-0 m-t-10">{{$details -> referee_company2}}</p>
                                     <p class="m-0">{{$details -> referee_position2}}</p>
                                     <p class="m-0">{{$details -> referee_number2}}</p>
@@ -162,7 +165,7 @@
                                 {{-- @if ( -> institution_name3 === null) --}}
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Educational Background :</h6>
-                                    <h6 class="m-0">{{$details -> institution_name3}}</h6>
+                                    <p class="m-0">{{$details -> institution_name3}}</p>
                                     <p class="m-0">{{$details -> certificate3}}</p>
                                     <p class="m-0 m-t-10">{{$details -> year_began3}}</p>
                                     <p class="m-0">{{$details -> year_of_graduation3}}</p>
@@ -185,7 +188,7 @@
                                 </div>
                                 <div class="col-md-4 col-xs-12 invoice-client-info">
                                     <h6>Secondary School :</h6>
-                                    <h6 class="m-0">{{$details -> school_name}}</h6>
+                                    <p class="m-0">{{$details -> school_name}}</p>
                                     <p class="m-0">{{$details -> secondary_certificate}}</p>
                                     <p class="m-0">{{$details -> year_of_completion}}</p>
                                 </div>
@@ -214,25 +217,25 @@
                                                     <td>
                                                         <h6>CV</h6>
                                                     </td>
-                                                    <td><a class="btn waves-effect waves-light btn-primary m-b" href="{{ url('/download/'.$details -> cv)}}"><i class="feather icon-download"></i> </a></td>
+                                                    <td><a class="btn waves-effect waves-light btn-primary m-b" href="{{ url('/download/'.$details -> cv)}}"><i class="fa fa-download"></i></a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Certificates Acquired</h6>
                                                     </td>
-                                                    <td><a class="btn waves-effect waves-light btn-primary m-b" href="{{ url('/download/'.$details -> cerificates_acquired)}}"><i class="feather icon-download"></i> </a></td>
+                                                    <td><a class="btn waves-effect waves-light btn-primary m-b" href="{{ url('/download/'.$details -> cerificates_acquired)}}"><i class="fa fa-download"></i> </a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Cover Letter</h6>
                                                     </td>
-                                                    <td><a class="btn waves-effect waves-light btn-primary m-b" href="{{ url('/download/'.$details -> cover_letter)}}"><i class="feather icon-download"></i> </a></td>
+                                                    <td><a class="btn waves-effect waves-light btn-primary m-b" href="{{ url('/download/'.$details -> cover_letter)}}"><i class="fa fa-download"></i> </a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <h6>Other Relevant Documents</h6>
                                                     </td>
-                                                    <td><a class="btn waves-effect waves-light btn-primary m-b-10 " href="{{ url('/download/'.$details -> other_relevant_doc)}}"><i class="feather icon-download"></i> </a></td>
+                                                    <td><a class="btn waves-effect waves-light btn-primary m-b-10 " href="{{ url('/download/'.$details -> other_relevant_doc)}}"><i class="fa fa-download"></i> </a></td>
                                                 </tr>
                                             </tbody>
                                         </table>

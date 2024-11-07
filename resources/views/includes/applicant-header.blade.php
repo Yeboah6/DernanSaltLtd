@@ -21,7 +21,7 @@
 
                         @if (Session::has('loginId'))
                             <li class=" li-header"><a href="#" style=" color: #fff;">{{$data -> first_name}}</a></li>
-                            <li><a href="applicant-logout"><i class="feather icon-log-out"></i></a></li>
+                            <li><a href="applicant-logout"><i class="fa fa-right-from-bracket"></i></a></li>
                         @else
                             <li class="scroll-to-section"><a wire:navigate href="/applicant-logout" style=" color: #fff;">Login</a></li>
                         @endif

@@ -91,10 +91,6 @@
         <li class="fieldset">Other Relevant</li>
         <li class="fieldset">Document Uploads</li>
         <li class="fieldset agree">Agreement and Declaration</li>
-
-        {{-- @if (Session::has('success') == 'Application Submitted Successfully')
-            <li class="fieldset agree">Bestie Baby</li>
-        @endif --}}
 </ul>
 
 <div class="container">
