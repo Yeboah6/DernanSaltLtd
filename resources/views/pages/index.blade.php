@@ -206,7 +206,14 @@
                             <li><a href="/contact" class="nav-link">Contact</a></li>
                             <li><a href="/marketing" class="nav-link">Marketing</a></li>
                             <li><a href="/sales" class="nav-link">Sales</a></li>
-                            <li><a href="/admin-login" class="nav-link login" style="color: #fff;">Login</a></li>
+                            {{-- <li><a href="/admin-login" class="nav-link login" style="color: #fff;">Login</a></li> --}}
+
+                          @if(Session::has('loginId'))
+                            <li class="nav-link login"><a wire:navigate href="#" style="color: #000;">{{ $data -> first_name }}</a></li>
+                            <li><a href="applicant-logout"><i class="fa fa-right-from-bracket"></i></a></li>
+                          @else
+                            <li class="nav-link login"><a wire:navigate href="/admin-login" style="color: #fff;">Login</a></li>
+                          @endif
                         </ul>
                     </nav>
                 </div>

@@ -23,6 +23,12 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
+        @if (Session::has('success'))
+			<div class="alert alert-success">{{ Session::get('success') }}</div>
+		@endif
+		@if (Session::has('fail'))
+			<div class="alert alert-danger">{{ Session::get('fail') }}</div>
+		@endif
         <div class="row">
             <!-- customar project  start -->
             <div class="col-xl-12">
@@ -58,13 +64,13 @@
                                         <td>{{$posting -> job_title}}</td>
                                         <td>{{ Str::limit($posting -> job_description, 105) }}</td>
                                         <td>
-                                            @foreach ($positionNames as $positionName)
+                                            @foreach ($position as $positionName)
                                                 @if ($positionName -> id == $posting -> position_id)
                                                     {{ $positionName -> position }}
                                                 @endif
                                             @endforeach
                                         </td>
-                                        {{-- {{$posting -> position_id}} --}}
+
                                         <td>{{$posting -> deadline}}</td>
                                         @if ($posting -> status == "Available")
                                             <td style="text-align: center"><span style="background-color: #008B9C;color:#fff;padding:5px;border-radius:50px;font-size:12px;text-align:center">{{$posting -> status}}</span></td>
@@ -74,7 +80,7 @@
 
                                         <td>
                                             <a href="{{ url('/job-posted/'.$posting -> id)}}" class="btn btn-primary btn-sm"><i class="feather icon-eye"></i></a>
-                                            <a href="{{url('/job-posting/'.$posting -> id)}}" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-report2"><i class="feather icon-edit"></i>&nbsp; </a>
+                                            <a href="{{url('/job-posting-edit/'.$posting -> id)}}" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp; </a>
                                             @if ($posting -> status == "Available")
                                                 <a href="{{url('/job-posting/'.$posting -> id)}}" class="btn btn-danger btn-sm"><i class="feather icon-eye-off"></i>&nbsp;</a>
                                             @else
@@ -94,97 +100,6 @@
             <!-- customar project  end -->
         </div>
         <!-- [ Main Content ] end -->
-    </div>
-</div>
-
-
-<div class="modal fade" id="modal-report2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Job Posting</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ url('/job-posting/'.$posting -> id) }}" method="POST">
-                    @csrf
-
-                    <input type="text" name="position_id" value="{{ $posting -> id}}">
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label class="floating-label">Job Title</label>
-                                <input type="text" class="form-control" name="job_title" value="{{$posting -> job_title}}">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="floating-label">Permanent</label>
-                                <select class="form-control" name="job_type">
-                                    <option value="{{$posting -> job_type}}">{{$posting -> job_type}}</option>
-                                    <option value="Contract">Contract</option>
-                                    <option value="Full Time">Full Time</option>
-                                    <option value="Part Time">Part Time</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="floating-label">Job Description</label>
-                                <textarea class="form-control" name="job_description" rows="3">{{$posting -> job_description}}</textarea>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label class="floating-label">Education</label>
-                                <input type="text" class="form-control" name="education" value="{{$posting -> education}}">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="floating-label">Experience</label>
-                                <input type="text" class="form-control" name="experience" value="{{$posting -> experience}}">
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="floating-label">Personal Attributes</label>
-                                <textarea class="form-control" name="personal_attributes" rows="3">{{$posting -> personal_attributes}}</textarea>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="floating-label">Position</label>
-                                <select class="form-control" name="position">
-                                    <option value=""></option>
-                                    @foreach ($position as $position)
-                                         <option value="{{$position -> position}}">{{$position -> position}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="floating-label">Skills and Competencies</label>
-                                <input type="text" class="form-control" name="skills_competencies" value="{{$position -> skills_competencies}}">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label class="floating-label">Deadline</label>
-                                <input type="text" class="form-control" name="deadline" value="{{$posting -> deadline}}">
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -247,9 +162,9 @@
                             <div class="form-group">
                                 <label class="floating-label">Position</label>
                                 <select class="form-control" name="position">
-                                    <option value=""></option>
+                                    <option></option>
                                     @foreach ($position as $position)
-                                        {{-- <option value="{{$position -> id}}">{{$position -> position}}</option> --}}
+                                        <option value="{{$position -> id}}">{{$position -> position}}</option>
                                     @endforeach
                                 </select>
                             </div>

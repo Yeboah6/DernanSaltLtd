@@ -38,37 +38,37 @@ class MainController extends Controller
     public function home() {
         $data = array();
         if(Session::has('loginId')) {
-            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
         }
         return view('pages.index', compact('data'));
     }
 
     // Dislpay About Page Function
     public function about() {
-            $data = array();
+        $data = array();
         if(Session::has('loginId')) {
-            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
         }
         return view('pages.about-us', compact('data'));
     }
 
     // Display Jobs Page Function
     public function job() {
-            $data = array();
+        $data = array();
         if(Session::has('loginId')) {
-            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
         }
         $jobPosting = PostJobs::where('status', 'Available') -> get();
         $positionNames = Position::all();
 
-        return view('pages.jobs', compact('positionNames', 'jobPosting'));
+        return view('pages.jobs', compact('positionNames', 'jobPosting', 'data'));
     }
     
     // Display Contact Page Function
     public function contact() {
             $data = array();
         if(Session::has('loginId')) {
-            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
         }
         return view('pages.contact-us', compact('data'));
     }
@@ -105,14 +105,6 @@ class MainController extends Controller
             return redirect('/admin-dashboard') -> with('success', 'Message sent successfully');
         }
     }
-
-
-
-
-
-
-
-    
 
     // Sending Accept Email Function
     public function accept_send_mail($id) {
@@ -319,13 +311,40 @@ class MainController extends Controller
         $position = Position::where('position_status', 'Available') -> get();
         $jobPosting = PostJobs::all();
 
-
-        // $position_id = $request -> input('position_id');
-        // $edit_position = Position::where('id', $position_id) -> first();
-
-        // dd($position);
-
         return view('pages.job-posting', compact('position', 'jobPosting', 'data'));
+    }
+
+    // Edit Job Posting Function
+    public function jobPostingEdit($id) {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = Admin::where('id', '=', Session::get('loginId')) -> first();
+        }
+        $position = Position::where('position_status', 'Available') -> get();
+
+        // $jobPosting = PostJobs::all();
+
+        $postingEdit = PostJobs::findOrFail($id);
+        // dd($postingEdit);
+        return view('pages.edit-jobs', compact('postingEdit', 'data', 'position'));
+    }
+
+    public function postJobPostingEdit(Request $request, $id) {
+        $saveEdit = PostJobs::findOrFail($id);
+
+        $saveEdit -> 
+        $saveEdit -> job_title = $request -> input('job_title');
+        $saveEdit -> job_type = $request -> input('job_type');
+        $saveEdit -> job_description = $request -> input('job_description');
+        $saveEdit -> education = $request -> input('education');
+        $saveEdit -> position_id = $request -> input('position');
+        $saveEdit -> experience = $request -> input('experience');
+        $saveEdit -> personal_attributes = $request -> input('personal_attributes');
+        $saveEdit -> skills_competencies = $request -> input('skills_competencies');
+        $saveEdit -> deadline = $request -> input('deadline');
+
+        $saveEdit -> update();
+        return redirect('/job-posting') -> with('success', 'Updated Successfully');
     }
 
     // Hide Jobs Function
@@ -334,7 +353,7 @@ class MainController extends Controller
 
         $hide -> status = "Unavailable";
         $hide -> update();
-        return redirect('/job-posting');
+        return redirect('/job-posting') -> with('success', 'Updated Successfully');
     }
 
     // Show Jobs Function
@@ -343,7 +362,7 @@ class MainController extends Controller
 
         $hide -> status = "Available";
         $hide -> update();
-        return redirect('/job-posting');
+        return redirect('/job-posting') -> with('success', 'Updated Successfully');
     }
 
     // Adding Job Posting Function
@@ -383,12 +402,6 @@ class MainController extends Controller
         return view('pages.view-job', compact('jobDesc', 'data'));
     }
 
-    // public function jobPostingEdit($id) {
-    //     $postingEdit = PostJobs::findOrFail($id);
-
-    //     return view('pages.job-posting', compact('postingEdit'));
-    // }
-
     // Display Position Page Function
     public function position() {
         $data = array();
@@ -398,11 +411,6 @@ class MainController extends Controller
         $position = Position::all();
         return view('pages.position', compact('position', 'data'));
     }
-
-    // public function jobPostingsEdit($id) {
-    //     $postingEdit = PostJobs::findOrFail($id);
-    //     return view('pages.job-posting', compact('postingEdit'));
-    // }
 
     // Adding Position Function
     public function positions(Request $request) {
@@ -437,9 +445,12 @@ class MainController extends Controller
 
     // Display Job Description Page Function
     public function jobDesc($id) {
-        // $position = Position::find($id);
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
         $jobDesc = PostJobs::find($id);
-        return view('pages.job-description', compact('jobDesc'));
+        return view('pages.job-description', compact('jobDesc', 'data'));
     }
 
     // Download Document Function
@@ -449,12 +460,20 @@ class MainController extends Controller
 
     // Display Sales Page Function
     public function sales() {
-        return view('pages.sales');
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+        return view('pages.sales', compact('data'));
     }
 
     // Display Marketing Page Function
     public function marketing() {
-        return view('pages.marketing');
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
+        return view('pages.marketing', compact('data'));
     }
 
     // Send Sales Email Message Function
@@ -486,8 +505,12 @@ class MainController extends Controller
 
     // Display Choose Account Page Function
     public function chooseAccount($id) {
+        $data = array();
+        if(Session::has('loginId')) {
+            $data = ApplicantLogins::where('id', '=', Session::get('loginId')) -> first();
+        }
         $jobDesc = PostJobs::find($id);
-        return view('pages.choose-account', compact('jobDesc'));
+        return view('pages.choose-account', compact('jobDesc', 'data'));
     }
 
     // Display Applicant Login Page Function

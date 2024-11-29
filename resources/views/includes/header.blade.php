@@ -27,16 +27,15 @@
                         @endif --}}
 
                         
-                        @if(Session::has('loginId'))
-                        <li class="scroll-to-section"><a wire:navigate href="#" style="color: #fff;">Dashboard</a></li>
+                    @if(Session::has('loginId'))
+                        <li class="scroll-to-section"><a wire:navigate href="#" style="color: #fff;">{{ $data -> first_name }}</a></li>
                         <li><a href="applicant-logout"><i class="fa fa-right-from-bracket"></i></a></li>
                     @else
                         <li class="scroll-to-section"><a wire:navigate href="/admin-login" style="color: #fff;">Login</a></li>
                     @endif
 
                         {{-- <li class="scroll-to-section"><a wire:navigate href="/admin-login" style=" color: #fff;">Login</a></li> --}}
-                    </ul>  
-                        {{--  --}}
+                    </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>

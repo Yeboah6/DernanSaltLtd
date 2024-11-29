@@ -49,6 +49,7 @@ Route::get('/job-posting', [MainController::class, 'jobPosting']) -> name('job-p
 Route::post('/job-posting', [MainController::class, 'jobPostings']) -> name('job-posting') -> middleware('isLoggedIn');
 
 Route::get('/job-posting-edit/{id}', [MainController::class, 'jobPostingEdit']) -> name('job-posting-edit') -> middleware('isLoggedIn');
+Route::post('/job-posting-edit/{id}', [MainController::class, 'postJobPostingEdit']) -> name('post-job-posting-edit') -> middleware('isLoggedIn');
 
 
 Route::get('/job-posted/{id}', [MainController::class, 'jobPostingsView']) -> name('job-posting') -> middleware('isLoggedIn');
@@ -140,18 +141,3 @@ Route::post('/update-agreement', [MultiStepForm::class, 'updateAgreement']) -> n
 
 
 Route::get('/preview-application', [MainController::class, 'previewApplication']) -> name('preview-application');
-
-
-// Route::get('/apply/create-step-one', [MultiStepForm::class, 'createStepOne']) -> name('apply.create.step.one');
-// Route::post('/apply/create-step-one', [MultiStepForm::class, 'postCreateStepOne']) -> name('apply.create.step.one');
-
-// Route::get('/apply-create-step-two/{applicant_id}', [MultiStepForm::class, 'createStepTwo']) -> name('apply.create.step.two');
-// Route::post('/apply/create-step-two', [MultiStepForm::class, 'postCreateStepTwo']) -> name('apply.create.step.two');
-
-
-// Route::get('/apply/create-step-three', [MultiStepForm::class, 'createStepThree']) -> name('apply.create.step.three');
-// Route::post('/apply/create-step-three', [MultiStepForm::class, 'postCreateStepThree']) -> name('apply.create.step.three');
-
-
-
-

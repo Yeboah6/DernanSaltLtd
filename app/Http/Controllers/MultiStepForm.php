@@ -21,7 +21,6 @@ class MultiStepForm extends Controller
 {
     // Display Personal Info Page Function
     public function personalInfo() {
-        // Initialize $data as null
         $data = null;
     
         // Check if the user is logged in via session
