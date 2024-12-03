@@ -32,7 +32,6 @@ Route::get('/job-apply', [MainController::class, 'apply']) -> name('job-apply');
 
 
 Route::get('/job-form', [MainController::class, 'jobApply']) -> name('job-form');
-// });
 
 
 Route::get('/applicants', [MainController::class, 'applicant']) -> name('applicants') -> middleware('isLoggedIn');
